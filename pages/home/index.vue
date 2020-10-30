@@ -2904,7 +2904,7 @@
 	/* 图标 */
 	.icon{
 	  display: flex;
-	  width: 780upx;
+	  width: 730upx;
 	  margin: 13upx 20upx 0 20upx;
 	  flex-wrap: wrap;
 	  position: absolute;
@@ -2929,7 +2929,8 @@
 	}
 	.icon1{
 	  text-align: center;
-	  margin-right: 64upx;
+	  /* margin-right: 59upx; */
+	  margin: 0 28upx;
 	}
 	/* 提示信息 */
 	.prompt{
@@ -3134,7 +3135,7 @@
 		display: flex;
 		vertical-align: middle;
 		text-align: center;
-		margin-left: 35upx;
+		/* margin-left: 35upx; */
 	}
 	.topScroll{
 		white-space: nowrap;
