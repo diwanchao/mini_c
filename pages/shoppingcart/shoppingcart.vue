@@ -37,7 +37,7 @@
 					</view>
 					<view class="x-auto" style="float: right; font-size: 10pt;" @click="qkgwc">清空</view>
 				</view>
-				<view class="tctj-body">
+				<view class="tctj-body" style="padding-bottom: 100upx;">
 						<view class="x12 border-top border-gray padding-top padding-bottom" v-for="(g_ite,g_index) in goodslist" :key="g_index" v-if="g_ite.stores_id==xshopInfo.store.stores_id">
 							<view class="x12" v-if="g_ite.status==1 && (g_ite.sale_num > 0 || g_ite.sale_num === '')">
 								

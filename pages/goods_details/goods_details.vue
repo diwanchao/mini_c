@@ -46,8 +46,8 @@
 			</view>
 			<!-- 拼团 -->
 			<view class="x12 hengfu" v-if="isgroups==true && isHot==false && isMark==false && isNew==false" >
-				<view class="x12 left">
-					<view style="color: #fff; font-size: 24upx;">{{buylistpintuan.xcx_start_time}}-{{buylistpintuan.xcx_end_time}}</view>
+				<view class="x12 left" style="padding-left:5upx; padding-right: 5upx;">
+					<view style="color: #fff; font-size: 24upx; line-height: 30upx;">{{buylistpintuan.xcx_start_time + '-' + buylistpintuan.xcx_end_time}} 23:59分</view>
 					<!-- <view class="newstylesss">
 						<uni-countdown color="#fff"  :show-day="false" :hour="s" :minute="s" :second="s"></uni-countdown>
 					</view> -->
@@ -203,7 +203,8 @@
 					</view>
 				</view>
 				<view class="x6 text-white float-right text-center gouwuche_three pintuangouwu" @click="open()">
-					  <view style="font-size: 28upx;">￥{{buylistpintuan.current_price}}
+					  <view style="font-size: 28upx; line-height: 80upx;"> 
+						  <!-- ￥{{buylistpintuan.current_price}} -->
 						<view>一键参团</view>
 					  </view>
 					  
@@ -1888,10 +1889,13 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 	 }
 	 .left{
 	 	position: absolute;
-	 	width: 210upx;
+	 	width: 220upx;
+		text-align: center;
 	 	height: 90upx;
 	 	right: 0;
 	 	background-color: #FE0000;
+		padding: 16upx;
+		box-sizing: border-box;
 	 }
 	 .left_img{
 	 	width: 34upx;
@@ -1928,6 +1932,7 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 	 	width: 26upx;
 	 	background-color: #FE0000;
 	 	border-radius: 50%;
+		position: relative;
 	 }
 	 .schedule_heng{
 	 	width: 600upx;
@@ -1953,7 +1958,33 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 		 padding-bottom: 110rpx;
 		 padding-top: 55rpx;
 	 }
-	.schedule_up{
+	 .schedule_up{
+	 	font-size: 22upx;
+	 	color: #666;
+	 	position: absolute;
+	 	bottom: 35upx;
+	 	/* margin-left: -20upx; */
+	 	text-align: center;
+	 	width: 5em;
+	 	display: block;
+	 	left: 50%;
+	 	transform: translateX(-50%);
+	 	white-space:nowrap;
+	 }
+	 .schedule_down{
+	 	font-size: 22upx;
+	 	color: #666;
+	 	width: 6em;
+	 	display: block;
+	 	position: absolute;
+	 	text-align: center;
+	 	white-space:nowrap;
+	 	/* margin-left: -20upx; */
+	 	left: 50%;
+	 	transform: translateX(-50%);
+	 	top: 35upx;
+	 }
+	/* .schedule_up{
 		font-size: 22upx;
 		color: #666;
 		position: absolute;
@@ -1968,7 +1999,7 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 		position: absolute;
 		margin-left: -20upx;
 		top: 35upx;
-	}
+	} */
 	 .kuan{
 	 	background-color: #FE0000;
 	 	height: 10upx;

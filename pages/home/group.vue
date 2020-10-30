@@ -493,13 +493,15 @@ page{
 	font-weight: 400;
 }
 .schedule{
-	overflow: hidden;
+	/* overflow: hidden; */
+	/* position: relative; */
 }
 .schedule_quan{
 	height: 26upx;
 	width: 26upx;
 	background-color: #FE0000;
 	border-radius: 50%;
+	position: relative;
 }
 .schedule_heng{
 	width: 600upx;
@@ -526,15 +528,25 @@ page{
 	color: #666;
 	position: absolute;
 	bottom: 35upx;
-	margin-left: -20upx;
-	width: 100%;
+	/* margin-left: -20upx; */
+	text-align: center;
+	width: 5em;
+	display: block;
+	left: 50%;
+	transform: translateX(-50%);
+	white-space:nowrap;
 }
 .schedule_down{
 	font-size: 22upx;
 	color: #666;
-	width: 100%;
+	width: 6em;
+	display: block;
 	position: absolute;
-	margin-left: -20upx;
+	text-align: center;
+	white-space:nowrap;
+	/* margin-left: -20upx; */
+	left: 50%;
+	transform: translateX(-50%);
 	top: 35upx;
 }
 .kuan{
@@ -544,4 +556,9 @@ page{
 	border-radius: 5upx;
 
 }
+/* .schedule::after{
+	content: "";
+	display: block;
+	clear: both;
+} */
 </style>
