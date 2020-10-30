@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "希希贝明细",
+  "backgroundColorTop": "#393D4A",
+  "navigationBarBackgroundColor": "#393D4A",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true,
+  "usingComponents": {}
+}

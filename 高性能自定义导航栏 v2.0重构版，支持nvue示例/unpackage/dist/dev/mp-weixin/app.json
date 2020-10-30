@@ -1,0 +1,33 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/demo/demo1",
+    "pages/demo/demo2",
+    "pages/demo/demo3",
+    "pages/demo/demo4",
+    "pages/demo/demo5",
+    "pages/demo/demo6",
+    "pages/demo/demo7",
+    "pages/demo/demo8",
+    "pages/demo/demo9",
+    "pages/demo/demo10",
+    "pages/demo/demo11",
+    "pages/demo/demo12",
+    "pages/demo/demo13",
+    "pages/demo/demo15",
+    "pages/demo/demo16",
+    "pages/demo/demo17"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "hx-navbar",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "navigationStyle": "custom"
+  },
+  "usingComponents": {
+    "hx-navbar": "/components/hx-navbar/hx-navbar"
+  },
+  "sitemapLocation": "sitemap91.json"
+}

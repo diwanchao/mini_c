@@ -1,0 +1,1 @@
+<view class="content"><uni-password class="vue-ref" bind:input="__e" bind:confirm="__e" vue-id="6853bb73-1" data-ref="secrity" data-event-opts="{{[['^input',[['onInput']]],['^confirm',[['onConfirm']]]]}}" bind:__l="__l" vue-slots="{{['default']}}">请输入6位支付密码</uni-password></view>

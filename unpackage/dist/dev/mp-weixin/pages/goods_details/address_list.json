@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "收货地址",
+  "navigationBarBackgroundColor": "#393D4A",
+  "backgroundColorTop": "#393D4A",
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "hx-navbar": "/components/hx-navbar/hx-navbar"
+  }
+}

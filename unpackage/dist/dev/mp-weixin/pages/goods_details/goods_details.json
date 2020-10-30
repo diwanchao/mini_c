@@ -1,0 +1,17 @@
+{
+  "navigationBarTitleText": "商品详情",
+  "navigationBarBackgroundColor": "#393D4A",
+  "backgroundColorTop": "#393D4A",
+  "backgroundColorBottom": "#f6f6f6",
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "hx-navbar": "/components/hx-navbar/hx-navbar",
+    "uni-countdown": "/components/uni-countdown/uni-countdown",
+    "uni-notice-bar": "/components/uni-notice-bar/uni-notice-bar",
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "uni-popup-message": "/components/uni-popup/uni-popup-message",
+    "uni-popup-dialog": "/components/uni-popup/uni-popup-dialog",
+    "lc-number-box": "/components/lc-number-box/lc-numberBox"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "会员中心",
+  "backgroundColorTop": "#393D4A",
+  "enablePullDownRefresh": true,
+  "navigationBarBackgroundColor": "#393D4A",
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "usingComponents": {}
+}

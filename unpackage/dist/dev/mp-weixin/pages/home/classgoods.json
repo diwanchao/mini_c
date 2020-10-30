@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "商品分类",
+  "backgroundColorTop": "#393D4A",
+  "navigationBarBackgroundColor": "#393D4A",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "uni-popup": "/components/uni-popup/uni-popup"
+  }
+}

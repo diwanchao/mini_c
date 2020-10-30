@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "购物须知",
+  "navigationBarBackgroundColor": "#393D4A",
+  "backgroundColorTop": "#393D4A",
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "usingComponents": {}
+}

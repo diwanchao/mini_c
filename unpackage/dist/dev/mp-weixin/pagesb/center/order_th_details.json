@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "退货单详情",
+  "backgroundColorTop": "#393D4A",
+  "navigationBarBackgroundColor": "#393D4A",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true,
+  "usingComponents": {}
+}

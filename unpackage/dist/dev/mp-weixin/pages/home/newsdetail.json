@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "新人详情",
+  "navigationBarBackgroundColor": "#000",
+  "backgroundColorTop": "#f6f6f6",
+  "backgroundColorBottom": "#f6f6f6",
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "usingComponents": {}
+}
