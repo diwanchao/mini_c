@@ -2,7 +2,7 @@
 	<view>
 		<hx-navbar :config="config" />
 		<view>
-			<view class="text">营业执照</view>
+			<view class="text">经营证照</view>
 			<view ><image class="img" :src="licenseList"></image></view>
 			<view class="text">食品经营许可证</view>
 			<view ><image class="img" :src="hygieneList"></image></view>
@@ -36,7 +36,7 @@
 				licenseList:'',
 				hygieneList:'',
 				config:{
-					title: '营业执照',
+					title: '经营证照',
 					color: '#ffffff',
 					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
 					statusBarFontColor:'#fff'

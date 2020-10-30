@@ -97,6 +97,8 @@
 				this.index1= index;
 				if(this.index1= index){
 					this.getmyjonin()
+				}else if(this.index==0){
+					this.getmyjonin()
 				}
 			},
 			//去支付

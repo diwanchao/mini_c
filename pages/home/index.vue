@@ -394,28 +394,13 @@
 						price:'￥25.00',
 						prices:'30.00'
 					}],
-					eveningList:[{
-						id:0,
-						title:'购划算',
-						img:'https://div.buy315.com.cn/xcx_imgs/xianshi.png',
-						time:'13:25:20>',
-						
-					},
-					{
-						id:0,
-						title:'晚间菜场',
-						img:'https://div.buy315.com.cn/xcx_imgs/wanjian.png',
-						time:'18:00-20:00>',
-						
-					}],
+					eveningList:[],
 					listScrollShop:[],
 					shopList:[],
-					spikeList:[
-						
-					],    // 限时秒杀
+					spikeList:[],    // 限时秒杀
 					wanjian:'block',
 					miaosha:'block',
-					newcomer:'',
+					newcomer:true,
 					evenimglist:'',
 				}
 			},
@@ -535,6 +520,7 @@
 				this.getnewShopList();
 				this.getnewCoupon();
 				this.getexlosIve();
+				this.getClass();
 				// this.getEvening();
 				this.getbuyList();
 				this.getTimespike();
@@ -591,8 +577,13 @@
 			},
 			methods: {
 				gotodetails(item){
-					console.log('fhesuortgieoa')
-					console.log(item.barcode_id)
+					if (this.memberinfo.length == 0) {
+						uni.navigateTo({
+							url: "/pages/login/login"
+						})
+						return;
+					}
+					
 					uni.navigateTo({
 					     url:"../goods_details/goods_details?barcode_id=" + item.barcode_id
 					 })
@@ -630,7 +621,7 @@
 						return;
 					}
 					uni.navigateTo({
-						url:'/pages/serch/goods_list'
+						url:'/pages/serch/index'
 					})
 				},
 				// 晚间
@@ -891,6 +882,10 @@
 				}else if(this.eveningList.length>4 && this.spikeList.length==0){
 					console.log(this.eveningList,'晚间菜场4个成功')
 					this.eveningList = this.eveningList .slice(0,4);
+				}
+				if(this.eveningList.length==0 && this.spikeList.length==0){
+					this.wanjian = 'none'
+					this.miaosha ='none'
 				}
 			},
 			// 晚间菜场
@@ -1253,7 +1248,8 @@
 									// setTimeout(function(){
 									// 	xthis.pd_mshewanjian();
 									// },1000)
-									// xthis.getexlosIve();
+									xthis.getexlosIve();
+									xthis.getClass();
 								}
 								//console.log(res.data);						
 								if (xthis.memberinfo.length != 0) {
@@ -2277,6 +2273,7 @@
 									// 	xxx.pd_mshewanjian();
 									// },1000)
 									xxx.getexlosIve();
+									xxx.getClass();
 								}
 							});
 						},
@@ -2354,6 +2351,7 @@
 									xxx.getHome();
 									xxx.getexlosIve();
 									xxx.clickTab(0);
+									xxx.getClass();
 									xxx.getnewList();
 									xxx.getnewShopList();
 									xxx.getbuyList();

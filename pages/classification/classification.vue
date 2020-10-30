@@ -2,7 +2,7 @@
 	<view>
 		<hx-navbar :config="config" />
     <view v-if="xShow==true">
-		<view class="serchall">
+		<view class="serchall" @click="gotoserch">
 		   <view class="search">
 		    <view><image class="search_img" src="https://div.buy315.com.cn/xcx_imgs/search.png"></image></view>
 		    <input type="text" placeholder="请输入商品信息" class="input_text" v-model="name">
@@ -318,6 +318,18 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 			}
 		},
 		onShow:function(){
+		
+				if (this.memberinfo.length == 0) {
+					uni.redirectTo({
+						url: "/pages/login/login"
+					})
+					return;
+				}
+				
+				uni.navigateTo({
+				     url:"../goods_details/goods_details?barcode_id=" + item.barcode_id
+				 })
+		
 			try {//从本地缓存中同步获取指定 key 对应的内容。
 				const value = uni.getStorageSync('memberinfo');
 				const valuex = uni.getStorageSync('shoppingCarts');
@@ -408,6 +420,11 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 			this.checkItem(-1);
 		},
 		methods: {
+			gotoserch(){
+				uni.navigateTo({
+					url:'/pages/serch/index'
+				})
+			},
 			listleftScroll(index){
 				console.log(index)
 				this.tabIndex = index

@@ -353,6 +353,10 @@
 			}
 		},
 		onShow: function(e) {
+			
+	
+				
+			
 			//#ifdef MP-WEIXIN
 			wx.login({
 			  success: res =>{
@@ -362,6 +366,7 @@
 			})
 			//#endif
 			this.login = false;
+	
 			try { //从本地缓存中同步获取指定 key 对应的内容。
 				const value = uni.getStorageSync('memberinfo');
 				this.deployinfo = uni.getStorageSync('deployinfo');
@@ -381,8 +386,8 @@
 			} catch (e) {
 				// error
 			}
-			if (this.memberinfo.length == 0) {
-				return;
+			if (this.memberinfo.length == 0) {    
+				url: "/pages/login/login"
 			}
 			// uni.showLoading({
 			// 	title: '加载中'

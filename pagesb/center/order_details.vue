@@ -272,9 +272,7 @@ import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
 			}
 		},
 		onLoad:function(data){
-			wx.setNavigationBarTitle({
-			  title: this.data._title
-			})
+		
 			uni.showLoading({
 			    title: '加载中'
 			});

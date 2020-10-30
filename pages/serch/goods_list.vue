@@ -1,19 +1,6 @@
 <template>
     <view>
 		<hx-navbar :config="config" />
-		<view class="x-auto float-left" style="width: 600upx; border-radius: 40upx; padding: 0upx 0; background-color:#ccc;">
-			<view class="x-auto" style="padding: 23upx 0 0 28upx;">
-				<image src="https://div.buy315.com.cn/xcx_imgs/sec.png" style="width: 28upx; height: 28upx;"></image>
-			</view>
-			<view class="x-auto" style="color:rgba(255,255,255,1); padding:0 0 0 10upx; width: 520upx;">
-				<input placeholder="请输入商品名称" class=" input" style="height: 34upx; padding:18upx 0;" v-model="goods_title"/>
-			</view>
-		</view>	
-		<view class="x-auto text-center float-right" style="width: 110upx; padding-top: 0upx;">
-			<view class="x-auto text-center float-right bg-red text-white" @click="loadData(goods_title)" style="width: 110upx; height:85upx; font-size: 11pt; background-color: #F65A2A; line-height: 85upx; border-radius:40upx;">
-				搜索
-			</view>
-		</view>
 		<view class="x12 text-333 text-default" style="padding-bottom: 130upx;">
 			<view class="x12 border-bottom border-gray padding-top padding-bottom" v-for="(item,msindex) in goodsList" :key="msindex">
 				<view class="tctj-body-left" @click="goDetails(item)">

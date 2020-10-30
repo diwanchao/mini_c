@@ -18,18 +18,26 @@
 				<view class="x12 neworderlist" v-for="(xitme,xindex) in yemxList" :key="xindex">
 					<view class="box" >
 						<view class="boxTop" @click="goOrderDetails(xitme)" >
+							<view v-if="xid==4" class="text1">{{xitme.refund_time}}</view>
 							<view class="boxTop1">
 								<view><image class="timeimg" src="https://div.buy315.com.cn/xcx_imgs/c-set.png"></image></view>
 								<view class="text1">{{xitme.order_time}}</view>
+								
 							</view>
 							<!-- <view class="text1">待支付</view> -->
 						</view>
+					
+					
 						<view class="boximg" @click="goOrderDetails(xitme)">
+							
 							<view v-for="(item,index) in xitme.goods" :key="key">
-									<image v-if="xid==4" class="boximg1" :src="item.imgs_original"></image>
-									<image v-else  class="boximg1" :src="item.imgs_original"></image>
+								
+							<image class="boximg1" v-if="xid==4" :src="item.img_big"></image>
+							
+							<image class="boximg1" v-else  :src="item.imgs_original"></image>
 							</view>
-							<view class="text2">共{{xitme.nums}}件商品</view>
+							<view v-if="xid ==4" class="text2">共{{xitme.nums}}件商品</view>
+							<!-- <view  class="text2">共{{xitme.nums}}件商品</view> -->
 							
 						</view>
 						<view class="boxBtom">
@@ -128,6 +136,7 @@
 				limit: 30,
 				page: 0,
 				listpaid:[],
+				yemxListtui:[],
 				// tuiyemxList:[],
 			}
 		},
@@ -192,15 +201,21 @@
 				this.limit = 30;
 				this.getData(data);
 			},
-			goOrderDetails(data) {
+			goOrderDetails(item) {
+				// console.log(data)
+				// uni.navigateTo({
+				// 		url: "order_details?order_id=" + data.order_id + "&order_code=" + data.order_code
+				// 	})
 				if (this.xid == 4) {
 					uni.navigateTo({
-						url: "order_th_details?refund_id=" + data.refund_id
+						url: "order_th_details?refund_id=" + item.refund_id
 					})
 					return;
 				} else {
+					console.log('$$$$$$$$$$$$$$$$')
 					uni.navigateTo({
-						url: "order_details?order_id=" + data.order_id + "&order_code=" + data.order_code
+						// url:'/pagesb/center/order_details'
+						url: "order_details?order_id=" + item.order_id + "&order_code=" + item.order_code
 					})
 					return;
 				}

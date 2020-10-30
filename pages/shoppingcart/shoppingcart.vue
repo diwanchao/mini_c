@@ -220,6 +220,8 @@
 			uni.stopPullDownRefresh();			
 		},
 		onShow:function(){//返回时接收子页面的传参
+		
+	
 			try {//从本地缓存中同步获取指定 key 对应的内容。
 				const value = uni.getStorageSync('memberinfo');
 				const valuex = uni.getStorageSync('shoppingCarts');
