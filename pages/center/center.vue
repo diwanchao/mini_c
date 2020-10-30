@@ -61,13 +61,13 @@
 			<view class="x12 padding-small-bottom text-center text-default" style="padding-top: 35upx; font-size: 24upx;">
 				<view class="x4 orderlisttext"  @click="goDetails(1)">
 					<view style="width: 100upx; margin: auto;">
-						<view class="addcart" style="float: right; width: 13rpx; height: 13rpx; min-width: 0rpx; margin-right: 25rpx; background-color: red;"
+						<view class="addcart" style="float: right; width: 18rpx; height: 18rpx; min-width: 0rpx; margin-right: 25rpx; background-color: red;"
 						 v-if="memberList.dfk>0 && login==true"></view>
-						<view class="addcart" style="float: right; width: 13rpx; height: 13rpx; min-width: 0rpx; margin-right: 25rpx;"
+						<view class="addcart" style="float: right; width: 18rpx; height: 18rpx; min-width: 0rpx; margin-right: 25rpx;"
 						 v-if="memberList.dfk==0"></view>
 						<view class="x12" style="margin-top: -20upx;">
 							<view style="display: table-cell; vertical-align: middle; text-align: center; width: 100upx; height: 50rpx;">
-								<image src="https://div.buy315.com.cn/xcx_imgs/dfk.png" style="width: 36upx; height: 36upx;"></image>
+								<image src="https://div.buy315.com.cn/xcx_imgs/dfk.png" style="width: 48upx; height: 48upx;"></image>
 							</view>
 						</view>
 						<view class="x12 text22">
@@ -83,7 +83,7 @@
 						 v-if="memberList.dfh==0"></view>
 						<view class="x12" style="margin-top: -20upx;">
 							<view style="display: table-cell; vertical-align: middle; text-align: center; width: 100upx; height: 50rpx;">
-								<image src="https://div.buy315.com.cn/xcx_imgs/dfh.png" style="width: 44upx; height: 32upx;"></image>
+								<image src="https://div.buy315.com.cn/xcx_imgs/dfh.png" style="width: 48upx; height: 48upx;"></image>
 							</view>
 						</view>
 						<view class="x12 text22">
@@ -97,7 +97,7 @@
 						 v-if="login==true"></view>
 						<view class="x12" style="margin-top: -20upx;">
 							<view style="display: table-cell; vertical-align: middle; text-align: center; width: 100upx; height: 50rpx;">
-								<image src="https://div.buy315.com.cn/xcx_imgs/yfh.png" style="width: 36upx; height: 40upx;"></image>
+								<image src="https://div.buy315.com.cn/xcx_imgs/yfh.png" style="width: 48upx; height: 48upx;"></image>
 							</view>
 						</view>
 						<view class="x12 text22">
@@ -113,7 +113,7 @@
 						 v-if="memberList.tkz==0"></view>
 						<view class="x12" style="margin-top: -20upx;">
 							<view style="display: table-cell; vertical-align: middle; text-align: center; width: 170upx; height: 50rpx;">
-								<image src="https://div.buy315.com.cn/xcx_imgs/ysh.png" style="width: 40upx; height: 40upx;"></image>
+								<image src="https://div.buy315.com.cn/xcx_imgs/ysh.png" style="width: 48upx; height: 48upx;"></image>
 							</view>
 						</view>
 						<view class="x12 text22">
@@ -136,15 +136,15 @@
 			<view class="servicelisttext">我的服务</view>
 			<view class="servicelall">
 				<view class="serviceone" @click="gotovips">
-					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz4.png" mode=""></image></view>
+					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz11.png" mode=""></image></view>
 					<view class="servicetext">会员卡</view>
 				</view>
 				<view class="serviceone" @click="gotomyjoin" v-if="login==true">
-					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz4.png" mode=""></image></view>
+					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz12.png" mode=""></image></view>
 					<view class="servicetext">我的拼团</view>
 				</view>
 				<view class="serviceone" @click="goDz"  v-if="login==true">
-					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz4.png" mode=""></image></view>
+					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz13.png" mode=""></image></view>
 					<view class="servicetext">地址管理</view>
 				</view>
 <!-- 				<button>
@@ -154,11 +154,11 @@
 				</view>
 				</button> -->
 				<view class="serviceone"  @click="gotoRowse">
-					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz4.png" mode=""></image></view>
+					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz14.png" mode=""></image></view>
 					<view class="servicetext">浏览记录</view>
 				</view>
-				<view class="serviceone" @click="gotoSet">
-					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz4.png" mode=""></image></view>
+				<view class="serviceone" @click="gotoSet" style="margin-left: 40rpx;">
+					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz15.png" mode=""></image></view>
 					<view class="servicetext">设置</view>
 				</view>
 			</view>
@@ -1016,9 +1016,14 @@
 	  margin: 0 auto;
 	  margin-bottom: 20upx;
 	  background-color: #fff;
-	  position: absolute;
-	  margin-top: 650upx;
+	 position: absolute;
+	  margin-top: 670upx;
 	  margin-left: 20upx;
+	}
+	.order_num::after{
+		content: "";
+		clear: both;
+		display: block;
 	}
 	.order_num .img{
 	  width: 120upx;
@@ -1103,7 +1108,7 @@
 		background-color: #fff;
 		margin-left: 20upx;
 		position: absolute;
-		top: 850upx;
+		top: 870upx;
 		border-radius: 10upx;
 		box-shadow: 1px 2px 18px 0px rgba(4, 0, 0, 0.12)
 	}
