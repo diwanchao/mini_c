@@ -1,1 +1,0 @@
-<view><view class="x12 padding-big text-333"><view class="x12 text-big padding-top detial"><rich-text nodes="{{details}}"></rich-text></view></view></view>

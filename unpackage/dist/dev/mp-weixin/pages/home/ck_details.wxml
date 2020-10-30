@@ -1,1 +1,0 @@
-<view class="x12"><view class="x12" style="padding-bottom:200rpx;"><rich-text nodes="{{cl_list.details}}"></rich-text></view><view data-event-opts="{{[['tap',[['goPay',['$event']]]]]}}" class="x12 text-center" style="background-color:#DD0000;position:fixed;z-index:1000;bottom:0;height:100rpx;color:#fff;line-height:100rpx;" bindtap="__e">立即购买</view></view>

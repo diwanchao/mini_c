@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "hello",
-  "usingComponents": {
-    "hx-navbar": "/components/hx-navbar/hx-navbar"
-  }
-}
