@@ -51,7 +51,7 @@
 		data() {
 			return {
 				config:{
-					title: '好货爆品',
+					title: '爆品好货',
 					color: '#ffffff',
 					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
 					statusBarFontColor:'#fff'
