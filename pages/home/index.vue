@@ -81,7 +81,7 @@
 	</view>
 		<!-- 爆品好物 -->
 		<view>
-			<view class="things">
+			<view class="things" v-if="thingsList.length != 0">
 				<view class="things_top" @click="gotoexplosive">
 					<view class="things_top1">
 						<view class="things_text1">爆品好货 总有您需要的</view>
@@ -148,7 +148,7 @@
 			</view>
 		</view>
 		<!-- 图 -->
-		<view @click="gotocoupon" class="this_coupon" >
+		<view @click="gotocoupon" class="this_coupon"  v-if="buyList.current_number != undefined">
 			<image class="conten_imgs" src="https://div.buy315.com.cn/xcx_imgs/bgimgs.png"></image>
 			<view style="display: flex;" >
 				<view><image class="conter_img2" src="https://div.buy315.com.cn/xcx_imgs/kele.jpg"></image></view>
