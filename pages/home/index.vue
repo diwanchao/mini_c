@@ -16,8 +16,7 @@
 				</view>
 			</view>
 			<!-- 新人专享 -->
-			<view>
-			<view v-if="newcomer==true" >	
+			<view v-if="newcomer==true">
 				<view class="new" @click="gotonewlist" >
 					<view class="bgnew"><image class="new01" src="https://div.buy315.com.cn/xcx_imgs/newbg.png"></image></view>
 					<view class="newlist">
@@ -27,7 +26,7 @@
 								<image class="img02" :src="item.imgs_original" v-else ></image>
 							</view>
 							<view class="newprice">
-								<view><text class="price1" style="background-color: #FF874B;">新人价</text></view>
+								<view class="newtexiinn"><text class="price1">新人价</text></view>
 								<view class="price2">￥{{item.new_people_price}}</view>
 							</view>
 						</view>
@@ -43,9 +42,20 @@
 					</view>
 				</view>
 				<view class="text2">更多优惠 > </view>
-			</view>
 		</view> 
+		<view class="new" v-else>
+			<view class="bgnew">
+				<view v-if="bannerLen>0" class="lunbotu">
+					<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
+						<swiper-item  v-for="(item,index) in homeGoods.banner" :key="index" @click="goZt(item.type,item.jump_id,item.name)">
+							<image class="img3":src="item.img"></image>
+						</swiper-item>
+					</swiper>
+				</view>
+			</view>
 		</view>
+		</view>
+		<!-- 轮播图 -->
 		<!-- 新人图标 -->
 		<view v-if="newcomer==true">
 			<view class="icons" v-if="iconsLen>0 ">
@@ -55,30 +65,17 @@
 			  </view>
 			</view>
 		</view>
-		<!-- 轮播图 -->
-		
-		<view v-if="newcomer!=true">
-		
-		<view v-if="bannerLen>0" class="lunbotu new"  >
-			<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
-				<swiper-item  v-for="(item,index) in homeGoods.banner" :key="index" @click="goZt(item.type,item.jump_id,item.name)">
-					<image class="img3":src="item.img"></image>
-				</swiper-item>
-			</swiper>
-		</view>
 		<!-- 二维码 -->
-		<!-- <view><image class="erweima" src="https://div.buy315.com.cn/xcx_imgs/tiaoxingma.png"></image></view> -->
-		<!-- <view class="text6">43534543657625</view> -->
-		<!-- 新人图标 -->
+		<!-- 图标 -->
 		<view v-if="newcomer!=true">
-		   <view class="icon" v-if="iconsLen>0">
-			  <view class="icon1" v-for="(ico_item,ico_index) in homeGoods.icons" :key="ico_index" @click="goZt(ico_item.type,ico_item.jump_id,ico_item.name)">
+			<view class="icon" v-if="iconsLen>0" :style="[{marginTop:mar_top + 'rpx'}]">
+				<view class="icon1" v-for="(ico_item,ico_index) in homeGoods.icons" :key="ico_index" @click="goZt(ico_item.type,ico_item.jump_id,ico_item.name)">
 				<view class="iconbg"><image class="icon_img" :src="ico_item.img"></image></view>
-				<view class="icon_name">{{ico_item.name}}</view>
-			  </view>
+					<view class="icon_name">{{ico_item.name}}</view>
+				 </view>
 			</view>
 		</view>
-	</view>
+		
 		<!-- 爆品好物 -->
 		<view>
 			<view class="things" v-if="thingsList.length != 0">
@@ -151,7 +148,7 @@
 		<view @click="gotocoupon" class="this_coupon"  v-if="buyList.current_number != undefined">
 			<image class="conten_imgs" src="https://div.buy315.com.cn/xcx_imgs/bgimgs.png"></image>
 			<view style="display: flex;" >
-				<view><image class="conter_img2" src="https://div.buy315.com.cn/xcx_imgs/kele.jpg"></image></view>
+				<view><image class="conter_img2" :src="buyList.imgs_original"></image></view>
 				<view class="this_title">{{buyList.goods_title}}</view>
 				<view class="this_fenshu">已累计拼成:{{buyList.current_number}}份</view>
 			</view>
@@ -323,7 +320,7 @@
 								key: 'btn1',
 								icon: '&#xe651;',
 								position: 'left',
-								txt:'' ,
+								txt:'请登录' ,
 								fontSize:'14px'
 							}],
 					},
@@ -405,6 +402,7 @@
 					miaosha:'block',
 					newcomer:true,
 					evenimglist:'',
+					mar_top:20
 				}
 			},
 			onTabItemTap:function(){
@@ -491,7 +489,10 @@
 				}
 			},
 			onShow: function(e) {
-			
+				console.log('uni.getSystemInfoSync().platform',)
+				if(uni.getSystemInfoSync().platform == 'android'){
+					this.mar_top = 60
+				}
 				this.wanjian ='block',
 				this.miaosha ='block'
 				//#ifdef MP-WEIXIN
@@ -1235,9 +1236,9 @@
 							} else {
 								xthis.maddress = values.address.xq_name + values.address.mbh;
 							}
-							xthis.$refs.hxnb.conf.leftButton[0].txt = xthis.stores_name
+							// xthis.$refs.hxnb.conf.leftButton[0].txt = xthis.stores_name
 							console.log(xthis.stores_name,'获取到的门店地址')
-							xthis.stores_name = xthis.$refs.hxnb.conf.leftButton[0].txt
+							// xthis.stores_name = xthis.$refs.hxnb.conf.leftButton[0].txt
 							
 							xthis.$refs.hxnb.conf.leftButton[0].txt = values.store.stores_name;
 							// console.log(xthis.$refs.hxnb.conf.leftButton[0].txt,'取回来菜场的名字');
@@ -2238,7 +2239,8 @@
 								success: res => {
 									//console.log(res.data.data);
 									//console.log(sort(res.data));
-	
+									// console.log('用户同意获取经纬度后回调',res.data.data)
+									// xxx.$refs.hxnb.conf.leftButton[0].txt = xxx.stores_name
 									xxx.xshopInfo = res.data.data;
 									//console.log(this.xshopInfo.store.stores_id);
 									//写入缓存
@@ -2483,7 +2485,7 @@
 					     
 				uni.showToast({
 				      title: '加入成功',
-				      duration: 2000,
+				      duration: 1000,
 					  icon:'none'
 				     });
 					//num_s参数   0和1，0为减，1为加
@@ -2603,6 +2605,12 @@
 					//5分类
 					//group_id==1000秒杀分组
 					//console.log(type,jump_id,title,group_id,gtype);return;
+					if (this.memberinfo.length == 0) {
+					     uni.navigateTo({
+					      url: "/pages/login/login"
+					     })
+					     return;
+					    }
 					this.tcStatus = 1;
 					uni.showTabBar();
 					if (gtype == 1) {
@@ -2753,7 +2761,7 @@
 	}
 	.head_img1{
 		width: 100%;
-		height: 652upx;
+		height: 650upx;
 	}
 	/* 搜索和定位 */
 	.head_top2{
@@ -2834,13 +2842,20 @@
 	}
 	.newprice{
 		display: flex;
-		margin-top: 30upx;
+		margin-top: 20upx;
 		align-items: center;
 		font-family: 'SimHei';
 	}
 	.price1{
-		font-size: 20upx;
+		font-size: 16upx;
 		color:#fff;
+		padding-left: 6rpx;
+	}
+	.newtexiinn{
+		height: 24upx;
+		width: 66upx;
+		background-color: #FF874B;
+		line-height: 18upx;
 	}
 	.price2{
 		font-size: 24upx;
@@ -2910,10 +2925,9 @@
 		
 	}
 	.lunbotu{
-		position: absolute;
-		top: 240upx;
+		top: 110upx;
 		width: 100%;
-		margin-top: 60rpx;
+		position: absolute;
 		/* left: 20upx; */
 	}
 	/* 二维码 */
@@ -2940,10 +2954,10 @@
 	.icon{
 	  display: flex;
 	  width: 730upx;
-	  margin: 13upx 20upx 0 20upx;
+	  margin: 0upx 20upx 0 20upx;
 	  flex-wrap: wrap;
 	  position: absolute;
-	  top: 530rpx;
+	  top: 450rpx;
 /* 	  margin-top: 40rpx; */
 	}
 	.iconbg{
@@ -2961,11 +2975,12 @@
 	  font-size: 22upx;
 	  padding-top: 20upx;
 	  color: #333;
+	  line-height: 24upx;
 	}
 	.icon1{
 	  text-align: center;
-	  /* margin-right: 59upx; */
 	  margin: 0 28upx;
+	 
 	}
 	/* 提示信息 */
 	.prompt{
@@ -3001,7 +3016,7 @@
 		border-radius: 20upx;
 		position: relative;
 		margin-left: 20upx;
-		margin-top: 16upx;
+		/* margin-top: 16upx; */
 	}
 	.thingstwo{
 		height: 300upx;

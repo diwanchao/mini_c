@@ -11,9 +11,29 @@
 				<view class="boxtop">
 					<view class="boxtop_c">
 						<view><image class="top_img" src="../../static/center-0.png" ></image></view>
-						<view>{{itme.expiration_time}}</view>
+						<view>{{itme.order_time}}</view>
 					</view>
-					<view>待付款</view>
+					<!-- <view>待付款</view> -->
+					<!-- 全部 -->
+					<viwe  v-if='itme.order_status == 1 && itme.temp_pay_status == 1 && index1==0'>待支付</viwe>
+					
+					
+					
+					<viwe  v-if='itme.order_status == 1 && itme.temp_pay_status == 2 && index1==0'>支付成功</viwe>
+					<!-- <view  v-if='itme.order_status == 1 && itme.temp_logistics_status == 1 && (itme.temp_pay_status == 2 || itme.temp_type == 2) && index1==0'>待发货</view> -->
+					
+					<view  v-if='itme.order_status == 1 && itme.temp_logistics_status == 2 && (itme.temp_pay_status == 2 || itme.temp_type == 2) && index1==0'>待收货</view>
+					
+					<view  v-if='itme.order_status == 1 && itme.temp_logistics_status == 3 && (itme.temp_pay_status == 2 || itme.temp_type == 2) && index1==0'>已完成</view>
+					<!-- 拼团中 -->
+					<viwe  v-if='itme.order_status == 1 && itme.temp_pay_status == 1 && index1==1'>待支付</viwe>
+					<viwe  v-if='itme.order_status == 1 && itme.temp_pay_status == 2 && index1==1'>支付成功</viwe>
+					<!-- 成功 -->
+					<view  v-if='itme.order_status == 1 && itme.temp_logistics_status == 1 && (itme.temp_pay_status == 2 || itme.temp_type == 2) && index1==2'>待发货</view>
+					<view  v-if='itme.order_status == 1 && itme.temp_logistics_status == 2 && (itme.temp_pay_status == 2 || itme.temp_type == 2) && index1==2'>待收货</view>
+					<view  v-if='itme.order_status == 1 && itme.temp_logistics_status == 3 && (itme.temp_pay_status == 2 || itme.temp_type == 2) && index1==2'>已完成</view>
+					<!-- 失败 -->
+					<view  v-if='itme.order_status == 1 && index1==3'>拼团失败</view>
 				</view>
 				<view class="conter">
 					<view class="conter_img">
@@ -27,7 +47,7 @@
 						<!-- <view>分享</view> -->
 						<view @click="goOrderDetails(itme)">查看详情</view>
 						<!-- <view style="color: #FE0000; border: #FE0000 1upx solid;" v-if="itme.to_pay==1">去支付</view> -->
-						<view style="color: #FE0000; border: #FE0000 1upx solid;" v-if="itme.to_pay==1" @click="goPay(itme.order_code)">去支付</view>
+						<view style="color: #FE0000; border: #FE0000 1upx solid;" v-if='itme.order_status == 1 && itme.temp_pay_status == 1' @click="goPay(itme.order_code)">去支付</view>
 						<!-- <view>已退款</view> -->
 					</view>
 				</view>
@@ -78,7 +98,7 @@
 					name:'拼团成功',
 				},
 				{
-					id:2,
+					id:3,
 					name:'拼团失败',
 				}],
 				index1:0,
@@ -93,6 +113,7 @@
 				
 			},
 			clickTab(index){
+				console.log(this.index1,'____________')
 				if(this.index1= index){
 					this.getmyjonin()
 				}else if(this.index1==0){

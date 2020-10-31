@@ -31,6 +31,7 @@
 								<view class="text1" v-if='xitme.order_status == 1 && xitme.temp_logistics_status == 1 && (xitme.temp_pay_status == 2 || xitme.temp_type == 2)'>待发货</view>
 								<view class="text1" v-if='xitme.order_status == 2'>已取消</view>
 								<view class="text1" v-if="xid==4">退款中</view>
+								
 						</view>
 					
 					
@@ -54,7 +55,7 @@
 							 <view class="right" bindtap="getClickToast">催货</view> -->
 							 <view class="right"v-if="xitme.status_name !== '正常'">{{xitme.status_name}} </view>
 							 <view class="right" v-if="xitme.refund_status == '未审核'">{{xitme.refund_status}}</view>
-							 <view class="right" @click="tuiHuo(xitme)" v-if="xid==3 && xitme.to_refund==1" >我要退货 </view>
+							 <view class="right" @click="tuiHuo(xitme)" v-if='xitme.temp_logistics_status == 3 && xitme.order_status < 4 && xitme.temp_pay_status == 2' >我要退货 </view>
 							 <!-- <view class="right" @click="gopl(xitme.order_code)" v-if="xitme.to_pj==1" >去评价</view> -->
 							 <!-- <view class="right" v-if="xid==3 && xitme.to_pj==2" >已评价</view> -->
 							 <view class="right rights" @click="goPay(xitme.order_code)" v-if="xitme.to_pay==1" >去支付</view>

@@ -8,7 +8,10 @@
 		<view class="pageall" >
 		<view class="zf" >
 		  <view v-if='yemxList.order_status == 1 && yemxList.to_pay == 1'> 
-		    <view class="za_sj"><text style="float: left; color: #333;">等待支付，剩余</text><view class="daojishist"><uni-countdown color="#F65A2A"  v-if="m!=0" :show-day="false" :show-hour="false" :minute="m" :second="s"></uni-countdown></view>
+		    <view class="za_sj"><text style="float: left; color: #333;">等待支付，剩余</text><view class="daojishist">
+				<view>{{m}}分钟 </view>
+				<!-- <uni-countdown color="#F65A2A"  v-if="m!=0" :show-day="false" :show-hour="false" :minute="m" :second="s"></uni-countdown> -->
+			</view>
 			</view>
 		    <view class="zf_tisy">订单超时未支付将自动关闭</view>
 		    <view class="zf_an">
@@ -252,12 +255,14 @@ import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
 			yemxList:[],
 			goodsList:[],
 			datanum:0,
+			jstime:'',	
 			order_id:0,
 			send_info:[],
 			dsq_status:1,
 			//id:0, // 使用 marker点击事件 需要填写id
 			//title: 'map',
 			latitude: '',
+			shengyutime:'',
 			longitude: '',
 			covers: [],
 			rider:{},
@@ -344,6 +349,10 @@ import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
 						that.m = minutes
 						that.s = seconds
 						console.log(that.s)
+						
+						this.shengyutime = res.data.data.expiration_time
+						console.log(this.jstime,'————————————————当前时间')
+						console.log(that.m,'————————————————剩余时间')
 						if(that.s == '400'){
 							this.yemx();
 							// console.log('sgdjysgr')
@@ -855,7 +864,7 @@ import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
 	/* pages/order/detail.wxss */
 	.pageall{
 	  height: 100%;
-	  width: 100%;
+	 
 	  margin: 0 20rpx;
 	}
 	.zf{

@@ -6,10 +6,10 @@
 		    <view>经营证照</view>
 		    <view><image class="set_icon" src="https://div.buy315.com.cn/xcx_imgs/yjt.png"></image></view>
 		  </view>
-		 <view class="jingying">
+	<!-- 	 <view class="jingying">
 		    <view>用户协议</view>
 		    <view><image class="set_icon" src="https://div.buy315.com.cn/xcx_imgs/yjt.png"></image></view>
-		  </view>
+		  </view> -->
 <!-- 		  <view class="jingying">
 		    <view>隐私政策</view>
 		    <view><image class="set_icon" src="https://div.buy315.com.cn/xcx_imgs/yjt.png"></image></view>

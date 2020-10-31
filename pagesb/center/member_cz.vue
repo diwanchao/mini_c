@@ -34,10 +34,10 @@
 				<li>充值优惠将不定期浮动调整，具体返券金额，请以此页面显示为准。</li>
 			</ul>
 		</view>
-		<view class="zhifu">支付</view>
+		<view class="zhifu" @click="gotozhifu">支付</view>
 <!-- 		<view class="x12 padding-big text-center" style="padding-top: 0;"  >
 			<input class="uni-input" type="digit" placeholder="如:100.00"  v-model="xmoney" style="background-color: #fff; border-radius: 18pt; text-align: left; height: 90upx; padding:0 50upx;" />
-			<view class="x-auto text-center text-white" v-if="xmoney>0" @click="goCzQr(xmoney,yemxList.pay_methods)" style=" width:100%;height:85upx;background:rgba(246,90,42,1); font-size: 14pt; line-height: 85upx; border-radius:18pt;border:1px solid rgba(246,90,42,1);  margin-top: 30upx;">
+			<view class="x-auto text-center text-white" v-if="xmoney>0" " style=" width:100%;height:85upx;background:rgba(246,90,42,1); font-size: 14pt; line-height: 85upx; border-radius:18pt;border:1px solid rgba(246,90,42,1);  margin-top: 30upx;">
 				支付
 			</view>
 			<view class="x-auto text-center text-white" v-else style=" width:100%;height:85upx;background:#999; font-size: 14pt; line-height: 85upx; border-radius:18pt;border:1px solid #999;  margin-top: 30upx;">
@@ -171,10 +171,18 @@
 				this.index1 = index
 				console.log(index,'点击成功了')
 					this.zdy = false;
-					uni.navigateTo({
-						url:"member_cz_qr?paymoney="+data+"&pay_methods="+JSON.stringify(pay_methods)
-					})
+					console.log('---------------',data)
+					this.pay_ma = data
+					this.pay_methods = pay_methods
+					
 			},
+			gotozhifu(data,pay_methods,index){
+				console.log(data)
+				uni.navigateTo({
+					url:"member_cz_qr?paymoney="+this.pay_ma+"&pay_methods="+JSON.stringify(this.pay_methods)
+				})
+			},
+			
 			zdyJe(data){//money
 				this.xmoney = '';
 				if(data==='zdy'){

@@ -6,7 +6,7 @@
 			<view class="text1">账户余额：￥{{listScroll.money_sum}}</view>
 			<view><image class="erewima" :src="yemxList.barcode_img"></image></view>
 		</view>
-		<view style="position: absolute; bottom: 220upx;">
+		<view style="margin-top: 20rpx;">
 		 <view class="active_imgs" >
 		   <image class="active_img" src="../../static/ditu.png"></image>
 			<view class="viptext">会员规则</view>

@@ -234,7 +234,7 @@
 				     
 			uni.showToast({
 			      title: '加入成功',
-			      duration: 2000,
+			      duration: 1000,
 				  icon:'none'
 			     });
 				//num_s参数   0和1，0为减，1为加

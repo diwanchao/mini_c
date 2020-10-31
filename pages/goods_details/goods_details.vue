@@ -32,22 +32,25 @@
 			<!-- 晚间 -->
 			<view class="x12 hengfu" v-if="isgroups==false && isHot==false && isMark==true && isNew==false" >
 				<view class="x12 left">
-					<view style="display: flex; align-items: center;" >
+					<view class="baopin">晚间菜场</view>
+					<!-- <view style="display: flex; align-items: center;" >
 						<view><image class="left_img" src="https://div.buy315.com.cn/xcx_imgs/c-set.png" style="margin-left: 20upx;"></image></view>
 						<view style="height: 90upx;  font-size: 24upx; color: #fff; margin-left: 20upx; margin-top: 8upx;">
 							<view style="margin-left: 5upx;">距结束</view>
 							<view class="newstyle" style="margin-left: 37upx;">
+								{{eveningListtime.end_time}}
 								<uni-countdown color="#fff"  :show-day="false" :hour="h" :minute="m" :second="s"></uni-countdown>
 							</view>
 						</view>
-					</view>
+					</view> -->
 				</view>
 				<view class="textjiage">￥{{goodsinfo.price}}/{{goodsinfo.unit}}<text>原价￥{{goodsinfo.retail_price}}/{{goodsinfo.unit}}</text></view>
 			</view>
 			<!-- 拼团 -->
 			<view class="x12 hengfu" v-if="isgroups==true && isHot==false && isMark==false && isNew==false" >
-				<view class="x12 left" style="padding-left:5upx; padding-right: 5upx;">
-					<view style="color: #fff; font-size: 24upx; line-height: 30upx;">{{buylistpintuan.xcx_start_time + '-' + buylistpintuan.xcx_end_time}} 23:59分</view>
+				<view class="x12 left this_pintuan">
+					<view style="color: #fff; font-size: 24upx;">{{buylistpintuan.xcx_start_time + '-' + buylistpintuan.xcx_end_time}} </view>
+					<view style="font-size: 24upx; color: #fff; ">23:59</view>
 					<!-- <view class="newstylesss">
 						<uni-countdown color="#fff"  :show-day="false" :hour="s" :minute="s" :second="s"></uni-countdown>
 					</view> -->
@@ -333,7 +336,7 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 			spec_num:0,
 			spec_id:0,
 			spec:'',
-
+			eveningListtime:'',
 			isClass:false,
 			shoppingCarts:[],
 			shoppingCartNum:0,
@@ -1478,11 +1481,28 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 						this.isNew = res.data.data.goods[0].is_new_people_goods
 						this.isMark = res.data.data.goods[0].is_evening_market
 						this.isgroups = res.data.data.goods[0].is_group_buying
-						
 						this.buylistpintuan = res.data.data.goods[0].group_buying_info
+						this.eveningListtime = res.data.data.goods[0].evening_market_info
 						console.log(this.buylistpintuan)
 						console.log(res.data.data.goods[0].is_hot_money)
-			
+				
+					this.marketList = res.data.data;
+					this.xtime = res.data.data.end_time
+					var new_date = new Date(); //新建一个日期对象，默认现在的时间
+					var old_date = new Date(this.xtime); //设置过去的一个时间点，"yyyy-MM-dd HH:mm:ss"格式化日期
+					var difftime = (old_date - new_date) / 1000; //计算时间差,并把毫秒转换成秒
+					var days = parseInt(difftime / 86400); // 天  24*60*60*1000 
+					var hours = parseInt(difftime / 3600) - 24 * days;    // 小时 60*60 总小时数-过去的小时数=现在的小时数 
+					var minutes = parseInt(difftime % 3600 / 60); // 分钟 -(day*24) 以60秒为一整份 取余 剩下秒数 秒数/60 就是分钟数
+					var seconds = parseInt(difftime % 60);  // 以60秒为一整份 取余 剩下秒数
+					console.log('difftime' + difftime)
+					console.log('现在时间：' + new_date)
+					console.log('自定义时间：' + old_date)
+					console.log("时间差是: " + days + "天, " + hours + "小时, " + minutes + "分钟, " + seconds + "秒")
+					this.d = days
+					this.h = hours
+					this.m = minutes
+					this.s = seconds
 							//console.log(res.data);
 							this.goodsinfo = res.data.data.goods[0];
 							//console.log(this.sale_num);
@@ -2253,5 +2273,8 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 		justify-content: center;
 		font-size: 24upx;
 	}
-
+	.this_pintuan{
+		height: 90upx;
+		line-height: 45upx;
+	}
 </style>

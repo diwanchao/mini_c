@@ -43,7 +43,7 @@
 			  <view class="viptext">拼团规则</view>
 		    </view>
 		    <view class="active_footer">
-		      <view class="active_rules" v-for="item in active_rules" :key='item.id'>
+		      <view class="active_rules" >
 		        <view>1.参加团购用户,团购支付成功后无法退款,如拼团未成功,金额退回原路径.</view>
 				<view>2.参团人数越多,团购商品价格越低.</view>
 				<view>3.团购商品到截止时间,参团人数符合最低开团标准,团购成功.</view>

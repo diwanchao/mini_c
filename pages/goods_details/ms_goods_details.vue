@@ -14,19 +14,21 @@
 					</swiper-item>
 				</swiper>
 			</view>
-		<view class="x12 hengfu" >
-			<view class="x12 left">
-				<view style="display: flex; align-items: center;">
-					<view><image class="left_img" src="https://div.buy315.com.cn/xcx_imgs/c-set.png" style="margin-left: 20upx;"></image></view>
-					<view style="height: 90upx;  font-size: 24upx; color: #fff; margin-left: 20upx; margin-top: 8upx;">
-						<view style="margin-left: 5upx;">距开始</view>
-						<view class="newstyle"><uni-countdown color="#fff"  :show-day="false" :hour="hour" :minute="minute" :second="second"></uni-countdown></view>
+			<view class="x12 hengfu" >
+				<view class="x12 left">
+					<view style="display: flex; align-items: center;">
+						<view><image class="left_img" src="https://div.buy315.com.cn/xcx_imgs/naozhongaaaa.png" style="margin-left: 20upx;"></image></view>
+						<view style="height: 90upx;  font-size: 24upx; color: #fff; margin-left: 20upx; margin-top: 8upx;">
+							<view style="margin-left: 5upx;">距开始</view>
+							<view class="newstyle">
+								<uni-countdown color="#fff"  :show-day="false" :hour="hour" :minute="minute" :second="second"></uni-countdown>
+							</view>
+						</view>
 					</view>
 				</view>
-			</view>
-			<view class="textjiage">￥{{hd.price}}/{{goodsinfo.unit}}<text>原件￥{{hd.retail_price}}/{{goodsinfo.unit}}</text></view>
-		</view>		
-				
+				<view class="textjiage">￥{{hd.price}}/{{goodsinfo.unit}}<text>原件￥{{hd.retail_price}}/{{goodsinfo.unit}}</text></view>
+			</view>		
+					
 				
 		<view class="x12 bg-white newagain " style="margin-top:20upx;">
 			<view class="x12" v-if="goodsinfo.length != 0">
@@ -261,9 +263,9 @@ import url from '../../main.js';
 				fx:false,
 				tips:'',
 				ms:true,
-				hour:0,
-				minute: 0,
-				second:0,
+				hour:12,
+				minute: 59,
+				second:59,
 				xreset: false,
 				hd:[],
 				s_id:0,
@@ -557,6 +559,7 @@ import url from '../../main.js';
 				})
 			},
 			reset(time) {
+
 				this.time = time
 				this.$refs.countdown.restart()
 			},
@@ -1117,6 +1120,7 @@ import url from '../../main.js';
 							//我的项目中只赋值一次, 所以直接设为true了
 							this.hd = res.data.data;
 							this.xreset = !this.xreset;
+							// console.log9
 							this.tips = res.data.data.msg
 							this.hour = res.data.data.times.h;
 							this.minute = res.data.data.times.i;

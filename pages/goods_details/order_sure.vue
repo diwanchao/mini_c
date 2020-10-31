@@ -466,14 +466,20 @@
 					},
 					data:pdata,
 					success: res => {
+						
 						console.log('已经进入了')
-						console.log(res.data.status)
-						if(res.data.status = 'n'){
-							// uni.showToast({
-							// 	title:'订单已取消',
-							// 	icon:'none'
-							// })
-						}
+						console.log(res.data.info)
+						// if(res.data.status = 'n'){
+						// 	uni.showToast({
+						// 		title:res.data.info
+						// 	})
+						// 	setTimeout(function() {
+						// 			uni.navigateBack({
+						// 			    delta: 1,
+						// 				duration: 3000
+						// 			});  
+						// 		}, 1500) 
+						// }		
 						this.pay_info = res.data.data;
 						this.pay_info_order = res.data.data.order[0];
 						this.getYhxx(this.order_code);

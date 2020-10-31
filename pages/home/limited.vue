@@ -83,25 +83,12 @@
 					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
 					statusBarFontColor:'#fff'
 				},
-				active_rules:[1,2,3],
+				
 				spikeList:[{
-					id:0,
-					img:'https://div.buy315.com.cn/xcx_imgs/kele.jpg',
-					name:'[可口可乐] 汽水 碳酸饮料',
-					picter:'25.00',
-					zhek:'7折',
-					husx:'￥30.00',
-					shengy:'剩余30件'
-					
-				},
-				{
-					id:0,
-					img:'https://div.buy315.com.cn/xcx_imgs/kele.jpg',
-					name:'[可口可乐] 汽水 碳酸饮料',
-					picter:'25.00',
-					zhek:'7折',
-					husx:'￥30.00',
-					shengy:'剩余30件'
+					goods_title:'获取中',
+					price:'获取中',
+					retail_price:'获取中',
+					num:'获取中',
 					
 				}],
 				sidnum:[],

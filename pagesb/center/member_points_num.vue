@@ -18,7 +18,7 @@
 			<!-- 列表 -->
 			 <!-- <view class="none">{{none}}</view> -->
 			 <view v-if="datanum==0">
-				<image src="../../static/zanwusj.png" mode="" style="width: 100%; height: 1089upx;"></image>
+				<view style="text-align: center;">暂无数据</view>
 			 </view>
 			<view class="ul">
 			  <view class="li" v-for="item in listScroll" :key="item.id">

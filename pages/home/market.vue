@@ -12,14 +12,15 @@
 		    <view><image class="icon_right" src="https://div.buy315.com.cn/xcx_imgs/xihongshi.png"></image></view>
 		  </view>
 		  <!-- 时间倒计时 -->
-		  <view class="marth_time">
+<!-- 		  <view class="marth_time">
 		    <view class="text1">据下次折扣时间还有：</view>
 			
-		    <view class="newstyle">
-				<uni-countdown color="#fff" background-color="#70BC26" :show-day="false" :hour="h" :minute="m" :second="s"></uni-countdown>
-		    </view>
+		   <view class="newstyle">
+			   {{hour}}{{minute}}{{second}}
+				<uni-countdown color="#fff"  :show-day="false" :hour="hour" :minute="minute" :second="second"></uni-countdown>
+		   </view>
 			
-		  </view>
+		  </view> -->
 		<!-- 商品 -->
 		<view>
 		  <view class="shop_one" v-for='(item,index) in marketList.data' :key='index' >
@@ -33,8 +34,9 @@
 		      </view>
 			 <!-- <view class="text10">限时7折</view> -->
 		    </view>
+			 <view class="tetx7" >仅剩{{item.sale_num}}件</view>
 		    <view class="text9">
-		      <view class="tetx7" >仅剩{{item.sale_num}}件</view>
+		     
 		      <view class="text8" style="background-color: #9999; color: #999;" v-if="item.sale_num == 0" >售空</view>
 			  <view class="text8" v-else @click="gotonewdetail(item)">抢</view>
 		    </view>
@@ -63,9 +65,11 @@
 
 <script>
 	import url from '../../main.js';
-	import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
+	// import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
+	import uniCountdown from "@/components/linnian-CountDown/uni-countdown.vue";
+	import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue';
 	export default {
-		components: {uniCountdown},
+		components: {uniCountdown,uniNoticeBar},
 		data() {
 			return {
 				config:{
@@ -76,11 +80,70 @@
 				},
 				active_rules:[1,2,3],
 				marketList:[],
-				m:'',
-				s:'',
-				d:'',
-				h:'',
-				endTime:''
+				m:10,
+				s:10,
+				h:10,
+				endTime:'',
+				wh:1,
+				time: 0,///多少毫秒
+				xShow:false,
+				deployinfo:{},//配置信息货币单位，符号，以及其他的一些配置参数
+				app_xxb:-1,
+				xxb_num:0,
+				nodes: [{
+					name: 'img',
+					attrs: {
+						style: 'height:100upx;width:100upx;'
+					},
+				}],
+				login:false,
+				memberinfo:[],
+				indicatorDots: true,
+				autoplay: true,
+				interval: 5000,
+				duration: 1000,
+				//xstrs:'',
+				pjList:[],
+				spec_num:0,
+				
+				isClass:false,
+				shoppingCarts:[],
+				shoppingCartNum:0,
+				xshopInfo:[],
+				
+				stores_name:'',
+				praise:0,
+				barcode_id:0,
+				jjkkjj:0,
+				fx:false,
+				tips:'',
+				ms:true,
+				hour:0,
+				minute: 0,
+				second:0,
+				xreset: false,
+				hd:[],
+				s_id:0,
+				wx_tpl:[],
+				zxkf:false,
+				tg_str:'',//通告
+				announce_seat:1,
+				spec_id:0,
+				spec:'',
+				goodsinfo:[],
+				goodsinfos:[],
+				choice:[],
+				choice_tag:[],
+				choice_unit:[],
+				simulatedDATA: { //模拟后台返回的数据 多规格
+					"difference": [],
+					"specifications": []
+				},
+				selectArr: [], //存放被选中的值
+				shopItemInfo: {}, //存放要和选中的值进行匹配的数据
+				subIndex: [], //是否选中 因为不确定是多规格还是但规格，所以这里定义数组来判断
+				total:0,
+				xsdata:0,
 			}
 		},
 		onLoad() {
@@ -98,7 +161,24 @@
 				uni.navigateTo({
 					url:"../goods_details/goods_details?barcode_id=" + item.barcode_id
 				})
-			
+			},
+			onFinish() {
+				uni.showToast({
+					icon: 'none',
+					title: '倒计时结束'
+				})
+			},
+			reset(time) {
+				this.time = time
+				this.$refs.countdown.restart()
+			},
+			fillWithZero(num, n) {
+				var len = num.toString().length;
+				while (len < n) {
+					num = "0" + num;
+					len++;
+				}
+				return num;
 			},
 			// 晚间菜场
 			getEvening(){
@@ -135,24 +215,30 @@
 					},
 					data:pdata,
 					success: res => {
+						
+						// var timeStr = (Number(res.data.data.times.h * 3600)+Number(res.data.data.times.i * 60)+Number(res.data.data.times.s))*1000;
+						// this.time = timeStr;
+						// this.xreset = !this.xreset;
+						
+						// this.hour = 11;
+						// this.minute = 23;
+						// this.second = 15;
+						
+						
+						// // console.log(res.data.data.times.h,'res.data.data.times.h')
+						// // console.log(res.data.data.times.i,'res.data.data.times.i')
+						// // console.log(res.data.data.times.s,'res.data.data.times.s')
+						
+						
+						// console.log(this.hour,)
+						// console.log(this.minute,)
+						// console.log(this.second,)
+						
+						
 						console.log(res.data.data,'晚间菜场')
 						this.marketList = res.data.data;
 						this.xtime = res.data.data.end_time
-						var new_date = new Date(); //新建一个日期对象，默认现在的时间
-						var old_date = new Date(this.xtime); //设置过去的一个时间点，"yyyy-MM-dd HH:mm:ss"格式化日期
-						var difftime = (old_date - new_date) / 1000; //计算时间差,并把毫秒转换成秒
-						var days = parseInt(difftime / 86400); // 天  24*60*60*1000 
-						var hours = parseInt(difftime / 3600) - 24 * days;    // 小时 60*60 总小时数-过去的小时数=现在的小时数 
-						var minutes = parseInt(difftime % 3600 / 60); // 分钟 -(day*24) 以60秒为一整份 取余 剩下秒数 秒数/60 就是分钟数
-						var seconds = parseInt(difftime % 60);  // 以60秒为一整份 取余 剩下秒数
-						console.log('difftime' + difftime)
-						console.log('现在时间：' + new_date)
-						console.log('自定义时间：' + old_date)
-						console.log("时间差是: " + days + "天, " + hours + "小时, " + minutes + "分钟, " + seconds + "秒")
-						this.d = days
-						this.h = hours
-						this.m = minutes
-						this.s = seconds
+						
 				
 					}
 				})
@@ -279,6 +365,9 @@ page{
   font-size: 24rpx;
   color: #fe0000;
   font-weight: bold;
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
 }
 .text8{
   font-size: 36rpx;
@@ -508,11 +597,23 @@ page{
 	width: 30upx;
 	margin-top: 20upx;
 }
-.uni-countdown__number{
+/* .uni-countdown__number{
 	height: 30upx !important;
 	border-radius: 5upx !important;
 }
 .uni-countdown__splitor{
 	line-height: 30upx !important;
-}
+} */
+	.uni-countdown__number{
+		height: 30upx !important;
+		border: none !important;
+		background-color: none !important;
+		background:none !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	.uni-countdown__splitor{
+		padding: 0 3upx !important;
+		color: #fff !important;
+	}
 </style>

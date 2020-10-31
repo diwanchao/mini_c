@@ -107,7 +107,7 @@
 				</view>
 		</view>
 		<!--多规格弹窗的显示开始-->
-		<view class="x12" v-if="xpopup==1">
+		<view class="x12" v-if="xpopup==1" style="z-index: 999999999999999999999999;">
 			<uni-popup ref="showpopup" :type="type" @change="change"  style="position: absolute; z-index: 1000000; bottom: 0;">
 				<view class="x12 popup-content">
 					<view class="x12 border-bottom border-gray" style="width: 700upx; padding-bottom: 10px; margin-bottom:0px;">
@@ -125,12 +125,13 @@
 								<view class="x12 text-large" style="padding-top: 15upx;">
 									<view class="x-auto">
 										<view class="x-auto">
-											<span style="color:#F65A2A; font-size: 14pt;">{{deployinfo.monetary_symbol}}{{goodsinfo.price}}</span>
+											<!-- {{deployinfo.monetary_symbol}} -->
+											<span style="color:#F65A2A; font-size: 14pt;">{{goodsinfo.price}}</span>
 										</view>
 										<view class="x-auto" style="padding-left: 10upx;">
-											<span style="color:#393D4A; font-size: 10pt;">/{{goodsinfo.unit}}</span>
+											<span style="color:#393D4A; font-size: 10pt;">{{goodsinfo.unit}}</span>
 											<span style="font-size: 10pt; color: #999; text-decoration: line-through; font-weight: 100;" v-if="(goodsinfo.price*1) < (goodsinfo.original_price*1)">
-												{{deployinfo.monetary_symbol}}{{goodsinfo.original_price}}/{{goodsinfo.unit}}
+												{{goodsinfo.original_price}}/{{goodsinfo.unit}}
 											</span>
 										</view>
 									</view>
@@ -351,7 +352,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 				this.getMer();
 			}
 		},
-		onLoad:function(){			
+		onLoad:function(){		
 			try {//从本地缓存中同步获取指定 key 对应的内容。
 				const value = uni.getStorageSync('memberinfo');
 				const valuex = uni.getStorageSync('shoppingCarts');
@@ -623,6 +624,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 			        },
 			//弹出下拉弹窗
 			togglePopup(type, open,data) {
+					console.log('++++++++++++++++++++++++++')
 					switch (type) {
 						case 'bottom':
 							this.content = '底部弹出 popup';
@@ -761,6 +763,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 											
 										}
 										this.choice_unit = res.data.data.choice_unit;
+										this.choice_unit[0].site = 2
 										this.goodsinfos = res.data.data.goods;
 										this.spec_id = res.data.data.goods[0].spec_id;
 										this.spec = res.data.data.goods[0].spec;

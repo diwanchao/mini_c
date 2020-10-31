@@ -18,7 +18,7 @@
 		        <view class="tetx6">{{item.retail_price}}</view>
 		      </view>
 		    </view>
-		    <view class="text9" @click="addToCart(item)">
+		    <view class="text9" @click="jrShoppingCart(1,item,item.group_id,'dh'+item.group_id+'-'+item.barcode_id)">
 		      <!-- <view class="tetx7">{{item.shengy}}</view> -->
 		      <view class="text8"><image class="shop_img01" src="https://div.buy315.com.cn/xcx_imgs/jia.png"></image></view>
 		    </view>
@@ -77,101 +77,13 @@
 			this.getexlosIve();
 		},
 		methods: {
-			addToCart() {
-				// 加入购物前先检查有没有选择规格
-				// if(this.choice.choice_spec.length > 0){
-				// 	var selectArrx = [];
-				// 	var k1 = 0;
-				// 	for (let y1 in this.selectArr) {
-				// 		if(this.selectArr[y1] != ""){
-				// 			selectArrx[k1] = this.selectArr[y1];
-				// 			k1++;
-				// 		}
-				// 	}
-				// 	if(selectArrx.length < this.choice.choice_spec.length){
-				// 		uni.showToast({
-				// 			title: '请选择规格',
-				// 			duration: 2000,
-				// 			icon:"none",
-				// 		});
-				// 		return;
-				// 	}
-				// }
-				
-				//组织要提交的备注信息
-				var bjRemark = "";
-				var tag_name = "";
-				var bzInt = "";
-				var sgt_ids = "";
-				var allbzxzInt = "";
-				for (let b in this.choice_tag) {
-					if(this.choice_tag[b].goods_tag.is_must==1){
-						tag_name += this.choice_tag[b].goods_tag.name+",";
-						allbzxzInt  += this.choice_tag[b].goods_tag.sgt_id+",";
-					}
-					var str_bz = "";
-					var sgt_ids_b = "";
-					var bzInt_b = "";
-					for (let b1 in this.choice_tag[b].goods_tag.tag) {
-						if(this.choice_tag[b].goods_tag.tag[b1].site == 2 && this.choice_tag[b].goods_tag.tag[b1].tag_id > 0){
-							str_bz = this.choice_tag[b].goods_tag.name+":【"+this.choice_tag[b].goods_tag.tag[b1].tag_name+"】";
-							sgt_ids_b = this.choice_tag[b].goods_tag.sgt_id;
-							if(this.choice_tag[b].goods_tag.is_must==1){
-								bzInt_b  = this.choice_tag[b].goods_tag.sgt_id;
-							}
-						}
-						if(this.choice_tag[b].goods_tag.tag[b1].site == 2 && this.choice_tag[b].goods_tag.tag[b1].tag_id == 0){
-							str_bz = this.choice_tag[b].goods_tag.name+":【"+this.choice_tag[b].goods_tag.t_name+"】";
-							sgt_ids_b = this.choice_tag[b].goods_tag.sgt_id;
-							if(this.choice_tag[b].goods_tag.is_must==1){
-								bzInt_b  = this.choice_tag[b].goods_tag.sgt_id;
-							}
-						}
-					}
-					if(str_bz!=''){
-						bjRemark += str_bz+",";
-						sgt_ids += sgt_ids_b+",";
-						if(this.choice_tag[b].goods_tag.is_must==1){
-							bzInt += bzInt_b+",";
-						}
-					}
-				}
-				//检查备注信息是不是必须选择，如果是要先选择备注信息
-				if(allbzxzInt != bzInt){
-					uni.showToast({
-						title: "请选择："+tag_name,
-						duration: 2000,
-						icon:"none",
-					});
-					return;
-				}
-				uni.showToast({
-					title: '加入成功',
-					duration: 2000
-				});
-				console.log(this.goodsinfo,'看看里面有啥');
-				var xxx={
-					stores_id:this.xshopInfo.store.stores_id,
-					barcode_id:this.goodsinfo.barcode_id,
-					category_id:this.goodsinfo.category_id,
-					goods_id:this.goodsinfo.goods_id,
-					goods_title:this.goodsinfo.goods_title,
-					// img:this.goodsinfo.imgs[0],
-					original_price:this.goodsinfo.original_price,
-					price:this.goodsinfo.price,
-					promotion:this.goodsinfo.promotion,
-					unit:this.goodsinfo.unit,
-					astrict_num:this.goodsinfo.astrict_num,
-					spec:this.spec,
-					site:2,
-					remark:bjRemark,
-					sgt_ids:sgt_ids,
-				};
-				//console.log(xxx);
-				//console.log(this.goodsinfo);return;
-				this.jrShoppingCart(1,xxx);
-			},
+		
 			jrShoppingCart(num_s,goods_info){
+				uni.showToast({
+				      title: '加入成功',
+				      duration: 1000,
+					  icon:'none'
+				     });
 				//num_s参数   0和1，0为减，1为加
 				//goods_info参数  一维数组
 				//console.log(goods_info);

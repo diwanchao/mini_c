@@ -1122,7 +1122,7 @@
 		background-color: #fff;
 		margin-left: 20upx;
 		position: absolute;
-		top: 870upx;
+		top: 660upx;
 		border-radius: 10upx;
 		box-shadow: 1px 2px 18px 0px rgba(4, 0, 0, 0.12)
 	}
