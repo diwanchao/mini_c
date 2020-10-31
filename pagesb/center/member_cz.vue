@@ -4,7 +4,7 @@
 		<view class="rech_top">
 		  <image src="https://div.buy315.com.cn/xcx_imgs/my_small.png" class="image"></image>
 		  <view class="content">
-		    <view class="t1">666,666.66</view>
+		    <view class="t1">{{zhanghuyue.money_sum}}</view>
 		    <view class="t2">余额（元）</view>
 		  </view>
 		</view>
@@ -24,7 +24,7 @@
 				</view>
 			</view>
 		</view>
-		<view style="margin-left: 20upx; margin-bottom: 100rpx;">
+		<view style="margin-left: 20upx; margin-bottom: 20rpx;">
 		<view>充值声明</view>
 			<ul style='width: 550upx; line-height: 40upx;'>
 				
@@ -118,6 +118,7 @@
 				// error
 			}
 			this.yemx();
+			this.clickTab()
 		},
 		methods: {
 			rechPrice(data){
@@ -173,6 +174,45 @@
 				if(data==='zdy'){
 					this.zdy = !this.zdy;
 				}
+			},
+			clickTab(index){
+				this.index1= index;
+				console.log(index)
+				console.log('data',index)
+				// index = data;
+				if(index==1){
+					var im = 'sr';					
+				}else if(index==2){
+					var im = 'zc';
+				}else{
+					var im = '';
+					this.index = 0;
+				}				
+				//获取信息
+				var arr ={
+						openid: this.memberinfo.openid,
+						status:im,
+					};
+				var pdata = url.getSignStr(arr);
+				uni.request({
+					url:url.websiteUrl+'/api_v2/membercenter/member_balance',
+					method:'POST',
+					dataType:'json',
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+					},
+					data:pdata,
+					success: res => {
+						//console.log(res.data);
+						this.datanum = res.data.data.length;
+						this.listScroll = res.data.data;
+						this.zhanghuyue = res.data
+						uni.stopPullDownRefresh();
+						return;
+					},
+					fail: () => {},
+					complete: () => {}
+				});
 			}
 		}
 	}

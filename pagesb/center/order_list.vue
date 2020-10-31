@@ -24,7 +24,13 @@
 								<view class="text1">{{xitme.order_time}}</view>
 								
 							</view>
-							<!-- <view class="text1">待支付</view> -->
+								<view class="text1" v-if='xitme.temp_logistics_status == 3 && xitme.order_status < 4 && xitme.temp_pay_status == 2'>已完成</view>
+								<view class="text1" v-if='xitme.order_status == 1 && xitme.to_pay == 1'>待支付</view>
+								
+								<view class="text1" v-if='xitme.order_status == 1 && xitme.temp_logistics_status == 2 && (xitme.temp_pay_status == 2 || xitme.temp_type == 2)'>待收货</view>
+								<view class="text1" v-if='xitme.order_status == 1 && xitme.temp_logistics_status == 1 && (xitme.temp_pay_status == 2 || xitme.temp_type == 2)'>待发货</view>
+								<view class="text1" v-if='xitme.order_status == 2'>已取消</view>
+								<view class="text1" v-if="xid==4">退款中</view>
 						</view>
 					
 					
@@ -115,11 +121,11 @@
 						'name': '待付款',
 					},
 					{
-						'_id': 2,
+						'_id': 6,
 						'name': '待发货',
 					},
 					{
-						'_id': 3,
+						'_id': 2,
 						'name': '待收货',
 					},
 					{

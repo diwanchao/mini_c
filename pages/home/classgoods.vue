@@ -1,5 +1,6 @@
 <template>
     <view>		
+	<hx-navbar :config="config"/>
 		<view class="x12 text-333 text-default" v-if="lim > 0" style="padding-bottom: 130upx;">
 			<view class="x12 border-bottom border-gray padding-top padding-bottom" v-for="(item,index) in goodsList" :key="index">
 				<view class="tctj-body-left" @click="goDetails(item)">
@@ -32,9 +33,9 @@
 						
 					</view>
 					<view class="x12" style="font-size: 8pt; color: #fff; margin-top: 4px; padding-bottom: 4px;">
-						<view class="float-left" style="border: #f60 solid 1px; padding: 1px 4px; border-radius:2px;background-color: #f60; margin-right: 5px;" v-if="item.show_month_sales==1">月销 {{item.month_sales}}</view>
+					<!-- 	<view class="float-left" style="border: #f60 solid 1px; padding: 1px 4px; border-radius:2px;background-color: #f60; margin-right: 5px;" v-if="item.show_month_sales==1">月销 {{item.month_sales}}</view>
 						<view class="float-left" style="border: #FF9900 solid 1px; padding: 1px 4px; border-radius:2px; background-color: #FF9900;" v-if="item.sale_num>0 && item.show_sale_num==1">库存 {{item.sale_num}}</view>
-						<view class="float-left" style="border: #FF9900 solid 1px; padding: 1px 4px; border-radius:2px; background-color: #FF9900;" v-if="item.sale_num===0 && item.show_sale_num==1">售罄</view>
+						<view class="float-left" style="border: #FF9900 solid 1px; padding: 1px 4px; border-radius:2px; background-color: #FF9900;" v-if="item.sale_num===0 && item.show_sale_num==1">售罄</view> -->
 					</view>
 				</view>
 			</view>
@@ -162,6 +163,12 @@
 			goodsList:[],
 			login:false,
 			memberinfo:[],
+			config:{
+				title: '分类商品',
+				color: '#ffffff',
+				backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				statusBarFontColor:'#fff'
+			},
 			sData:[],
 			lim:0,
 			lim_info:'',

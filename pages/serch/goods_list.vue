@@ -20,16 +20,16 @@
 					</view>
 					<view class="x-auto float-right" style="padding-top: 20upx;">
 						<view class="x-auto" v-for="(cartitme,cartindex) in shoppingCarts" :key="cartindex" v-if="cartitme.barcode_id==item.barcode_id">
-							<view class="x-auto" v-if="cartitme.num>0" @click="jrShoppingCart(0,item)"><image src="../../static/jian.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image></view>
+							<view class="x-auto" v-if="cartitme.num>0" @click="jrShoppingCart(0,item)"><image src="https://div.buy315.com.cn/xcx_imgs/jian.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image></view>
 							<view class="x-auto" v-if="cartitme.num>0" style="color: #393D4A; padding: 0 10upx;font-size: 12pt; font-weight: 700; padding-top: 8upx;">{{cartitme.num}}</view>
 						</view>
-						<view class="x-auto" @click="jrShoppingCart(1,item)"  v-if="item.more==1 && (item.sale_num==='' || item.sale_num>0)"><image src="../../static/jia.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image></view>
+						<view class="x-auto" @click="jrShoppingCart(1,item)"  v-if="item.more==1 && (item.sale_num==='' || item.sale_num>0)"><image src="https://div.buy315.com.cn/xcx_imgs/jia.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image></view>
 						<view class="x-auto" v-if="item.more==2 && (item.sale_num==='' || item.sale_num>0)">
 							<button type="primary"  @click="togglePopup('bottom', 'popup',item)" style=" width:auto; height:auto; padding:0; line-height: 35upx; background:#fff;display:inline;border:0;">
-								<image src="../../static/jia.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image>
+								<image src="https://div.buy315.com.cn/xcx_imgs/jia.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image>
 							</button>
 						</view>
-						<view class="x-auto" v-if="item.sale_num===0"><image src="../../static/jia2.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image></view>
+						<view class="x-auto" v-if="item.sale_num===0"><image src="https://div.buy315.com.cn/xcx_imgs/jian.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image></view>
 					</view>
 					<view class="x12" style="font-size: 8pt; color: #fff; margin-top: 4px; padding-bottom: 4px;">
 						<view class="float-left" style="border: #f60 solid 1px; padding: 1px 4px; border-radius:2px;background-color: #f60; margin-right: 5px;" v-if="item.show_month_sales==1">月销 {{item.month_sales}}</view>

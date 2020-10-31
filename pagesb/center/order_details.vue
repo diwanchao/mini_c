@@ -29,7 +29,7 @@
 		    <view class="za_sj">已完成</view>
 		    <view class="zf_tisy">感谢您的信任，期待你再次光临</view>
 		    <view class="zf_an">
-		      <view class="zf_anlj" @click="clickAfter(yemxList)">申请售后</view>
+		      <!-- <view class="zf_anlj" @click="clickAfter(yemxList)">申请售后</view> -->
 		      <!-- <view class="zf_anlj zasi zf_dele">删除订单</view> -->
 		    </view>
 		  </view>
@@ -123,10 +123,10 @@
 		    <view>优惠金额</view>
 		    <view class="xinxi_je">￥{{yemxList.discount_money}}</view>
 		  </view>
-		  <view class="xinxi">
+	<!-- 	  <view class="xinxi">
 		    <view>运费</view>
 		    <view class="xinxi_je">￥0.00</view>
-		  </view>
+		  </view> -->
 		  <view class="sfk">实付款:<text>￥{{yemxList.price}}</text></view>
 		 </view>
 </view>

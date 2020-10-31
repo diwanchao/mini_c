@@ -1,4 +1,7 @@
 <template>
+	<view>
+		
+	<hx-navbar :config="config" />
 	<view class="x12" style="padding:35upx 25upx 15upx 25upx; width: 700upx;">
 		<view class="x12" style="margin-bottom:20upx;" v-for="(item,index) in cl_list" :key="index">
 			<view class="float-left" style="width: 250upx;">
@@ -19,6 +22,7 @@
 			<image src="https://div.buy315.com.cn/xcx_imgs/wts.png"  mode="aspectFill" style="width: 132upx; height: 140upx;"></image>
 			<view class="x12 text-gray">没有可用劵</view>
 		</view>
+	</view>
 	</view>
 </template>
 
@@ -52,6 +56,12 @@
 			datanum:0,
 			limit:30,
 			page:0,
+			config:{
+				title: '可用券',
+				color: '#ffffff',
+				backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				statusBarFontColor:'#fff'
+			},
 			}
 		},
 		onLoad:function(data){
@@ -73,14 +83,14 @@
 			}
 			this.getCk('add',data);
 		},
-		onPullDownRefresh(){
-			this.cl_list = [];
-			this.limit = 30;
-			this.page = 0;
-			this.getCk();
-			uni.stopPullDownRefresh();
-			return;
-		},
+		// onPullDownRefresh(){
+		// 	this.cl_list = [];
+		// 	this.limit = 30;
+		// 	this.page = 0;
+		// 	this.getCk();
+		// 	uni.stopPullDownRefresh();
+		// 	return;
+		// },
 		onReachBottom() {
 		    this.getCk();
 		},

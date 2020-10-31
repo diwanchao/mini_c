@@ -15,8 +15,9 @@
 			<view class="x12 bg-white padding" >
 				<view class="x12 padding" style="font-size: 12pt; color: #393D4A;" v-for="(sitem,sindex) in pay_info.address" :key="sindex">
 					<view class="x-auto" style="width: 670upx;" v-if="addressNum>0">
-						<view class="x12" @click="goAddressXlist" v-if="xid==1">
-							<view class="x-auto">
+						<view class="x12" v-if="xid==1">
+							<!--  " -->
+							<view class="x-auto" @click="goAddressXlist">
 								<view style="font-size: 28upx;">{{sitem.xq_name}}{{sitem.mbh}}</view>
 								<view>
 									<view class="x-auto" style="font-size: 24upx;">{{sitem.name}}</view>
@@ -24,7 +25,7 @@
 								</view>
 							</view>
 							<view class="x-auto float-right" style="padding-top: 7upx;">
-								<image src="https://div.buy315.com.cn/xcx_imgs/yjt.png" class="float-left" style="width: 16upx; height: 30upx;"></image>
+								<!-- <image src="https://div.buy315.com.cn/xcx_imgs/yjt.png" class="float-left" style="width: 16upx; height: 30upx;"></image> -->
 							</view>
 						</view>
 						<view class="x12" v-else>
@@ -35,7 +36,7 @@
 						</view>
 					</view>
 				</view>
-					<view class="x12 padding" style="border-top:#F5F5F5 solid 6upx; font-size: 12pt; align-items: center;" @click="ps">
+					<view class="x12 padding" style="border-top:#F5F5F5 solid 6upx; font-size: 12pt; align-items: center;" >
 						<!-- <view class="x-auto" style="padding-top: 8upx;">
 							<image src="https://div.buy315.com.cn/xcx_imgs/sj.png" class="float-left" style="width: 28upx; height: 28upx;"></image>
 						</view> -->
@@ -58,9 +59,9 @@
 								</view>
 								<view v-else>立即提货</view>
 							</view>
-							<view class="x-auto">
+						<!-- 	<view class="x-auto">
 								<image src="https://div.buy315.com.cn/xcx_imgs/yjt.png" class="float-left" style="width: 16upx; height: 30upx; margin-top: 8upx;"></image>
-							</view>
+							</view> -->
 						</view>
 					</view>
 			</view>
@@ -75,13 +76,13 @@
 				</view>
 				<view class="x12 padding" style="font-size: 12pt; color: #393D4A;">
 					<view class="x-auto" >
-						<view style="display: flex; position: relative; margin-top: 10upx;" v-for="(gitem,gindex) in pay_info.goods" :key="gindex" v-if="gindex<6">
+						<view style="display: flex; position: relative; margin-top: 10upx;" v-for="(gitem,gindex) in pay_info.goods" :key="gindex" >
 							<view>
 								<view><image :src="gitem.img" class="shop_imgtit" ></image></view>
 							</view>
 							<view class="shop_information" style="padding-left: 20upx;">
 								<view>{{gitem.goods_title}}</view>
-								<view class="shop_picter">￥{{pay_info_order.price}}</view>
+								<view class="shop_picter">￥{{gitem.price}}</view>
 								
 							</view> 
 							<view style="position: absolute; left: 630upx; top: 84upx;" >X{{parseInt(gitem.num)}}</view>
@@ -106,14 +107,14 @@
 							</view>
 						</view>
 					</view>
-					<view class="x12" style="padding-top: 60upx;" v-if="xid==1">
+				<!-- 	<view class="x12" style="padding-top: 60upx;" v-if="xid==1">
 						<view class="x-auto" style="font-size: 24upx;">
 							运费
 						</view>
 						<view class="x-auto float-right" style="font-size: 24upx;">
 							+{{deployinfo.monetary_symbol}}{{pay_info_order.freight}}
 						</view>
-					</view>
+					</view> -->
 					<view class="x12 tips">
 						<view style="margin-top: 6upx;">共{{pay_info_order.nums}}件</view>
 						<view class="xiaoji">小计：<text>￥{{pay_info_order.price}}</text></view>

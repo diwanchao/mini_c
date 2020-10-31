@@ -49,7 +49,7 @@
 		<!-- 新人图标 -->
 		<view v-if="newcomer==true">
 			<view class="icons" v-if="iconsLen>0 ">
-			  <view class="icon1" v-for="(ico_item,ico_index) in homeGoods.icons" :key="ico_index">
+			  <view class="icon1" v-for="(ico_item,ico_index) in homeGoods.icons" :key="ico_index" @click="goZt(ico_item.type,ico_item.jump_id,ico_item.name)">
 				<view class="iconbg"><image class="icon_img" :src="ico_item.img"></image></view>
 				<view class="icon_name">{{ico_item.name}}</view>
 			  </view>
@@ -72,7 +72,7 @@
 		<!-- 新人图标 -->
 		<view v-if="newcomer!=true">
 		   <view class="icon" v-if="iconsLen>0">
-			  <view class="icon1" v-for="(ico_item,ico_index) in homeGoods.icons" :key="ico_index">
+			  <view class="icon1" v-for="(ico_item,ico_index) in homeGoods.icons" :key="ico_index" @click="goZt(ico_item.type,ico_item.jump_id,ico_item.name)">
 				<view class="iconbg"><image class="icon_img" :src="ico_item.img"></image></view>
 				<view class="icon_name">{{ico_item.name}}</view>
 			  </view>
@@ -98,10 +98,10 @@
 				</view>
 			</view>
 			<!-- 提示消息 -->
-			<view class="prompt">
+			<!-- <view class="prompt">
 				<view><image class="img4" src="https://div.buy315.com.cn/xcx_imgs/tongzhi.png" ></image></view>
 				<text class="text7">您有一笔待付款订单未支付 请尽快支付</text>
-			</view>
+			</view> -->
 			<view class="thingstwo">
 				<view class="things_foot">
 					<view class="things_foot1" @click="gotolimited" :style="{display:miaosha}" >
@@ -243,6 +243,9 @@
 					markers: '',
 					index:1,
 					login: false,
+					memberinfo:{
+						mobile:'',
+					},
 					shopclass:[],
 					deployinfo: {
 						monetary_symbol: '￥',
@@ -488,6 +491,7 @@
 				}
 			},
 			onShow: function(e) {
+			
 				this.wanjian ='block',
 				this.miaosha ='block'
 				//#ifdef MP-WEIXIN
@@ -515,8 +519,11 @@
 				}
 			},
 			onLoad(data) {
+
+					this.getnewList();
+			
 				this.clickTab(0);
-				this.getnewList();
+				
 				this.getnewShopList();
 				this.getnewCoupon();
 				this.getexlosIve();
@@ -571,6 +578,8 @@
 				}
 			},
 			created() {
+				this.newcomer==true,
+				console.log(this.newcomer)
 				this.initializeData();
 				this.checkItem(-1);
 				this.clickTab(0);
@@ -918,25 +927,27 @@
 			},
 				// 新人判断
 				getnewList(){
-					var arr = {
-						mobile:this.memberinfo.mobile,
-					};
-					var pdata = url.getSignStr(arr);
-					uni.request({
-						url: url.websiteUrl + '/api_v2/member/check_member_is_new_people',
-						method: 'POST',
-						dataType: 'json',
-						header: {
-							'content-type': 'application/x-www-form-urlencoded'
-						},
-						data: pdata,
-						success: res => {
-							console.log(res.data,'还是不是一个新人')
-							this.newcomer = res.data.data
-						},
-						fail: () => {},
-						complete: () => {}
-					});
+					if(uni.getStorageSync('memberinfo')){
+						var arr = {
+							mobile:this.memberinfo.mobile,
+						};
+						var pdata = url.getSignStr(arr);
+						uni.request({
+							url: url.websiteUrl + '/api_v2/member/check_member_is_new_people',
+							method: 'POST',
+							dataType: 'json',
+							header: {
+								'content-type': 'application/x-www-form-urlencoded'
+							},
+							data: pdata,
+							success: res => {
+								console.log(res.data,'还是不是一个新人')
+								this.newcomer = res.data.data
+							},
+							fail: () => {},
+							complete: () => {}
+						});
+					}
 				},
 				// 拼团
 				getbuyList(){
@@ -968,6 +979,7 @@
 					uni.showLoading({
 					    title: '正在加载中'
 					});
+					this.newcomer=true
 					this.shopList = [];
 					this.page = 0;
 					this.limit = 10;
@@ -3267,7 +3279,7 @@
 		height: 10upx;
 		width: 335upx;
 		top: 152upx;
-		left: 252upx;
+		left: 255upx;
 		overflow: hidden;
 	}
 	.qiuqiu{

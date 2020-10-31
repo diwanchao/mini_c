@@ -54,13 +54,12 @@
 				</view>
 				<view class="textjiage">团购价￥{{buylistpintuan.current_price}}/{{buylistpintuan.unit_name}}<text>原件￥{{goodsinfo.price}}/{{goodsinfo.unit}}</text></view>
 			</view>
-
-				
-				
+	
 		<view class="x12 bg-white newagain " style="margin-top:20upx;">
 			<view class="x12" v-if="goodsinfo.length != 0">
 				<view class="x12">
 					<view class="x12 text-large text_title">{{goodsinfo.goods_title}}</view>
+					<view  v-if="isgroups==false && isHot==false && isMark==false && isNew==false"  style="color: #FE0000; font-size: 30upx; margin-left: 20rpx; font-weight: 400;">￥{{goodsinfo.original_price}}</view>
 					<!-- <view class="textmiaoshu">商品描述商品描述商品描述商品描述商品描述商品描述商品描述述商品描述</view> -->
 					<view class="x12 schedule" v-if="isgroups==true">
 					  <view class="schedule_all" style="display: flex;" >
@@ -75,7 +74,9 @@
 						</view>
 						
 						
-						<view style="font-size: 22upx; position: absolute; top: 135upx;color: #999; left: 20upx;">已累计拼成{{buylistpintuan.current_number}}份</view>
+						<view style="font-size: 22upx; position: absolute; top: 135upx;color: #999; left: 20upx;">已累计拼成{{buylistpintuan.current_number}}份
+						<text style="margin-left: 20rpx;">总数量{{buylistpintuan.total_num}}</text>
+						</view>
 					</view>
 					
 				</view>
@@ -196,7 +197,7 @@
 		<!-- 拼团 -->
 		<view class="x12 shop-menu" v-if="isgroups == true && isNew == false && isMark == false && isHot == false">
 			<view class="x12 bg-white text-default text-333 border-top border-gray">
-				<view >					
+				<view style="margin-left: 30rpx; box-sizing: border-box;">					
 					<view class="x-auto"  @click="rotohome" style="height: 50upx; padding: 15upx 0 0 20upx;">
 						<image src="../../static/index-1.png" style="width: 42upx; height: 42upx; margin-left: 10upx;"></image>
 						<view style="font-size: 24upx;">回首页</view>
@@ -235,7 +236,7 @@
 			<!-- 新人 -->
 			<view class="x12 shop-menu" v-if="isNew==true">
 				<view class="x12 bg-white text-default text-333 border-top border-gray">
-					<view >					
+					<view style="margin-left: 30rpx; box-sizing: border-box;">					
 						<view class="x-auto"  @click="rotohome" style="height: 50upx; padding: 15upx 0 0 20upx;">
 							<image src="../../static/index-1.png" style="width: 42upx; height: 42upx; margin-left: 10upx;"></image>
 							<view style="font-size: 24upx;">回首页</view>
@@ -1939,7 +1940,7 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 	 	height: 10upx;
 	 	/* background-color: #FE0000; */
 	 	border: 1upx solid #FE0000;
-	 	left: 55upx;
+	 	left: 58upx;
 		position: absolute;
 		overflow: hidden;
 	 }

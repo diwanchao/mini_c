@@ -61,9 +61,9 @@
 			<view class="x12 padding-small-bottom text-center text-default" style="padding-top: 35upx; font-size: 24upx;">
 				<view class="x4 orderlisttext"  @click="goDetails(1)">
 					<view style="width: 100upx; margin: auto;">
-						<view class="addcart" style="float: right; width: 18rpx; height: 18rpx; min-width: 0rpx; margin-right: 25rpx; background-color: red;"
+						<view class="addcart" style="float: right; width: 12rpx; height: 12rpx; min-width: 0rpx; margin-right: 25rpx; background-color: red;"
 						 v-if="memberList.dfk>0 && login==true"></view>
-						<view class="addcart" style="float: right; width: 18rpx; height: 18rpx; min-width: 0rpx; margin-right: 25rpx;"
+						<view class="addcart" style="float: right; width: 12rpx; height: 12rpx; min-width: 0rpx; margin-right: 25rpx;"
 						 v-if="memberList.dfk==0"></view>
 						<view class="x12" style="margin-top: -20upx;">
 							<view style="display: table-cell; vertical-align: middle; text-align: center; width: 100upx; height: 50rpx;">
@@ -354,9 +354,6 @@
 		},
 		onShow: function(e) {
 			
-	
-				
-			
 			//#ifdef MP-WEIXIN
 			wx.login({
 			  success: res =>{
@@ -421,6 +418,7 @@
 			});
 		},
 		onLoad: function() {
+		
 			this.getyouhuiquan();
 			this.getmypoint();
 			//#ifdef MP-WEIXIN

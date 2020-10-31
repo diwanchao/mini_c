@@ -152,7 +152,7 @@
 				//psd_info:[],
 				programtype:3,
 				config:{
-					title: '新增地址',
+					title: '编辑地址',
 					color: '#ffffff',
 					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
 					statusBarFontColor:'#fff'

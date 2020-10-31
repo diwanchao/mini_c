@@ -113,7 +113,7 @@
 		<view class="x12 bg-white time_peisongs">
 			<view class="shop_detail">商品详情</view>
 			<view class="x12 bg-white time_peisongs">
-				<view class="shop_detail">商品详情</view>
+				<!-- <view class="shop_detail">商品详情</view> -->
 				<view class="shop_jieshao">
 					<view class="shop_text45" v-if="goodsinfo.gb_name==''">产地 <text></text></view>
 					<view class="shop_text45" v-else>产地 <text>{{goodsinfo.origin}}</text></view>

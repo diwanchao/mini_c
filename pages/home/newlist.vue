@@ -20,11 +20,12 @@
 				 <text class="t3">全场通用</text> 
 		      </view>
 		    </view>
+			<view class="newGiftConCouponBtnAdd" @click="gotoyouhuiq" >
+			  <image src="../../static/ananiuuioj.png" mode="widthFix" class="bg3"></image>
+			</view>
 		  </view>
 		  </view>
-		  <view class="newGiftConCouponBtnAdd"  >
-		    <image src="../../static/ananiuuioj.png" mode="widthFix" class="bg3"></image>
-		  </view>
+		
 		  <!-- 商品 -->
 		  <view class="new_t1"  >
 		    <image class="new_images" src="../../static/xiangou.png"></image>
@@ -146,6 +147,11 @@
 			console.log('45645646')
 		},
 		methods: {
+			gotoyouhuiq(){
+				uni.navigateTo({
+					url:'/pagesb/center/xjj_list'
+				})
+			},
 			getnewlist() {
 				console.log('fewgirhe')
 				//获取公告信息
@@ -351,8 +357,7 @@ page{
 .bg3{
   height: 100rpx;
   width: 553rpx;
-  margin-top: 30rpx;
-  margin-left: 50rpx;
+  margin-top: 60rpx;
 }
 /* 商品 */
 .new_t1{
@@ -361,8 +366,6 @@ page{
   color: #FF874B; 
   font-family: 'STHupo';
   font-weight: bold;
-  height: 109rpx;
-  line-height: 109rpx;
 }
 .new_images{
   height: 38rpx;

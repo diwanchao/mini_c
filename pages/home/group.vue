@@ -16,7 +16,7 @@
 				  <image class="shop_img" :src="item.imgs_original"></image>
 				  <view style="height: 150upx; line-height: 48upx; margin-left: 20upx;">
 					<view class="shop_texts">{{item.goods_title}}</view>
-					<view class="carry">已累计拼成{{item.current_number}}份</view>
+					<view class="carry">已累计拼成{{item.current_number}}份 <text style="margin-left: 20rpx;">总数量{{item.total_num}}</text></view>
 					<view class="time_end">{{item.end_time}} 结束</view>
 				  </view>
 				  <view class="group_grab">
@@ -39,7 +39,8 @@
 		    </view>
 		    <!-- 活动规则 -->
 		    <view class="active_imgs">
-		      <image class="active_img" src="https://div.buy315.com.cn/xcx_imgs/kele.jpg"></image>
+		      <image class="active_img" src="../../static/ditu.png"></image>
+			  <view class="viptext">拼团规则</view>
 		    </view>
 		    <view class="active_footer">
 		      <view class="active_rules" v-for="item in active_rules" :key='item.id'>
@@ -509,7 +510,7 @@ page{
 	/* background-color: #FE0000; */
 	border: 1upx solid #FE0000;
 	position: absolute;
-	left: 55upx;
+	left: 58upx;
 	bottom: 62upx;
 	overflow: hidden;
 }
@@ -555,6 +556,15 @@ page{
 	position: absolute;
 	border-radius: 5upx;
 
+}
+.viptext{
+	font-size: 30rpx;
+	color: #FFFFFF;
+	position: absolute;
+	left: 44%;
+	bottom: 12rpx;
+	letter-spacing: 7rpx;
+	z-index: 999999;
 }
 /* .schedule::after{
 	content: "";
