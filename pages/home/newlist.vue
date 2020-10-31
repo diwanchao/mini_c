@@ -45,7 +45,9 @@
 		          <view class="shop_t4">{{item.label_name}}</view>
 		        </view>
 		      </view>
-		      <view class="shop_gou"><image class="shop_moreimg" src="https://div.buy315.com.cn/xcx_imgs/jia.png" mode=""></image></view>
+		      <view class="shop_gou" @click="addshuliang">
+				  <image class="shop_moreimg" src="https://div.buy315.com.cn/xcx_imgs/jia.png" mode=""></image>
+			  </view>
 		    </view>
 		  </view>
 

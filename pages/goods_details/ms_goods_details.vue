@@ -19,8 +19,8 @@
 				<view style="display: flex; align-items: center;">
 					<view><image class="left_img" src="https://div.buy315.com.cn/xcx_imgs/c-set.png" style="margin-left: 20upx;"></image></view>
 					<view style="height: 90upx;  font-size: 24upx; color: #fff; margin-left: 20upx; margin-top: 8upx;">
-						<view style="margin-left: 5upx;">距结束</view>
-						<view class="newstyle"><uni-countdown color="#fff"  :show-day="false" :hour="h" :minute="m" :second="s"></uni-countdown></view>
+						<view style="margin-left: 5upx;">距开始</view>
+						<view class="newstyle"><uni-countdown color="#fff"  :show-day="false" :hour="hour" :minute="minute" :second="second"></uni-countdown></view>
 					</view>
 				</view>
 			</view>
@@ -259,7 +259,7 @@ import url from '../../main.js';
 				barcode_id:0,
 				jjkkjj:0,
 				fx:false,
-				
+				tips:'',
 				ms:true,
 				hour:0,
 				minute: 0,
@@ -287,9 +287,7 @@ import url from '../../main.js';
 				subIndex: [], //是否选中 因为不确定是多规格还是但规格，所以这里定义数组来判断
 				total:0,
 				xsdata:0,
-				m:59,
-				s:20,
-				h:2,
+				
 			}
 		},
 		onShow:function(){//返回时接收子页面的传参
@@ -1113,6 +1111,7 @@ import url from '../../main.js';
 							//我的项目中只赋值一次, 所以直接设为true了
 							this.hd = res.data.data;
 							this.xreset = !this.xreset;
+							this.tips = res.data.data.msg
 							this.hour = res.data.data.times.h;
 							this.minute = res.data.data.times.i;
 							this.second = res.data.data.times.s;

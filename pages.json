@@ -454,6 +454,7 @@
 				"navigationStyle":"custom"
 			}
         }
+        
     ],
 	"subPackages": [{
 	    "root": "pagesb",
@@ -474,6 +475,16 @@
 					"navigationBarBackgroundColor": "#393D4A",
 					"navigationBarTextStyle":"white"
 				}
+			},
+			{
+			    "path" : "center/chongzhixy",
+			    "style" : {					
+					"navigationBarTitleText": "优惠劵详情",
+					"backgroundColorTop":"#393D4A",
+					"navigationBarBackgroundColor": "#393D4A",
+					"navigationBarTextStyle":"white",
+					"navigationStyle":"custom"
+					}
 			},{
 				"path": "center/xjj_details",
 				"style": {
