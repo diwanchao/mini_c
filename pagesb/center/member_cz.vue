@@ -44,7 +44,7 @@
 				充值
 			</view>
 		</view> -->
-		<view class="chongzhixieyi">点击支付即代表同意 <view class="anniuxieyi">充值协议</view></view>
+		<view class="chongzhixieyi">点击支付即代表同意 <view class="anniuxieyi" @click="gotochongzhi">充值协议</view></view>
     </view>
 </template>
 <script>import url from '../../main.js';
@@ -77,6 +77,7 @@
 			],
 			zdy:false,
 			xmoney:'',
+			zhanghuyue:'',
 			index1:0,
 			index:0,
 			list:[{
@@ -124,6 +125,11 @@
 			rechPrice(data){
 				this.index1 = data
 				console.log(data)
+			},
+			gotochongzhi(){
+				uni.navigateTo({
+					url:'/pagesb/center/chongzhixy'
+				})
 			},
 			yemx(){ 
 				//#ifdef APP-PLUS
