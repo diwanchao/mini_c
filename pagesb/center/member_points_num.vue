@@ -52,7 +52,7 @@
 		data() {
 			return {
 				config:{
-					title:'会员详情',
+					title:'积分详情',
 					color: '#ffffff',
 					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
 					statusBarFontColor:'#fff',

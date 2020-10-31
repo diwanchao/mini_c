@@ -20,14 +20,14 @@
 				<view class="x12 left">
 					<view class="baopin">爆品推荐</view>
 				</view>
-				<view class="textjiage">￥{{goodsinfo.price}}/{{goodsinfo.unit}}<text>原件￥{{goodsinfo.original_price}}/{{goodsinfo.unit}}</text></view>
+				<view class="textjiage">￥{{goodsinfo.price}}/{{goodsinfo.unit}}<text>原价￥{{goodsinfo.original_price}}/{{goodsinfo.unit}}</text></view>
 			</view>
 			<!-- 新人 -->
 			<view class="x12 hengfu" v-if="isgroups==false && isHot==false && isMark==false && isNew==true" >
 				<view class="x12 left">
 					<view class="baopin">新人专享</view>
 				</view>
-				<view class="textjiage">￥{{goodsinfo.price}}/{{goodsinfo.unit}}<text>原件￥{{goodsinfo.original_price}}/{{goodsinfo.unit}}</text></view>
+				<view class="textjiage">￥{{goodsinfo.price}}/{{goodsinfo.unit}}<text>原价￥{{goodsinfo.original_price}}/{{goodsinfo.unit}}</text></view>
 			</view>
 			<!-- 晚间 -->
 			<view class="x12 hengfu" v-if="isgroups==false && isHot==false && isMark==true && isNew==false" >
@@ -42,7 +42,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="textjiage">￥{{goodsinfo.price}}/{{goodsinfo.unit}}<text>原件￥{{goodsinfo.original_price}}/{{goodsinfo.unit}}</text></view>
+				<view class="textjiage">￥{{goodsinfo.price}}/{{goodsinfo.unit}}<text>原价￥{{goodsinfo.original_price}}/{{goodsinfo.unit}}</text></view>
 			</view>
 			<!-- 拼团 -->
 			<view class="x12 hengfu" v-if="isgroups==true && isHot==false && isMark==false && isNew==false" >
@@ -52,7 +52,7 @@
 						<uni-countdown color="#fff"  :show-day="false" :hour="s" :minute="s" :second="s"></uni-countdown>
 					</view> -->
 				</view>
-				<view class="textjiage">团购价￥{{buylistpintuan.current_price}}/{{buylistpintuan.unit_name}}<text>原件￥{{goodsinfo.price}}/{{goodsinfo.unit}}</text></view>
+				<view class="textjiage">团购价￥{{buylistpintuan.current_price}}/{{buylistpintuan.unit_name}}<text>原价￥{{goodsinfo.price}}/{{goodsinfo.unit}}</text></view>
 			</view>
 	
 		<view class="x12 bg-white newagain " style="margin-top:20upx;">
@@ -256,7 +256,7 @@
 					<view><image class="boximg" :src="goodsinfo.imgs" ></image></view>
 					<view class="boxtext">
 						<view>{{goodsinfo.goods_title}}</view>
-						<view class="boxpicter">￥{{buylistpintuan.current_price}}/{{buylistpintuan.unit_name}}<text>原件￥{{goodsinfo.price}}/{{goodsinfo.unit}}</text></view>
+						<view class="boxpicter">￥{{buylistpintuan.current_price}}/{{buylistpintuan.unit_name}}<text>原价￥{{goodsinfo.price}}/{{goodsinfo.unit}}</text></view>
 					
 						<!-- <view class="boxpicter">￥{{current_price.price}}/{{current_price.unit}} <text>￥{{current_price.original_price}}/{{current_price.unit}}</text></view> -->
 					</view>
@@ -1810,7 +1810,7 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 		margin-left: 20upx;
 	}
 	.text_title{
-		font-size: 28upx;
+		font-size: 32upx;
 		color: #333333;
 		margin-top: 30upx;
 		margin-left: 20upx;
@@ -1895,7 +1895,7 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 	 	height: 90upx;
 	 	right: 0;
 	 	background-color: #FE0000;
-		padding: 16upx;
+		/* padding: 16upx; */
 		box-sizing: border-box;
 	 }
 	 .left_img{

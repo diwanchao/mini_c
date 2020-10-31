@@ -197,7 +197,7 @@
 			},
 			getCk(action = 'add'){
 				console.log(this.memberinfo.openid)
-				if(this.tabIndex==0){
+				// if(this.tabIndex==0){
 					var arr ={
 							member_mark:this.memberinfo.openid,
 							use_status:this.tabIndex,
@@ -247,57 +247,57 @@
 							complete: () => {}
 						});
 						
-				}else{
-					var arr ={
-							// pt_user_id:this.memberinfo.openid,
-							use_status:this.tabIndex,
-							//usedup:1,
-							member_mark:this.memberinfo.openid,
-							limit:this.limit,
-							offset:this.page*this.limit,
-						};
-						var pdata = url.getSignStr(arr);
-						uni.request({
-							url:url.websiteUrl+'/app_coupon_offset/aapi_coupon_offset_member/xlist',
-							method:'POST',
-							dataType:'json',
-							header:{
-								'content-type':'application/x-www-form-urlencoded'
-							},
-							data:pdata,
-							success: res => {
-								console.log(res.data.data,'优惠券成功未使用、已使用')
-								//console.log(res.data);
-								this.datanum = res.data.total;
-								var max_page = res.data.total/this.limit;
-								if(max_page<=this.page){
-									uni.showToast({
-									    icon: 'none',
-									    title: '已到底'
-									});
-									return;
-								}
-								if(res.data.status=='y'){
-									this.cl_list = res.data.data;
-								}else{
-									var datax = [];
-									uni.showToast({
-									    icon: 'none',
-									    title: '已到底'
-									});
-								}
-								if (action === 'refresh') {
-									this.cl_list = [];
-								}						
-								datax.forEach(item => {							
-									this.cl_list.push(item);
-								});
-								this.page = this.page+1;
-							},
-							fail: () => {},
-							complete: () => {}
-						});
-				}
+				// }else{
+				// 	var arr ={
+				// 			pt_user_id:this.memberinfo.openid,
+				// 			use_status:this.tabIndex,
+				// 			//usedup:1,
+							
+				// 			limit:this.limit,
+				// 			offset:this.page*this.limit,
+				// 		};
+				// 		var pdata = url.getSignStr(arr);
+				// 		uni.request({
+				// 			url:url.websiteUrl+'/app_coupon_offset/aapi_coupon_offset_member/xlist',
+				// 			method:'POST',
+				// 			dataType:'json',
+				// 			header:{
+				// 				'content-type':'application/x-www-form-urlencoded'
+				// 			},
+				// 			data:pdata,
+				// 			success: res => {
+				// 				console.log(res.data.data,'优惠券成功未使用、已使用')
+				// 				//console.log(res.data);
+				// 				this.datanum = res.data.total;
+				// 				var max_page = res.data.total/this.limit;
+				// 				if(max_page<=this.page){
+				// 					uni.showToast({
+				// 					    icon: 'none',
+				// 					    title: '已到底'
+				// 					});
+				// 					return;
+				// 				}
+				// 				if(res.data.status=='y'){
+				// 					this.cl_list = res.data.data;
+				// 				}else{
+				// 					var datax = [];
+				// 					uni.showToast({
+				// 					    icon: 'none',
+				// 					    title: '已到底'
+				// 					});
+				// 				}
+				// 				if (action === 'refresh') {
+				// 					this.cl_list = [];
+				// 				}						
+				// 				datax.forEach(item => {							
+				// 					this.cl_list.push(item);
+				// 				});
+				// 				this.page = this.page+1;
+				// 			},
+				// 			fail: () => {},
+				// 			complete: () => {}
+				// 		});
+				// }
 				//获取信息
 				
 		

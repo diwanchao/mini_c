@@ -24,7 +24,7 @@
 				<view class="footer">
 					<view class="foot_x">实付: <text>￥{{itme.price}}元</text></view>
 					<view class="foot_a" >
-						<view>分享</view>
+						<!-- <view>分享</view> -->
 						<view @click="goOrderDetails(itme)">查看详情</view>
 						<!-- <view style="color: #FE0000; border: #FE0000 1upx solid;" v-if="itme.to_pay==1">去支付</view> -->
 						<view style="color: #FE0000; border: #FE0000 1upx solid;" v-if="itme.to_pay==1" @click="goPay(itme.order_code)">去支付</view>
@@ -93,11 +93,9 @@
 				
 			},
 			clickTab(index){
-				console.log('index',index)
-				this.index1= index;
 				if(this.index1= index){
 					this.getmyjonin()
-				}else if(this.index==0){
+				}else if(this.index1==0){
 					this.getmyjonin()
 				}
 			},

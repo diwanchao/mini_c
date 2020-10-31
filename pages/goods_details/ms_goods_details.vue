@@ -354,6 +354,12 @@ import url from '../../main.js';
 		 	this.checkItem(-1);
 		 },
 		methods: {
+			rotohome(){
+				uni.switchTab({
+					url:'/pages/home/index'
+				})
+			},
+				
 			addToCart() {
 				//加入购物前先检查有没有选择规格
 				if(this.choice.choice_spec.length > 0){
