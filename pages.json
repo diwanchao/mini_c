@@ -26,7 +26,8 @@
 				"backgroundColorTop":"#393D4A",
 				"navigationBarBackgroundColor": "#393D4A",
 				"navigationBarTextStyle":"white",
-				"enablePullDownRefresh": true
+				"enablePullDownRefresh": true,
+				"navigationStyle":"custom"
 			}
 		},{
 			"path": "pages/home/ck_list",

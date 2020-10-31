@@ -31,11 +31,11 @@
 		    <image class="new_images" src="../../static/xiangou.png"></image>
 		  </view>
 		  <view >
-		    <view class="shop_1" v-for="(item,index) in newlist" :key='index' @click="gotonewdetail(item)">
-		      <view >
+		    <view class="shop_1" v-for="(item,index) in newlist" :key='index' >
+		      <view @click="gotonewdetail(item)">
 		        <image class="shop_picter" :src="item.imgs_original"></image>
 		      </view>
-		      <view class="shop_t1">
+		      <view class="shop_t1" @click="gotonewdetail(item)">
 		        <view class="shop_t2">{{item.goods_title}}</view>
 		        <view class="shop_money">
 		          <view>￥{{item.new_people_price}}</view>
@@ -45,7 +45,7 @@
 		          <view class="shop_t4">{{item.label_name}}</view>
 		        </view>
 		      </view>
-		      <view class="shop_gou" @click="addshuliang">
+		      <view class="shop_gou" @click="jrShoppingCart(1,item,item.group_id,'dh'+item.group_id+'-'+item.barcode_id)">
 				  <image class="shop_moreimg" src="https://div.buy315.com.cn/xcx_imgs/jia.png" mode=""></image>
 			  </view>
 		    </view>
@@ -135,8 +135,7 @@
 			this.getnewlist();
 			this.getnewCoupon();
 		},
-		onLoad() {
-			
+		onLoad() {	
 			console.log(this.xshopInfo)
 			// 获取系统高度
 			uni.getSystemInfo({
@@ -224,8 +223,128 @@
 				uni.navigateTo({
 					url:"../goods_details/goods_details?barcode_id=" + item.barcode_id
 				})
-
-			}
+			},
+			jrShoppingCart(num_s, goods_info, type, v) {
+				 if (this.memberinfo.length == 0) {
+				      uni.navigateTo({
+				       url: "/pages/login/login"
+				      })
+				      return;
+				     }
+				     
+			uni.showToast({
+			      title: '加入成功',
+			      duration: 2000,
+				  icon:'none'
+			     });
+				//num_s参数   0和1，0为减，1为加
+				//goods_info参数  一维数组				
+				//console.log(goods_info);
+				//console.log(goods_info);
+				//if(num_s==1){
+				//console.log(123);
+				//return;
+				//}
+				//限购数量和购物车数量对比
+				for (let ixs in this.shoppingCarts) {
+					if (this.shoppingCarts[ixs].barcode_id == goods_info.barcode_id) {
+						if (goods_info.astrict_num !== '' && ((parseFloat(this.shoppingCarts[ixs].num) + 1) > goods_info.astrict_num)) {
+							uni.showToast({
+								icon: 'none',
+								title: '商品【' + this.shoppingCarts[ixs].goods_title + '】限购' + goods_info.astrict_num + goods_info.unit
+							});
+							return;
+						}
+					}
+				}
+				//如果重复，查询下重复的商品在购车的数量
+				var snum = 0;
+				for (let ix in this.shoppingCarts) {
+					if (this.shoppingCarts[ix].barcode_id == goods_info.barcode_id) {
+						snum = this.shoppingCarts[ix].num;
+					}
+				}
+				//只留下不重复的
+				var glistx = [];
+				var mxx = 0;
+				for (let i in this.shoppingCarts) {
+					if (this.shoppingCarts[i].barcode_id != goods_info.barcode_id && this.shoppingCarts[i].stores_id == this.xshopInfo
+						.store.stores_id && this.shoppingCarts[i].status == 1) {
+						glistx[mxx] = {
+							stores_id: this.xshopInfo.store.stores_id,
+							barcode_id: this.shoppingCarts[i].barcode_id,
+							category_id: this.shoppingCarts[i].category_id,
+							goods_id: this.shoppingCarts[i].goods_id,
+							goods_title: this.shoppingCarts[i].goods_title,
+							img: this.shoppingCarts[i].img,
+							original_price: this.shoppingCarts[i].original_price,
+							price: this.shoppingCarts[i].price,
+							promotion: this.shoppingCarts[i].promotion,
+							num: this.shoppingCarts[i].num,
+							unit: this.shoppingCarts[i].unit,
+							spec: this.shoppingCarts[i].spec,
+							site: this.shoppingCarts[i].site,
+							status: this.shoppingCarts[i].status,
+							remark: this.shoppingCarts[i].remark,
+							sgt_ids: this.shoppingCarts[i].sgt_ids,
+						}
+						mxx++;
+					}
+				}
+				//this.shoppingCarts = glistx;
+				//console.log(glistx);
+				var glist = [];
+				var mx = 0;
+				//console.log(snum);
+				glist[mx] = {
+					stores_id: this.xshopInfo.store.stores_id,
+					barcode_id: goods_info.barcode_id,
+					category_id: goods_info.category_id,
+					goods_id: goods_info.goods_id,
+					goods_title: goods_info.goods_title,
+					img: goods_info.img,
+					original_price: goods_info.original_price,
+					price: goods_info.price,
+					promotion: goods_info.promotion,
+					num: (num_s == 1) ? (snum + 1) : (snum - 1),
+					unit: goods_info.unit,
+					spec: goods_info.spec,
+					site: 2,
+					status: 1,
+					remark: goods_info.remark,
+					sgt_ids: goods_info.sgt_ids,
+				}
+				
+				this.shoppingCarts = glistx.concat(glist);
+				//console.log(this.shoppingCarts);
+				//console.log(this.shoppingCarts);
+				//写入缓存
+				uni.setStorage({
+					key: 'shoppingCarts',
+					data: this.shoppingCarts,
+					success: function() {}
+				});
+				//console.log(this.shoppingCarts);
+				this.sumShoppingCartNum();
+				if (type != "dgg") {
+					//调取动画效果
+					this.shopCart(goods_info.barcode_id, type, v);
+				}
+				//console.log(this.shoppingCarts);
+			},
+			goDetails(s_itme, group_id, gtype) {
+				//console.log(s_itme);
+				if (gtype == 1) {
+					uni.navigateTo({
+						url: "../goods_details/ms_goods_details?barcode_id=" + s_itme.barcode_id + "&s_id=" + s_itme.s_id
+					})
+				} else {
+					uni.navigateTo({
+						url: "../goods_details/goods_details?barcode_id=" + s_itme.barcode_id
+					})
+				}
+				
+			},
 		}
 	}
 </script>

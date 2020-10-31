@@ -41,7 +41,8 @@
 			        </view>
 			    </view>
 				  <view class="wodedd">
-				    <view class="wo_address">附近地址 <text class="address_left">仅支持自取</text></view>
+					  <!-- <text class="address_left">仅支持自取</text> -->
+				    <view class="wo_address">附近地址 </view>
 				    <view>
 				      <view class="fjdizhi" v-for="(item,index) in areaList" :key="index" @click="qiehuan(item)" >{{item.stores_name}}<text class="address_left">{{item.distance}}km</text></view>
 				    </view>

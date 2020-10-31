@@ -29,9 +29,9 @@
 				<button hover-class="none" plain='true' v-if="login==false" open-type="getPhoneNumber" style="border: none; height: 300upx;"
 				 @getphonenumber="getPhoneNumber">
 					<image class="logo-img" style="margin: auto; float: none; background-color: #fff; border-color: #fff;" :src="(login && memberList.heard_imgs!=''  && memberList.heard_imgs!=undefined) ? memberList.heard_imgs :avatarUrl"></image>
-					<view class="x12  text-center">
+					
 						<text class="uer-name">{{login ? memberinfo.mobile : '请登录'}}</text>
-					</view>
+					
 				</button>
 			</view>
 		</view>
@@ -75,7 +75,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="x4 orderlisttext"  @click="goDetails(2)">
+				<view class="x4 orderlisttext"  @click="goDetails(6)">
 					<view style="width: 100upx; margin: auto;">
 						<view class="addcart" style="float: right; width: 13rpx; height: 13rpx; min-width: 0rpx; margin-right: 30rpx; background-color: red;"
 						 v-if="memberList.dfh>0 && login==true"></view>
@@ -91,7 +91,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="x4 orderlisttext"  @click="goDetails(3)">
+				<view class="x4 orderlisttext"  @click="goDetails(2)">
 					<view style="width: 100upx; margin: auto;">
 						<view class="addcart" style="float: right; width: 13rpx; height: 13rpx; min-width: 0rpx; margin-right: 30rpx;"
 						 v-if="login==true"></view>
@@ -123,14 +123,14 @@
 				</view>
 			</view>
 		</view>
-		<view class="order_num bg-white x12">
+<!-- 		<view class="order_num bg-white x12">
 		  <view class="two">
 		    <view class="t1">分拣完成待自取</view>
 		    <view class="t2">订单编号:2020090813425601</view>
 		  </view>
 		  <image src="https://div.buy315.com.cn/xcx_imgs/kele.jpg" class="img"></image>
-		<!--  <text class="text">再来一单</text> -->
-		</view>
+		 <text class="text">再来一单</text>
+		</view> -->
 		<!-- 我的服务 -->
 		<view class="servicelist">
 			<view class="servicelisttext">我的服务</view>
@@ -353,7 +353,7 @@
 			}
 		},
 		onShow: function(e) {
-			
+		this.getlogin();
 			//#ifdef MP-WEIXIN
 			wx.login({
 			  success: res =>{
@@ -363,7 +363,6 @@
 			})
 			//#endif
 			this.login = false;
-	
 			try { //从本地缓存中同步获取指定 key 对应的内容。
 				const value = uni.getStorageSync('memberinfo');
 				this.deployinfo = uni.getStorageSync('deployinfo');
@@ -386,12 +385,13 @@
 			if (this.memberinfo.length == 0) {    
 				url: "/pages/login/login"
 			}
-			// uni.showLoading({
-			// 	title: '加载中'
-			// });
+			uni.showLoading({
+				title: '加载中'
+			});
 			if (this.memberinfo.length != 0) {
 				this.getMer();
 			}
+			
 			//获取信息
 			var arr = {
 				openid: this.memberinfo.openid,
@@ -417,6 +417,7 @@
 				complete: () => {}
 			});
 		},
+		
 		onLoad: function() {
 		
 			this.getyouhuiquan();
@@ -437,6 +438,16 @@
 			this.getmypoint()
 		},
 		methods: {
+			getlogin(){
+				console.log('进入方法',uni.getStorageSync('memberinfo'))
+				if (!uni.getStorageSync('memberinfo')) {
+					console.log('进入判断',uni.getStorageSync('memberinfo'))
+					uni.redirectTo({
+						url: "/pages/login/login"
+					})
+					return;
+				}
+			},
 			gotovips(){
 				uni.navigateTo({
 					url:'/pages/center/vipsdetail'

@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<hx-navbar :config="config"/>
 		<view class="x12 bg-white">
 			<view class="x12"  style="width: 750upx;" v-if="goodsList.length>0">
 				<view class="x4" style="font-size: 10pt; width: 250upx; padding:0 0 2upx 0; background-color: #f5f5f5;" v-for="(g_item,g_index) in goodsList" :key="g_index">
@@ -71,7 +72,12 @@
 				xshopInfo:[],
 				indexInfo:[],
 				shoppingCartNumP:0,
-				
+				config:{
+					title: '秒杀详情',
+					color: '#ffffff',
+					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+					statusBarFontColor:'#fff'
+				},
 				goodsList:[],
 				dataZs:[],
 				img:'',

@@ -20,14 +20,14 @@
 				<view class="x12 left">
 					<view class="baopin">爆品推荐</view>
 				</view>
-				<view class="textjiage">￥{{goodsinfo.price}}/{{goodsinfo.unit}}<text>原价￥{{goodsinfo.original_price}}/{{goodsinfo.unit}}</text></view>
+				<view class="textjiage">￥{{goodsinfo.price}}/{{goodsinfo.unit}}<text>原价￥{{goodsinfo.retail_price}}/{{goodsinfo.unit}}</text></view>
 			</view>
 			<!-- 新人 -->
 			<view class="x12 hengfu" v-if="isgroups==false && isHot==false && isMark==false && isNew==true" >
 				<view class="x12 left">
 					<view class="baopin">新人专享</view>
 				</view>
-				<view class="textjiage">￥{{goodsinfo.price}}/{{goodsinfo.unit}}<text>原价￥{{goodsinfo.original_price}}/{{goodsinfo.unit}}</text></view>
+				<view class="textjiage">￥{{goodsinfo.price}}/{{goodsinfo.unit}}<text>原价￥{{goodsinfo.retail_price}}/{{goodsinfo.unit}}</text></view>
 			</view>
 			<!-- 晚间 -->
 			<view class="x12 hengfu" v-if="isgroups==false && isHot==false && isMark==true && isNew==false" >
@@ -42,7 +42,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="textjiage">￥{{goodsinfo.price}}/{{goodsinfo.unit}}<text>原价￥{{goodsinfo.original_price}}/{{goodsinfo.unit}}</text></view>
+				<view class="textjiage">￥{{goodsinfo.price}}/{{goodsinfo.unit}}<text>原价￥{{goodsinfo.retail_price}}/{{goodsinfo.unit}}</text></view>
 			</view>
 			<!-- 拼团 -->
 			<view class="x12 hengfu" v-if="isgroups==true && isHot==false && isMark==false && isNew==false" >
@@ -52,7 +52,7 @@
 						<uni-countdown color="#fff"  :show-day="false" :hour="s" :minute="s" :second="s"></uni-countdown>
 					</view> -->
 				</view>
-				<view class="textjiage">团购价￥{{buylistpintuan.current_price}}/{{buylistpintuan.unit_name}}<text>原价￥{{goodsinfo.price}}/{{goodsinfo.unit}}</text></view>
+				<view class="textjiage">团购价￥{{buylistpintuan.current_price}}/{{buylistpintuan.unit_name}}<text>原价￥{{goodsinfo.retail_price}}/{{goodsinfo.unit}}</text></view>
 			</view>
 	
 		<view class="x12 bg-white newagain " style="margin-top:20upx;">

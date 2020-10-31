@@ -59,9 +59,9 @@
 		
 		<view v-if="newcomer!=true">
 		
-		<view v-if="bannerLen>0" class="lunbotu new" >
+		<view v-if="bannerLen>0" class="lunbotu new"  >
 			<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
-				<swiper-item  v-for="(item,index) in homeGoods.banner" :key="index">
+				<swiper-item  v-for="(item,index) in homeGoods.banner" :key="index" @click="goZt(item.type,item.jump_id,item.name)">
 					<image class="img3":src="item.img"></image>
 				</swiper-item>
 			</swiper>
@@ -323,7 +323,7 @@
 								key: 'btn1',
 								icon: '&#xe651;',
 								position: 'left',
-								txt:'',
+								txt:'' ,
 								fontSize:'14px'
 							}],
 					},
@@ -519,9 +519,23 @@
 				}
 			},
 			onLoad(data) {
-
-					this.getnewList();
-			
+				
+				uni.getLocation({
+					type: 'wgs84',
+					success: function(res) {
+						// this.$refs.hxnb.conf.leftButton[0].txt = this.stores_name
+						// console.log(xthis.$refs.hxnb.conf.leftButton[0].txt,'xthis.$refs.hxnb.conf.leftButton[0].txt');
+						console.log('当前位置的经度：' + res.longitude);
+						console.log('当前位置的纬度：' + res.latitude);
+						console.log('s*****************rd')
+						// console.log('s*****************rd' ,res)
+						// console.log(this.stores_name,'看看这个嗯十二IE红烧肉可hi')
+					},
+					
+				});
+				
+				this.getnewList();
+				
 				this.clickTab(0);
 				
 				this.getnewShopList();
@@ -535,14 +549,7 @@
 				// 	this.pd_mshewanjian();
 				// },1000)
 				console.log('s*****************rd')
-				uni.getLocation({
-					type: 'wgs84',
-					success: function(res) {
-						console.log('当前位置的经度：' + res.longitude);
-						console.log('当前位置的纬度：' + res.latitude);
-						console.log('s*****************rd')
-					}
-				});
+			
 				console.log('******************', '查询页面')
 				///wx.login({success: res => {console.log(res.code);},});
 				uni.showLoading({
@@ -843,7 +850,8 @@
 					data:pdata,
 					success: res => {
 						console.log(res.data,'限时秒杀')
-						this.spikeList = res.data.data;
+						// this.spikeList = res.data.data;
+						this.spikeList_midd = res.data.data;
 						// setTimeout(function(){
 						// 	that.pd_mshewanjian();
 						// },1000)
@@ -858,11 +866,9 @@
 						success: res => {
 							console.log(res.data,'晚间菜场')
 							this.evenimglist = res.data.data
-							
-							
-							
 							if(res.data.data.length != 0){
-								this.eveningList = res.data.data.data;
+								// this.eveningList = res.data.data.data;
+								this.eveningList_midd = res.data.data.data;
 							}
 						setTimeout(function(){
 							that.pd_mshewanjian();
@@ -875,31 +881,31 @@
 				})
 			},
 			pd_mshewanjian(){
-				console.log(this.eveningList,'开始执行晚间菜场this.eveningList')
-				console.log(this.spikeList,'开始执行限时秒杀this.spikeList')
-				if(this.eveningList.length==0){
-					console.log('晚间菜场this.eveningList为空')
+				console.log(this.eveningList_midd,'开始执行晚间菜场this.eveningList')
+				console.log(this.spikeList_midd,'开始执行限时秒杀this.spikeList_midd')
+				if(this.eveningList_midd.length==0){
+					console.log('晚间菜场this.eveningList_midd为空')
 					this.wanjian = 'none'
-				}else if(this.spikeList.length==0){
+				}else if(this.spikeList_midd.length==0){
 					console.log('限时秒杀this.spikeList为空')
 					this.miaosha ='none'
 				}
-				if(this.eveningList.length > 0 && this.spikeList.length > 0){
-					this.eveningList = this.eveningList.slice(0,2);
-					var spikelenght = this.spikeList
+				if(this.eveningList_midd.length > 0 && this.spikeList_midd.length > 0){
+					this.eveningList = this.eveningList_midd.slice(0,2);
+					var spikelenght = this.spikeList_midd
 					this.spikeList = spikelenght.slice(0,2);
 					// this.spikeList = this.miaosha
-					console.log(this.eveningList,'晚间菜场截断成功')
+					console.log(this.eveningList_midd,'晚间菜场截断成功')
 					console.log(this.spikeList,'限时秒杀截断成功')
 				}
-				if(this.eveningList.length==0 && this.spikeList.length>4){
-					console.log(this.spikeList,'限时秒杀4个成功')
-					this.spikeList = this.spikeList.slice(0,4);
-				}else if(this.eveningList.length>4 && this.spikeList.length==0){
-					console.log(this.eveningList,'晚间菜场4个成功')
-					this.eveningList = this.eveningList .slice(0,4);
+				if(this.eveningList_midd.length==0 && this.spikeList_midd.length>4){
+					console.log(this.spikeList_midd,'限时秒杀4个成功')
+					this.spikeList = this.spikeList_midd.slice(0,4);
+				}else if(this.eveningList_midd.length>4 && this.spikeList_midd.length==0){
+					console.log(this.eveningList_midd,'晚间菜场4个成功')
+					this.eveningList = this.eveningList_midd .slice(0,4);
 				}
-				if(this.eveningList.length==0 && this.spikeList.length==0){
+				if(this.eveningList_midd.length==0 && this.spikeList.length==0){
 					this.wanjian = 'none'
 					this.miaosha ='none'
 				}
@@ -1229,11 +1235,12 @@
 							} else {
 								xthis.maddress = values.address.xq_name + values.address.mbh;
 							}
+							xthis.$refs.hxnb.conf.leftButton[0].txt = xthis.stores_name
+							console.log(xthis.stores_name,'获取到的门店地址')
+							xthis.stores_name = xthis.$refs.hxnb.conf.leftButton[0].txt
 							
-							xthis.stores_name = values.store.stores_name;
-
 							xthis.$refs.hxnb.conf.leftButton[0].txt = values.store.stores_name;
-							console.log(xthis.$refs.hxnb.conf.leftButton[0].txt,'取回来菜场的名字');
+							// console.log(xthis.$refs.hxnb.conf.leftButton[0].txt,'取回来菜场的名字');
 							uni.setNavigationBarTitle({
 								title: values.store.stores_name
 							});
@@ -1253,10 +1260,11 @@
 							},
 							data: pdata,
 							success: res => {
-								//console.log(res);
+								
 								if (res.data.total == 0) {
 									xthis.getShop();
 								} else {
+									// xthis.$refs.hxnb.conf.leftButton[0].txt = values.store.stores_name;
 									xthis.getHome();
 									xthis.clickTab(0);
 									xthis.getnewList();
@@ -1883,10 +1891,7 @@
 						});
 						return;
 					}
-					uni.showToast({
-						title: '加入成功',
-						duration: 2000
-					});
+					
 					//console.log(this.goodsinfo);
 					var xxx = {
 						stores_id: this.xshopInfo.store.stores_id,
@@ -2469,6 +2474,18 @@
 	
 				},
 				jrShoppingCart(num_s, goods_info, type, v) {
+					 if (this.memberinfo.length == 0) {
+					      uni.navigateTo({
+					       url: "/pages/login/login"
+					      })
+					      return;
+					     }
+					     
+				uni.showToast({
+				      title: '加入成功',
+				      duration: 2000,
+					  icon:'none'
+				     });
 					//num_s参数   0和1，0为减，1为加
 					//goods_info参数  一维数组				
 					//console.log(goods_info);
@@ -2915,7 +2932,7 @@
 	/* 二图标 */
 	.icons{
 		display: flex;
-		width: 780upx;
+		width: 720upx;
 		margin: 13upx 20upx 0 20upx;
 		flex-wrap: wrap;
 	}

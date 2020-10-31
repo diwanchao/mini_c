@@ -134,7 +134,7 @@
 				</view>
 			</uni-popup>
 		</view>
-		<!--多规格弹窗的显示结束-->4·
+		<!--多规格弹窗的显示结束-->
     </view>
 </template>
 <script>import url from '../../main.js';
