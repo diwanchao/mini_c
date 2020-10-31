@@ -159,7 +159,7 @@
 		<view class="x12 shop-menu" >
 			<view class="x12 bg-white text-default text-333 border-top border-gray">
 				<view >					
-					<view class="x-auto"  @click="rotohome" style="height: 50upx; padding: 20upx 0 0 20upx;">
+					<view class="x-auto"  @click="rotohome" style="height: 50upx; padding: 16upx 0 0 30upx;">
 						<image src="../../static/index-1.png" style="width: 42upx; height: 42upx; margin-left: 10upx;"></image>
 						<view style="font-size: 24upx; line-height: 24upx;">回首页</view>
 					</view>
