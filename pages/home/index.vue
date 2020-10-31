@@ -983,9 +983,10 @@
 					this.shopList = [];
 					this.page = 0;
 					this.limit = 10;
-					this.shopclass = [];
+					// this.shopclass = [];
 					this.towMenu = [];
-					this.getClass(index,'!!!!!!!!');
+					this.getGoods(index);
+					// this.getClass(index,'!!!!!!!!');
 				},
 				// 获取分类
 				getClass(index){
@@ -3174,6 +3175,7 @@
 		width: 98%;
 		flex-wrap: wrap;
 		justify-content: space-between;
+		min-height: 1100upx;
 	}
 	.shop_listimg{
 		height: 340upx;
