@@ -88,7 +88,7 @@
 						<view class="things_text2">></view>
 					</view>
 					<view class="things_top2" >
-						<view class="things_img1" v-for="(item,index) in thingsList.slice(0,4)" >
+						<view class="things_img1" v-for="(item,index) in thingsList" >
 							<image class="img5" src="../../static/zanwu.png" v-if="item.img == ''"></image>
 							<image class="img5" v-if="item.imgs_original==''" src="../../static/zanwu.png"></image>
 							<image class="img5" v-else :src="item.imgs_original"></image>
@@ -793,8 +793,15 @@
 						console.log(res.data,'首页爆品')
 						this.thingsListlen = res.data.data.length;
 						console.log(this.thingsListlen)
-						this.thingsList = res.data.data;
-				
+						console.log('res.data.data.length',res.data.data.length)
+						if(res.data.data.length > 4){
+							console.log('res.data.data.length 进入判断')
+							var jiequ = res.data.data.slice(0,4)
+							console.log('res.data.data.length 截取后',jiequ)
+							this.thingsList = jiequ;
+						}else{
+							this.thingsList = res.data.data;
+						}
 					}
 				})
 			},
@@ -2977,7 +2984,7 @@
 		border-radius: 20upx;
 		position: relative;
 		margin-left: 20upx;
-		margin-top: 46upx;
+		margin-top: 16upx;
 	}
 	.thingstwo{
 		height: 300upx;

@@ -85,7 +85,7 @@
 								<view class="shop_picter">￥{{gitem.price}}</view>
 								
 							</view> 
-							<view style="position: absolute; left: 630upx; top: 84upx;" >X{{parseInt(gitem.num)}}</view>
+							<view style="position: absolute; left: 630upx; top: 84upx;" >x{{parseInt(gitem.num)}}</view>
 						</view>
 					</view>
 								
@@ -116,8 +116,9 @@
 						</view>
 					</view> -->
 					<view class="x12 tips">
-						<view style="margin-top: 6upx;">共{{pay_info_order.nums}}件</view>
-						<view class="xiaoji">小计：<text>￥{{pay_info_order.price}}</text></view>
+						<!-- 
+						<view style="float: right;">共{{pay_info_order.nums}}件</view> -->
+						<view class="xiaoji">小计：<text style="margin-right: 20upx;">￥{{pay_info_order.price}}</text><text style="text-indent: 10upx; color: #aaa;font-size: 24upx;"> 共 {{pay_info_order.nums}} 件</text></view>
 					</view>
 				</view>
 			</view>
@@ -945,16 +946,15 @@
 		text-decoration: line-through;
 	}
 	.tips{
-		display: flex;
 		font-size: 24upx;
 		color: #999;
-		align-items: center;
-		margin-left: 406upx;
+		/* margin-left: 406upx; */
 		margin-top: 30upx;
+		text-align: right;
 	}
 	.xiaoji{
 		color: #333;
-		margin-left: 15upx;
+		float: right;
 	}
 	.xiaoji text{
 		color: #FE0000;
