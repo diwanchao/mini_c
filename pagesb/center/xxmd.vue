@@ -135,6 +135,11 @@
 			}],
 			lng:'',
 			lat:'',
+			areaList:[{
+				distance:0,
+				stores_name:'获取中'
+				}
+			]
 
 			}
 		},
