@@ -5,7 +5,7 @@
 		<view class="serchall" @click="gotoserch">
 		   <view class="search">
 		    <view><image class="search_img" src="https://div.buy315.com.cn/xcx_imgs/search.png"></image></view>
-		    <input type="text" placeholder="请输入商品信息" class="input_text" v-model="name">
+		    <input placeholder="请输入商品信息" class="input_text" disabled="disabled" @click="gotoserch">
 		   </view>
 		   <view class="text1" @click="inputName">搜索</view>
 		  </view>

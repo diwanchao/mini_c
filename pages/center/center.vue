@@ -18,7 +18,7 @@
 					</view>
 				</view>
 			<view class="x12 text-center" style="z-index: 1000; position: absolute; top: 100upx; display: block;">
-				<navigator hover-class="none" v-if="login==true" style="position: relative; ">
+				<navigator hover-class="none" v-if="login==true" style="position: relative; " url="/pagesb/center/member_info">
 					<!-- <image src="https://div.buy315.com.cn/xcx_imgs/c-set.png"  style="width: 39upx; height: 41upx;z-index: 1000; z-index: 999; position: absolute; top: 50%;transform: translateY(-50%); right: 30upx; display: block;"></image> -->
 					<image class="logo-img" style="width: 96upx; height: 96upx; margin: auto; float: none; background-color: #fff; border-color: #fff;"
 					 :src="(login && memberList.heard_imgs!=''  && memberList.heard_imgs!=undefined) ? memberList.heard_imgs :avatarUrl"></image>
@@ -29,7 +29,7 @@
 				<button hover-class="none" plain='true' v-if="login==false" open-type="getPhoneNumber" style="border: none; height: 300upx;"
 				 @getphonenumber="getPhoneNumber">
 					<image class="logo-img" style="margin: auto; float: none; background-color: #fff; border-color: #fff;" :src="(login && memberList.heard_imgs!=''  && memberList.heard_imgs!=undefined) ? memberList.heard_imgs :avatarUrl"></image>
-					
+
 						<text class="uer-name">{{login ? memberinfo.mobile : '请登录'}}</text>
 					
 				</button>
@@ -419,7 +419,7 @@
 		},
 		
 		onLoad: function() {
-		
+		this.getlogin();
 			this.getyouhuiquan();
 			this.getmypoint();
 			//#ifdef MP-WEIXIN
@@ -439,9 +439,9 @@
 		},
 		methods: {
 			getlogin(){
-				console.log('进入方法',uni.getStorageSync('memberinfo'))
+				console.log('进入方法',uni.getStorage('memberinfo'))
 				if (!uni.getStorageSync('memberinfo')) {
-					console.log('进入判断',uni.getStorageSync('memberinfo'))
+					console.log('进入判断',uni.getStorage('memberinfo'))
 					uni.redirectTo({
 						url: "/pages/login/login"
 					})

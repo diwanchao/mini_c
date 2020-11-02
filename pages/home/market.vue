@@ -16,8 +16,7 @@
 		    <view class="text1">据下次折扣时间还有：</view>
 			
 		   <view class="newstyle">
-			   {{hour}}{{minute}}{{second}}
-				<uni-countdown color="#fff"  :show-day="false" :hour="hour" :minute="minute" :second="second"></uni-countdown>
+				<uni-countdown color="#999" :reset='xreset'  :show-day="false" :hour="hour" :minute="minute" :second="second"></uni-countdown>
 		   </view>
 			
 		  </view> -->
@@ -69,7 +68,10 @@
 	import uniCountdown from "@/components/linnian-CountDown/uni-countdown.vue";
 	import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue';
 	export default {
-		components: {uniCountdown,uniNoticeBar},
+		components: {
+			uniCountdown,
+			uniNoticeBar
+		},
 		data() {
 			return {
 				config:{
@@ -215,31 +217,15 @@
 					},
 					data:pdata,
 					success: res => {
-						
-						// var timeStr = (Number(res.data.data.times.h * 3600)+Number(res.data.data.times.i * 60)+Number(res.data.data.times.s))*1000;
-						// this.time = timeStr;
-						// this.xreset = !this.xreset;
-						
-						// this.hour = 11;
-						// this.minute = 23;
-						// this.second = 15;
-						
-						
-						// // console.log(res.data.data.times.h,'res.data.data.times.h')
-						// // console.log(res.data.data.times.i,'res.data.data.times.i')
-						// // console.log(res.data.data.times.s,'res.data.data.times.s')
-						
-						
-						// console.log(this.hour,)
-						// console.log(this.minute,)
-						// console.log(this.second,)
-						
-						
-						console.log(res.data.data,'晚间菜场')
+						var timeStr = (Number(res.data.data.times.h * 3600)+Number(res.data.data.times.i * 60)+Number(res.data.data.times.s))*1000;
+						this.time = timeStr;
+						console.log('ok')
+						this.xreset = !this.xreset;
+						this.hour = res.data.data.times.h;
+						this.minute = res.data.data.times.i;
+						this.second = res.data.data.times.s;
 						this.marketList = res.data.data;
 						this.xtime = res.data.data.end_time
-						
-				
 					}
 				})
 			},

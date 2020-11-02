@@ -848,7 +848,7 @@
 					};
 					var pdata = url.getSignStr(arr);
 					uni.request({
-						url: url.websiteUrl + '/api_v2/stores/index',
+						url: url.websiteUrl + '/api_v2/shop/index',
 						method: 'POST',
 						dataType: 'json',
 						header: {

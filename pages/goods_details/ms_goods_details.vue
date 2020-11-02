@@ -19,7 +19,8 @@
 					<view style="display: flex; align-items: center;">
 						<view><image class="left_img" src="https://div.buy315.com.cn/xcx_imgs/naozhongaaaa.png" style="margin-left: 20upx;"></image></view>
 						<view style="height: 90upx;  font-size: 24upx; color: #fff; margin-left: 20upx; margin-top: 8upx;">
-							<view style="margin-left: 5upx;">距开始</view>
+							<view style="margin-left: 5upx;" v-if="hd.is_kill==1">距开始</view>
+							<view style="margin-left: 5upx;" v-if="hd.is_kill==2">距结束</view>
 							<view class="newstyle">
 								<uni-countdown color="#fff"  :show-day="false" :hour="hour" :minute="minute" :second="second"></uni-countdown>
 							</view>

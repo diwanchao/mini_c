@@ -9,13 +9,15 @@
 		<view class="zf" >
 		  <view v-if='yemxList.order_status == 1 && yemxList.to_pay == 1'> 
 		    <view class="za_sj"><text style="float: left; color: #333;">等待支付，剩余</text><view class="daojishist">
-				<view>{{m}}分钟 </view>
-				<!-- <uni-countdown color="#F65A2A"  v-if="m!=0" :show-day="false" :show-hour="false" :minute="m" :second="s"></uni-countdown> -->
+				<!-- <view>{{minutes}}分钟 </view> -->
+				<view class="newstyle">
+				<uni-countdown color="#fe0000"   :show-day="false" :hour="false" :minute="m" :second="s"></uni-countdown>
+				</view>
 			</view>
 			</view>
 		    <view class="zf_tisy">订单超时未支付将自动关闭</view>
 		    <view class="zf_an">
-		      <view class="zf_anlj" @click="clickfales">取消订单</view>
+		      <view class="zf_anlj" @click="qxOrder(yemxList.order_code)">取消订单</view>
 		      <view class="zf_anlj zasi" @click="goPay(yemxList.order_code)">立即支付</view>
 		    </view>
 		  </view>
@@ -219,7 +221,8 @@
     </view>
 </template>
 <script>import url from '../../main.js';
-import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
+// import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
+import uniCountdown from "@/components/linnian-CountDown/uni-countdown.vue";
 	export default {
 		components: {uniCountdown},
 		//#ifdef MP-WEIXIN
@@ -259,6 +262,10 @@ import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
 			order_id:0,
 			send_info:[],
 			dsq_status:1,
+			hour:0,
+			minute: 0,
+			second:0,
+			xreset: false,
 			//id:0, // 使用 marker点击事件 需要填写id
 			//title: 'map',
 			latitude: '',
@@ -267,6 +274,7 @@ import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
 			covers: [],
 			rider:{},
 			rider_status:0,
+			minutes:'',
 			imgUrl:'',
 			m:'',
 			s:'',
@@ -306,6 +314,18 @@ import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
 			this.yemx(this.order_id);
 		},
 		methods: {
+			reset(time) {
+				this.time = time
+				this.$refs.countdown.restart()
+			},
+			fillWithZero(num, n) {
+				var len = num.toString().length;
+				while (len < n) {
+					num = "0" + num;
+					len++;
+				}
+				return num;
+			},
 			yemx(){
 				var that = this
 				//获取信息
@@ -322,14 +342,11 @@ import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
 					},
 					data:pdata,
 					success: res => {
-						that.xdtime = res.data.data.expiration_time;
-						that.yemxList = res.data.data.order_info;
-						console.log(that.yemxList)
+						that.xdtime = res.data.data.expiration_time.replace(/-/g,'/');
 						that.goodsList = res.data.data.goods;
 						that.send_info = res.data.data.send_info;
 						that.order_code = that.yemxList.order_code,
-						console.log(that.xdtime)
-						console.log(that.yemxList.order_code,)
+						that.yemxList = res.data.data.order_info;
 						let jstime = new Date(that.xdtime)
 						let new_date = new Date();
 						let old_date = jstime; //设置过去的一个时间点，"yyyy-MM-dd HH:mm:ss"格式化日期
@@ -348,18 +365,22 @@ import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
 						that.h = hours
 						that.m = minutes
 						that.s = seconds
-						console.log(that.s)
+						console.log(that.m)
+					
 						
-						this.shengyutime = res.data.data.expiration_time
-						console.log(this.jstime,'————————————————当前时间')
-						console.log(that.m,'————————————————剩余时间')
-						if(that.s == '400'){
-							this.yemx();
-							// console.log('sgdjysgr')
-							// uni.showToast({
-							// 	title:'订单超时已取消'
-							// })
-						}
+						
+						
+						
+						// this.shengyutime = res.data.data.expiration_time
+						// console.log(this.jstime,'————————————————当前时间')
+						// console.log(this.m,'————————————————剩余时间')
+						// if(that.s == '0'){
+						// 	this.yemx();
+						// 	// console.log('sgdjysgr')
+						// 	// uni.showToast({
+						// 	// 	title:'订单超时已取消'
+						// 	// })
+						// }
 						this.pesLbs();
 						this.downData();
 						uni.stopPullDownRefresh();
@@ -894,7 +915,7 @@ import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
 	.zf_an{
 	  display: flex;
 	  position: relative;
-	  margin-top: 20rpx;
+	  margin-left: 20upx;
 	
 	}
 	.zf_anlj{
@@ -1156,5 +1177,9 @@ import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
 		content: "";
 		clear: both;
 		display: block;
+	}
+	.uni-countdown__number{
+		border: none !important;
+		
 	}
 </style>

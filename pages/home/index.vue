@@ -43,6 +43,7 @@
 				</view>
 				<view class="text2">更多优惠 > </view>
 		</view> 
+		<!-- 轮播图 -->
 		<view class="new" v-else>
 			<view class="bgnew">
 				<view v-if="bannerLen>0" class="lunbotu">
@@ -54,8 +55,17 @@
 				</view>
 			</view>
 		</view>
+		<view class="puticon" v-if="newcomer!=true">
+			<!-- :style="[{marginTop:mar_top + 'rpx'}]" -->
+			<view class="icon" v-if="iconsLen>0" >
+				<view class="icon1" v-for="(ico_item,ico_index) in homeGoods.icons" :key="ico_index" @click="goZt(ico_item.type,ico_item.jump_id,ico_item.name)">
+				<view class="iconbg"><image class="icon_img" :src="ico_item.img"></image></view>
+					<view class="icon_name">{{ico_item.name}}</view>
+				 </view>
+			</view>
 		</view>
-		<!-- 轮播图 -->
+		</view>
+		
 		<!-- 新人图标 -->
 		<view v-if="newcomer==true">
 			<view class="icons" v-if="iconsLen>0 ">
@@ -67,25 +77,18 @@
 		</view>
 		<!-- 二维码 -->
 		<!-- 图标 -->
-		<view v-if="newcomer!=true">
-			<view class="icon" v-if="iconsLen>0" :style="[{marginTop:mar_top + 'rpx'}]">
-				<view class="icon1" v-for="(ico_item,ico_index) in homeGoods.icons" :key="ico_index" @click="goZt(ico_item.type,ico_item.jump_id,ico_item.name)">
-				<view class="iconbg"><image class="icon_img" :src="ico_item.img"></image></view>
-					<view class="icon_name">{{ico_item.name}}</view>
-				 </view>
-			</view>
-		</view>
+
 		
 		<!-- 爆品好物 -->
 		<view>
 			<view class="things" v-if="thingsList.length != 0">
-				<view class="things_top" @click="gotoexplosive">
-					<view class="things_top1">
+				<view class="things_top" >
+					<view class="things_top1" @click="gotoexplosive">
 						<view class="things_text1">爆品好货 总有您需要的</view>
 						<view class="things_text2">></view>
 					</view>
 					<view class="things_top2" >
-						<view class="things_img1" v-for="(item,index) in thingsList" >
+						<view class="things_img1" v-for="(item,index) in thingsList" @click="gotodetails(item)">
 							<image class="img5" src="../../static/zanwu.png" v-if="item.img == ''"></image>
 							<image class="img5" v-if="item.imgs_original==''" src="../../static/zanwu.png"></image>
 							<image class="img5" v-else :src="item.imgs_original"></image>
@@ -101,41 +104,41 @@
 			</view> -->
 			<view class="thingstwo">
 				<view class="things_foot">
-					<view class="things_foot1" @click="gotolimited" :style="{display:miaosha}" >
-						<view class="things_foot2">
+					<view class="things_foot1"  :style="{display:miaosha}" >
+						<view class="things_foot2" @click="gotolimited">
 							<view class="things_text4">购划算</view>
 							<view class="things_imgs">
 								<image class="things_img2"  src="https://div.buy315.com.cn/xcx_imgs/xianshi.png" ></image>
-								<text class="things_text5">{{spikeList[0].end_time}}> </text>
+								<text class="things_text5">{{spikeList[0].end_time ? spikeList[0].end_time : '正在获取中'}}> </text>
 							</view>
 						</view>
 						<view class="things_foot3" >
-							<view class="things_foot4" v-for="(hitem,hindex) in spikeList" :key="hindex">
+							<view class="things_foot4" v-for="(hitem,hindex) in spikeList" :key="hindex" @click="gotodetailsms(hitem)">
 								<!-- <image class="img5" v-if="hitem.imgs_original==''" src="../../static/zanwu.png"></image> -->
 								<image class="img5" :src="hitem.img1_original"></image>
-								<view class="things_text6" >{{hitem.goods_title}}</view>
+								<view class="things_text6" >{{hitem.goods_title ? hitem.goods_title : '正在获取中'}}</view>
 								<view class="things_foot5">
-									<view class="things_text7">￥{{hitem.price}}</view>
-									<view class="things_text8">￥{{hitem.retail_price}}</view>
+									<view class="things_text7">￥{{hitem.price ? hitem.price : '正在获取中'}}</view>
+									<view class="things_text8">￥{{hitem.retail_price ? hitem.retail_price : '正在获取中'}}</view>
 								</view>
 							</view>
 						</view>	
 					</view>
-					<view class="things_foot1"  @click="gotomarket" :style="{display:wanjian}">
-						<view class="things_foot2">
+					<view class="things_foot1"  :style="{display:wanjian}">
+						<view class="things_foot2"  @click="gotomarket">
 							<view class="things_text4">晚间菜场</view>
 							<view class="things_imgs">
 								<image class="things_img2" src="https://div.buy315.com.cn/xcx_imgs/wanjian.png" ></image>
-								<text class="things_text5"> {{evenimglist.temp_start_time}}-{{evenimglist.temp_end_time}}> </text>
+								<text class="things_text5">{{evenimglist.temp_start_time ? evenimglist.temp_start_time + '-' + evenimglist.temp_end_time : '正在获取中'}} > </text>
 							</view>
 						</view>
 						<view class="things_foot3" >
-							<view class="things_foot4" v-for="(item,index) in eveningList" :key='index'>
+							<view class="things_foot4" v-for="(item,index) in eveningList" :key='index' @click="gotodetails(item)">
 								<!-- <image class="img5" v-if="hitem.imgs_original==''" src="../../static/zanwu.png"></image> -->
 								<image class="img5" :src="item.imgs_original"></image>
-								<view class="things_text6" >{{item.goods_title}}</view>
+								<view class="things_text6" >{{item.goods_title ? item.goods_title : '正在获取中' }}</view>
 								<view class="things_foot5">
-									<view class="things_text7">￥{{item.activity_price}}</view>
+									<view class="things_text7">￥{{item.activity_price ? item.activity_price : '正在获取中'}}</view>
 									<!-- <view class="things_text8">￥25.00</view> -->
 								</view>
 							</view>
@@ -402,7 +405,8 @@
 					miaosha:'block',
 					newcomer:true,
 					evenimglist:'',
-					mar_top:20
+					mar_top:20,
+					mar_iosTop:60
 				}
 			},
 			onTabItemTap:function(){
@@ -489,10 +493,13 @@
 				}
 			},
 			onShow: function(e) {
-				console.log('uni.getSystemInfoSync().platform',)
-				if(uni.getSystemInfoSync().platform == 'android'){
+				console.log(uni.getSystemInfoSync().platform,'uni.getSystemInfoSync().platform','%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+				if(uni.getSystemInfo().platform == 'android'){
 					this.mar_top = 60
 				}
+				// if(uni.getSystemInfo().platform == 'ios'){
+				// 	this.mar_iosTop = 60
+				// }
 				this.wanjian ='block',
 				this.miaosha ='block'
 				//#ifdef MP-WEIXIN
@@ -586,13 +593,28 @@
 				}
 			},
 			created() {
-				this.newcomer==true,
-				console.log(this.newcomer)
+				// this.newcomer==true,
+				// console.log(this.newcomer)
 				this.initializeData();
 				this.checkItem(-1);
 				this.clickTab(0);
 			},
 			methods: {
+				// gotonewdetail(){
+					
+				// },
+				gotodetailsms(hitem){
+					console.log(hitem,'$$$$$$$$$$$$$$$')
+					if (this.memberinfo.length == 0) {
+						uni.navigateTo({
+							url: "/pages/login/login"
+						})
+						return;
+					}
+					uni.navigateTo({
+					     url:"../goods_details/ms_goods_details?barcode_id="+hitem.barcode_id+"&s_id="+hitem.s_id
+					 })
+				},
 				gotodetails(item){
 					if (this.memberinfo.length == 0) {
 						uni.navigateTo({
@@ -906,7 +928,7 @@
 					console.log(this.eveningList_midd,'晚间菜场4个成功')
 					this.eveningList = this.eveningList_midd .slice(0,4);
 				}
-				if(this.eveningList_midd.length==0 && this.spikeList.length==0){
+				if(this.eveningList_midd.length==0 && this.spikeList_midd.length==0){
 					this.wanjian = 'none'
 					this.miaosha ='none'
 				}
@@ -993,7 +1015,7 @@
 					uni.showLoading({
 					    title: '正在加载中'
 					});
-					this.newcomer=true
+					// this.newcomer=true
 					this.shopList = [];
 					this.page = 0;
 					this.limit = 10;
@@ -1198,7 +1220,7 @@
 												if (res.confirm) {
 													plus.runtime.openURL(url);
 												} else if (res.cancel) {
-													//console.log('用户点击取消');
+													console.log('用户点击取消');
 												}
 											}
 										});
@@ -1253,7 +1275,7 @@
 						};
 						var pdata = url.getSignStr(arr);
 						uni.request({
-							url: url.websiteUrl + '/api_v2/stores/index',
+							url: url.websiteUrl + '/api_v2/shop/index',
 							method: 'POST',
 							dataType: 'json',
 							header: {
@@ -2212,6 +2234,7 @@
 				},
 				//获取门店信息
 				getShop(s_lat = false, s_lng = false) {
+					
 					var xxx = this;
 					//获取用户当前经纬度
 					uni.getLocation({
@@ -2237,8 +2260,8 @@
 								},
 								data: pdata,
 								success: res => {
-									//console.log(res.data.data);
-									//console.log(sort(res.data));
+									console.log(res.data.data,'res.data.data---------------');
+									// console.log(sort(res.data),'sort(res.data)====================');
 									// console.log('用户同意获取经纬度后回调',res.data.data)
 									// xxx.$refs.hxnb.conf.leftButton[0].txt = xxx.stores_name
 									xxx.xshopInfo = res.data.data;
@@ -2347,6 +2370,7 @@
 										xxx.maddress = res.data.data.address.xq_name + res.data.data.address.mbh;
 									}
 									xxx.stores_name = res.data.data.store.stores_name;
+									
 									uni.setNavigationBarTitle({
 										title: res.data.data.store.stores_name
 									});
@@ -2655,91 +2679,91 @@
 					}
 				},
 				//获取当前上级推荐人分享的店铺
-				getTjrShop(storesId) {
-					//获取信息
-					var arr = {};
-					var pdata = url.getSignStr(arr);
-					uni.request({
-						url: url.websiteUrl + '/api_v2/shop/index',
-						method: 'POST',
-						dataType: 'json',
-						header: {
-							'content-type': 'application/x-www-form-urlencoded'
-						},
-						data: pdata,
-						success: res => {
-							//console.log(res.data.data);
-							for (var i in res.data.data) {
-								if (res.data.data[i].stores_id == storesId) {
-									try { //从本地缓存中同步获取指定 key 对应的内容。
-										var xvs = uni.getStorageSync('xshopInfo');
-										//写入缓存
-										var xxx = {
-											address: xvs.address,
-											current: xvs.current,
-											store: res.data.data[i],
-										}
-									} catch (e) {
-										// error
-									}
-									//this.hhhj = res.data.data[i];
-									try {
-										uni.setStorage({
-											key: 'xshopInfo',
-											data: xxx,
-											success: function() {}
-										});
-									} catch (e) {
-										// error
-									}
-									try { //从本地缓存中同步获取指定 key 对应的内容。
-										const value = uni.getStorageSync('memberinfo');
-										const values = uni.getStorageSync('xshopInfo');
-										const valuex = uni.getStorageSync('shoppingCarts');
-										//console.log(values);
-										if (values) {
-											this.xshopInfo = values;
-											if (values.address.address == undefined) {
-												this.maddress = values.current;
-											} else {
-												this.maddress = values.address.xq_name + values.address.mbh;
-											}
-											//console.log(values.store.stores_name);
-											this.stores_name = values.store.stores_name;
-											uni.setNavigationBarTitle({
-												title: values.store.stores_name
-											});
-										}
-										if (value) {
-											this.memberinfo = value;
-											this.login = true;
-										}
-										if (valuex) {
-											this.shoppingCarts = valuex;
-										}
-									} catch (e) {
-										// error
-									}
-									this.getHome();
-									this.getexlosIve();
-									this.clickTab(0);
-									this.getnewList();
-									this.getnewShopList();
-									this.getbuyList();
-									this.getnewCoupon();
-									// this.getEvening();
-									this.getTimespike();
-									// setTimeout(function(){
-									// 	this.pd_mshewanjian();
-									// },1000)
-								}
-							}
-						},
-						fail: () => {},
-						complete: () => {}
-					});
+	// 			getTjrShop(storesId) {
+	// 				//获取信息
+	// 				var arr = {};
+	// 				var pdata = url.getSignStr(arr);
+	// 				uni.request({
+	// 					url: url.websiteUrl + '/api_v2/shop/index',
+	// 					method: 'POST',
+	// 					dataType: 'json',
+	// 					header: {
+	// 						'content-type': 'application/x-www-form-urlencoded'
+	// 					},
+	// 					data: pdata,
+	// 					success: res => {
+	// 						//console.log(res.data.data);
+	// 						for (var i in res.data.data) {
+	// 							if (res.data.data[i].stores_id == storesId) {
+	// 								try { //从本地缓存中同步获取指定 key 对应的内容。
+	// 									var xvs = uni.getStorageSync('xshopInfo');
+	// 									//写入缓存
+	// 									var xxx = {
+	// 										address: xvs.address,
+	// 										current: xvs.current,
+	// 										store: res.data.data[i],
+	// 									}
+	// 								} catch (e) {
+	// 									// error
+	// 								}
+	// 								//this.hhhj = res.data.data[i];
+	// 								try {
+	// 									uni.setStorage({
+	// 										key: 'xshopInfo',
+	// 										data: xxx,
+	// 										success: function() {}
+	// 									});
+	// 								} catch (e) {
+	// 									// error
+	// 								}
+	// 								try { //从本地缓存中同步获取指定 key 对应的内容。
+	// 									const value = uni.getStorageSync('memberinfo');
+	// 									const values = uni.getStorageSync('xshopInfo');
+	// 									const valuex = uni.getStorageSync('shoppingCarts');
+	// 									//console.log(values);
+	// 									if (values) {
+	// 										this.xshopInfo = values;
+	// 										if (values.address.address == undefined) {
+	// 											this.maddress = values.current;
+	// 										} else {
+	// 											this.maddress = values.address.xq_name + values.address.mbh;
+	// 										}
+	// 										//console.log(values.store.stores_name);
+	// 										this.stores_name = values.store.stores_name;
+	// 										uni.setNavigationBarTitle({
+	// 											title: values.store.stores_name
+	// 										});
+	// 									}
+	// 									if (value) {
+	// 										this.memberinfo = value;
+	// 										this.login = true;
+	// 									}
+	// 									if (valuex) {
+	// 										this.shoppingCarts = valuex;
+	// 									}
+	// 								} catch (e) {
+	// 									// error
+	// 								}
+	// 								this.getHome();
+	// 								this.getexlosIve();
+	// 								this.clickTab(0);
+	// 								this.getnewList();
+	// 								this.getnewShopList();
+	// 								this.getbuyList();
+	// 								this.getnewCoupon();
+	// 								// this.getEvening();
+	// 								this.getTimespike();
+	// 								// setTimeout(function(){
+	// 								// 	this.pd_mshewanjian();
+	// 								// },1000)
+	// 							}
+	// 						}
+	// 					},
+	// 					fail: () => {},
+	// 					complete: () => {}
+	// 				});
 	
-				}
+	// 			}
 			}
 		}
 	</script>
@@ -2749,7 +2773,7 @@
 	    margin: 0;
 	    padding: 0;
 		line-height: 0;	
-		background-color: #f7f7f7 !important;
+		background-color: #F7F7F7 !important;
 	}
 	.head_top1{
 		width: 100%;
@@ -2957,7 +2981,7 @@
 	  margin: 0upx 20upx 0 20upx;
 	  flex-wrap: wrap;
 	  position: absolute;
-	  top: 450rpx;
+	  top: 340rpx;
 /* 	  margin-top: 40rpx; */
 	}
 	.iconbg{
@@ -3355,4 +3379,7 @@
 		background-color: #70BC26;
 		height: 6rpx;
 	}
+/* 	.puticon{
+		height: ;
+	} */
 </style>

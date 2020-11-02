@@ -658,7 +658,8 @@
 					"backgroundColorTop":"#f6f6f6",
 					"backgroundColorBottom":"#f6f6f6",
 					"navigationBarBackgroundColor": "#393D4A",
-					"navigationBarTextStyle":"white"
+					"navigationBarTextStyle":"white",
+					"navigationStyle":"custom"
 				}
 			},{
 				"path": "center/reputation_value",
