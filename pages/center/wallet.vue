@@ -8,8 +8,10 @@
 				<view class="text1">账户余额：￥{{zhanghuyue.money_sum}}</view>
 				<view><image class="erewima" :src="yemxList.barcode_img"></image></view>
 			</view>
-			<view class="text2" @click="gotorecharge">充值</view>
-
+			<view  @click="gotorecharge" v-if="cz==1">
+				<text class="text2">充值</text>
+			</view>
+			<view @click="gotorecharge" v-else></view>
 		</view>
 		<!-- 菜单 -->
 		<view class="cou_top">
@@ -90,7 +92,8 @@
 					price:'￥66,666.00',
 					title:'充值失败',
 				}],
-				zhanghuyue:''
+				zhanghuyue:'',
+				cz:'',
 			}
 		},
 		onReady:function(e){
@@ -138,6 +141,7 @@
 			}
 			this.clickTab();
 			this.getvipsimg();
+			this.getswitch();
 		},
 		onPullDownRefresh() {
 			//console.log("下拉刷新");
@@ -234,7 +238,27 @@
 					fail: () => {},
 					complete: () => {}
 				});
+			},
+			getswitch(){
+				//获取信息
+				var arr ={};
+				var pdata = url.getSignStr(arr);
+				uni.request({
+					url:url.websiteUrl+'/api_v2/stores/getswitch',
+					method:'POST',
+					dataType:'json',
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+					},
+					data:pdata,
+					success: res => {
+						this.cz = res.data.data.cz
+					},
+					fail: () => {},
+					complete: () => {}
+				});
 			}
+			
 		}
 	}
 </script>

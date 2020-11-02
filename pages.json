@@ -456,6 +456,17 @@
 			}
         }
         
+        ,{
+            "path" : "pages/login/location",
+            "style" : {
+				"navigationBarTitleText": "获取位置",
+				"navigationBarBackgroundColor": "#000",
+				"backgroundColorTop":"#f6f6f6",
+				"backgroundColorBottom":"#f6f6f6",
+				"navigationBarTextStyle":"white",
+				"navigationStyle":"custom"
+			}
+        }
     ],
 	"subPackages": [{
 	    "root": "pagesb",
@@ -563,7 +574,8 @@
 					"backgroundColorTop":"#393D4A",
 					"navigationBarBackgroundColor": "#393D4A",
 					"navigationBarTextStyle":"white",
-					"enablePullDownRefresh": true
+					"enablePullDownRefresh": true,
+					"navigationStyle":"custom"
 				}
 			},{
 				"path": "center/my_bank",
@@ -571,8 +583,8 @@
 					"navigationBarTitleText": "我的银行卡",
 					"navigationBarBackgroundColor": "#393D4A",
 					"backgroundColorTop":"#393D4A",
-					"backgroundColorBottom":"#f6f6f6",
-					"navigationBarTextStyle":"white"
+					"backgroundColorBottom":"#fe0000",
+					"navigationStyle":"custom"
 				}
 			},{
 				"path": "center/my_bank_tj",

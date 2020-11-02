@@ -46,6 +46,7 @@
 		      <!-- <view class="zf_anlj zasi zf_dele">删除订单</view> -->
 		    </view>
 		  </view> 
+		  <!-- 退款 -->
 		</view>
 		<view class="x12 bg-white padding-big margin-top text-center" v-if="yemxList.mode==2 && yemxList.logistics_status<3 && yemxList.barcode_img!=''">
 			<view class="x12" style="font-size: 14pt;">- 提货码 -</view>
@@ -100,7 +101,7 @@
 		      <view class="shop_text01">{{xitem.goods_title}}</view>
 		        <view class="shop_je">
 		          <view class="shop_xj">￥{{xitem.price}}</view>
-		          <view class="shop_yj">￥{{xitem.subtotal}}</view>
+		          <view class="shop_yj">￥{{xitem.retail_price}}</view>
 		          <view class="shop_sl">x{{parseInt(xitem.num)}}</view>
 		        </view>
 		        <!-- <view class="biaoqian">

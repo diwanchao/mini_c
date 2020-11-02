@@ -3,6 +3,7 @@
 	 import Vue from 'vue'
 	export default {
 		onLaunch: function () {
+			
 			uni.login({
 			  provider: 'weixin',
 			  success: function (loginRes) {

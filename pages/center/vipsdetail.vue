@@ -183,7 +183,7 @@
 	font-size: 32upx;
 	color: #FE0000;
 	position: absolute;
-	left: 254upx;
+	left: 220upx;
 	top: 138upx;
 	font-weight: bold;
 }

@@ -224,21 +224,12 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 		data() {
 			return {
 				config:{
-					title: '分类',
+					title: '分类信息',
 					color: '#ffffff',
 					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff',
-					back:false,
+					statusBarFontColor:'#fff'
 				},
-				listSecond:[{
-					id:0,
-					name:'爆品'
-				},
-				{
-					id:0,
-					name:'爆品'
-				}],
-			data:0,
+				tabIndex:0,
 			xShow:false,
 			deployinfo:{},//配置信息货币单位，符号，以及其他的一些配置参数
 			categoryId:0,
@@ -273,7 +264,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 			content:'',
 			type:'',
 			inverted: false,
-			tabIndex:0,
+			
 			spec_id:0,
 			spec:'',
 			goodsinfo:[],
@@ -319,18 +310,12 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 			}
 		},
 		onShow:function(){
-		
-				if (this.memberinfo.length == 0) {
+			if (this.memberinfo.length == 0) {
 					uni.redirectTo({
 						url: "/pages/login/login"
 					})
 					return;
 				}
-				
-				uni.navigateTo({
-				     url:"../goods_details/goods_details?barcode_id=" + item.barcode_id
-				 })
-		
 			try {//从本地缓存中同步获取指定 key 对应的内容。
 				const value = uni.getStorageSync('memberinfo');
 				const valuex = uni.getStorageSync('shoppingCarts');
@@ -352,7 +337,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 				this.getMer();
 			}
 		},
-		onLoad:function(){		
+		onLoad:function(){			
 			try {//从本地缓存中同步获取指定 key 对应的内容。
 				const value = uni.getStorageSync('memberinfo');
 				const valuex = uni.getStorageSync('shoppingCarts');
@@ -426,21 +411,6 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 					url:'/pages/serch/index'
 				})
 			},
-			listleftScroll(index){
-				console.log(index)
-				this.tabIndex = index
-				// if(this.tabIndex = index){
-				// 	this.getGoods();
-				// }
-			},
-			// oMenu(index){
-			// 	// this.tabIndex= index;
-			// 	console.log(index,'index')
-			// 	if(this.tabIndex= index){
-			// 		this.getGoods();
-			// 	}
-				
-			// },
 			chooseItem(item, n, event, index) {
 				if (this.selectArr[n] != item) {
 					this.$set(this.selectArr, n, item);
@@ -624,7 +594,6 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 			        },
 			//弹出下拉弹窗
 			togglePopup(type, open,data) {
-					console.log('++++++++++++++++++++++++++')
 					switch (type) {
 						case 'bottom':
 							this.content = '底部弹出 popup';
@@ -1115,7 +1084,6 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 				
 			},
 			getClass(data){
-				
 				//console.log(data);
 				this.isClass = false;
 				//获取信息
@@ -1227,7 +1195,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 			},
 			oMenu(data){
 				this.tabIndex= data;
-				console.log('data',data)
+				    console.log('data',data)
 				uni.showLoading({
 				    title: '加载中'
 				});
@@ -1236,11 +1204,10 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 				this.limit = 10;
 				this.oneMenu = [];
 				this.towMenu = [];
-				this.getClass(data,'!!!!!!!!');
+				this.getClass(data);
 			},
 			tMenu(data){
 				this.tabIndex= data;
-				console.log(data,'二级分类')
 				uni.showLoading({
 				    title: '加载中'
 				});
@@ -1248,7 +1215,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 				this.page = 0;
 				this.limit = 10;
 				//this.towMenu = [];//修改二级菜单不显示问题
-				this.getGoods(data,'########');
+				this.getGoods(data);
 			},
 			sm(){
 				uni.scanCode({

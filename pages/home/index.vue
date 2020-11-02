@@ -155,7 +155,15 @@
 				<view class="this_title">{{buyList.goods_title}}</view>
 				<view class="this_fenshu">已累计拼成:{{buyList.current_number}}份</view>
 			</view>
-			<viwe>
+			<view class="jindutiao">
+				<viwe class="this_qiuqiu" v-for="item in 4" :key='index'>
+					
+						<!-- <view class="schedule_down">{{items.unit_price}}元/份</view> -->
+					
+					<view class="kuan"></view>
+				</viwe>
+			</view>
+<!-- 			<viwe>
 				<view class="this_qiuqiu">
 					<view class="schedule_quan" v-for="(items,index) in buyList.data" :key='index' >			
 						<view class="schedule_down">{{items.unit_price}}元/份</view>
@@ -163,10 +171,8 @@
 				</view>
 				<view class="hengsss">
 					<view class="jindu" :style="{width:Math.floor(buyList.current_number/buyList.data[3].number*10000)/100.00 + '%'}"></view>
-				</view>
-				
-				
-			</viwe>
+				</view>	
+			</viwe> -->
 		</view>
 		<!-- 导航 -->
 		<view  class="selected">
@@ -527,18 +533,39 @@
 				}
 			},
 			onLoad(data) {
-				
 				uni.getLocation({
 					type: 'wgs84',
 					success: function(res) {
-						// this.$refs.hxnb.conf.leftButton[0].txt = this.stores_name
-						// console.log(xthis.$refs.hxnb.conf.leftButton[0].txt,'xthis.$refs.hxnb.conf.leftButton[0].txt');
 						console.log('当前位置的经度：' + res.longitude);
 						console.log('当前位置的纬度：' + res.latitude);
-						console.log('s*****************rd')
-						// console.log('s*****************rd' ,res)
-						// console.log(this.stores_name,'看看这个嗯十二IE红烧肉可hi')
+						console.log('授权weizhi','++++++++++++++')
+						
 					},
+					fail: (res) => {
+						uni.hideLoading();
+						uni.showModal({
+							title: '温馨提示',
+							content: '您已拒绝授权，是否去设置打开同意位置授权？',
+							confirmText: "确认",
+							cancelText: "取消",
+							success: (res) => {
+								console.log(res,'再次调用成功');
+								if (res.confirm){
+									console.log('用户点击确认')
+									// uni.openSetting({
+									// 	success: (res) => {
+									// 		console.log(res,'用户确认成功','%%%%%%%%%%%%%%%%%%%%%%%')
+									// 	}
+									// })
+								}else{
+									console.log('用户点击取消了')
+									// uni.redirectTo({
+									// 	url:'/pages/login/location'
+									// })
+								}
+							}
+						})
+					}
 					
 				});
 				
@@ -2328,6 +2355,7 @@
 							});
 						},
 						fail: res => {
+						
 							//console.log('当前位置的经度：' + res.longitude);
 							//console.log('当前位置的纬度：' + res.latitude);
 							xxx.lng = '';
@@ -3354,30 +3382,23 @@
 		border-radius: 50%;
 	}
 	.this_qiuqiu{
-		display: flex;
-		justify-content: space-between;
+		height: 14upx;
+		width: 14upx;
+		background-color: #70BC26;
+		border-radius: 50%;
+		box-sizing: border-box;
+		padding-bottom: 5upx;
+	}
+
+	.jindutiao{
 		width: 335upx;
+		height: 10upx;
+		border: 1upx solid #70BC26;
 		position: absolute;
 		left: 252upx;
 		top: 150upx;
-	}
-	.schedule_quan{
-		height: 14upx;
-		width: 14upx;
-		border-radius: 50%;
-		background-color: #70BC26;
-	}
-	.schedule_down{
-		font-size: 18upx;
-		position: absolute;
-		color: #666;
-		margin-top: 27rpx;
-		width: 100rpx;
-		margin-left: -20rpx;
-	}
-	.jindu{
-		background-color: #70BC26;
-		height: 6rpx;
+		display: flex;
+		justify-content: space-between;
 	}
 /* 	.puticon{
 		height: ;

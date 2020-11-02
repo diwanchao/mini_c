@@ -30,8 +30,8 @@
 								<view class="text1" v-if='xitme.order_status == 1 && xitme.temp_logistics_status == 2 && (xitme.temp_pay_status == 2 || xitme.temp_type == 2)'>待收货</view>
 								<view class="text1" v-if='xitme.order_status == 1 && xitme.temp_logistics_status == 1 && (xitme.temp_pay_status == 2 || xitme.temp_type == 2)'>待发货</view>
 								<view class="text1" v-if='xitme.order_status == 2'>已取消</view>
-								<view class="text1" v-if="xid==4">退款中</view>
-								
+								<view class="text1" v-if="xid==4 && xitme.status == 1">退款中</view>
+								<view class="text1" v-if="xid==4 && xitme.status == 3">{{xitme.status_name}}</view>
 						</view>
 					
 					
@@ -215,6 +215,7 @@
 				// 	})
 				if (this.xid == 4) {
 					uni.navigateTo({
+						// url: "order_details?order_id=" + item.order_id + "&order_code=" + item.order_code
 						url: "order_th_details?refund_id=" + item.refund_id
 					})
 					return;

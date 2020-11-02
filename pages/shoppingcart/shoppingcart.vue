@@ -35,7 +35,7 @@
 					<view class="x-auto" style="margin-top: -6upx; padding-left: 10upx;">
 						全选
 					</view>
-					<view class="x-auto" style="float: right; font-size: 10pt;" @click="qkgwc">清空</view>
+					<view class="x-auto" style="float: right; font-size: 10pt;" @click="qkgwcList">清空</view>
 				</view>
 				<view class="tctj-body" style="padding-bottom: 100upx;">
 						<view class="x12 border-top border-gray padding-top padding-bottom" v-for="(g_ite,g_index) in goodslist" :key="g_index" v-if="g_ite.stores_id==xshopInfo.store.stores_id">
@@ -269,7 +269,23 @@
 			//console.log(this.wheight);
 		},
 		methods: {
+			qkgwcList(){
+				var that = this
+				uni.showModal({
+				    title: '提示',
+				    content: '是否清空购物车',
+				    success: function (res) {
+				        if (res.confirm) {
+							console.log('进入购物车方法成功第一次')
+				            that.qkgwc();
+				        } else if (res.cancel) {
+				            console.log('用户点击取消');
+				        }
+				    }
+				});
+			},
 			qkgwc(){
+				console.log('进入清空购物车方法成功第二次')
 				uni.setStorage({
 					key: 'shoppingCarts',
 					data:[],
