@@ -78,7 +78,8 @@
 				"navigationBarTitleText": "登录",
 				"backgroundColorTop":"#393D4A",
 				"navigationBarBackgroundColor": "#393D4A",
-				"navigationBarTextStyle":"white"
+				"navigationBarTextStyle":"white",
+				"navigationStyle":"custom"
 			}
 		},{
 			"path": "pages/reg/reg",

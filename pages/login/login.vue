@@ -1,10 +1,21 @@
 <template>
     <view class="x12">
-		<view class="x12">
-			<!-- <image src="https://div.buy315.com.cn/xcx_imgs/toplogin.png" style="width: 750upx; height: 180upx;" mode="aspectFit"></image>		 -->
+		<hx-navbar :config="config" />
+<!-- 		<view class="x12">
+			<image src="https://div.buy315.com.cn/xcx_imgs/toplogin.png" style="width: 750upx; height: 180upx;" mode="aspectFit"></image>		
 				<image style="margin: 0 auto; height: 100upx; width: 350upx;" src="https://div.buy315.com.cn/xcx_imgs/bg_bg" mode=""></image>
-		</view>
-		<view class="x12" style="font-size: 12pt; margin-top: -20upx;">
+		</view> -->
+		<!-- <view class="x12" style="font-size: 12pt; margin-top: -20upx;"> -->
+			<view class="logos">
+				<view class="logos_img"><image class="this_lit" src="../../static/logos.png" mode=""></image></view>
+				<view class="logos_text">
+					<!-- <view>请完成微信授权已继续使用</view> -->
+					<!-- <view @click="getlocationpush" class="botton">微信授权用户信息</view> -->
+					<button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber" v-if="dwxlogin == true && deployinfo.one_click_login==1" class="botton">微信手机号快捷登录</button>
+					<view @click="gotoindex" class="quxiao">取消授权</view>
+				</view>
+				
+			</view>
 	<!-- 		<view class="x12 padding-big" style="padding-top: 0px; font-size: 14pt; font-weight: bold; margin: 0 auto;">
 				请登录
 			</view> -->
@@ -21,7 +32,7 @@
 			<view class="btn-row x12" style="margin-top: 80upx;">
 				<!-- <button type="primary" class="primary" v-if="but==false" style="background:rgba(155,155,155,1); border-radius:24px; width: 525upx;">登录</button>
 				<button type="primary" class="primary" v-if="but==true" @tap="bindLogin" style="background:#F65A2A; border-radius:24px; width: 525upx;">登录</button> -->
-				<button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber" v-if="dwxlogin == true && deployinfo.one_click_login==1"  style="background:#51A938; color: #fff; border-radius:24px; width: 525upx; margin-top: 10px;">微信手机号快捷登录</button>
+				
 			</view>
 <!-- 			<view class="x12" style="width:500upx;  color: #393D4A; margin-top: 40upx; padding-left: 130upx; font-size: 11pt;">
 				<view class="x-auto" @tap="goReg">
@@ -33,7 +44,7 @@
 					</view>
 				</navigator>
 			</view> -->
-		</view>
+		<!-- </view> -->
     </view>
 </template>
 
@@ -70,7 +81,13 @@
 				dwxlogin:false,
 				tjr_id:'',
 				deployinfo:{},
-				login:false
+				login:false,
+				config:{
+					title: '购物车',
+					color: '#ffffff',
+					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+					statusBarFontColor:'#fff',
+				},
             }
         },
 		onShow() {
@@ -103,6 +120,11 @@
 			//#endif
 		},
         methods: {
+			gotoindex(){
+				uni.switchTab({
+					url:'/pages/home/index'
+				})
+			},
 			getPhoneNumber: function (e){
 				//console.log(e.detail.iv);
 				//console.log(e.detail.encryptedData);
@@ -301,7 +323,7 @@
 </script>
 <style>
 	page{
-		background-color: #F5F5F5;
+		background-color: #fff;
 	}
     .action-row {
         display: flex;
@@ -309,10 +331,6 @@
         justify-content: center;
     }
 
-    .action-row navigator {
-        color: #007aff;
-        padding: 0 20px;
-    }
 
     .oauth-row {
         display: flex;
@@ -338,4 +356,39 @@
         height: 60px;
         margin: 20px;
     }
+	.logos{
+		width: 750rpx;
+		background-color: #fff;
+	}
+	.logos_img{
+		height: 200rpx;
+		width: 200rpx;
+		margin: 100rpx auto;
+	}
+	.this_lit{
+		height: 100%;
+		width: 100%;
+	}
+	.logos_text{
+		text-align: center;
+	}
+	.botton{
+		width: 710upx;
+		height: 80upx;
+		background-color: #FE0000;
+		border-radius: 10rpx;
+		text-align: center;
+		line-height: 80rpx;
+		font-size: 24rpx;
+		color: #fff;
+		margin-left: 20rpx;
+		margin-top: 40rpx;
+	}
+	.quxiao{
+		font-size: 24upx;
+		color: #0000FF;
+		text-align: center;
+		margin-top: 20upx;
+		text-decoration: underline;
+	}
 </style>

@@ -2656,7 +2656,7 @@
 					//4次卡
 					//5分类
 					//group_id==1000秒杀分组
-					//console.log(type,jump_id,title,group_id,gtype);return;
+					console.log(type,jump_id,title,group_id,gtype,'#############');return;
 					if (this.memberinfo.length == 0) {
 					     uni.navigateTo({
 					      url: "/pages/login/login"
@@ -2684,9 +2684,13 @@
 								url: "../home/ck_list?title=" + title
 							})
 						} else if (type == 5) {
-							uni.navigateTo({
-								url: "../home/classgoods?category_id=" + jump_id + "&title=" + title
+							console.log(type,'########################')
+							uni.switchTab({
+								url: "../classification/classification?category_id=" + jump_id + "&title=" + title
 							})
+							// uni.navigateTo({
+							// 	url: "../home/classgoods?category_id=" + jump_id + "&title=" + title
+							// })
 						} else if (type == 6) {
 							uni.navigateTo({
 								url: "../home/ms"

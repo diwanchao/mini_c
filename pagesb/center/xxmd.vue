@@ -41,10 +41,12 @@
 			        </view>
 			    </view>
 				  <view class="wodedd">
-					  <!-- <text class="address_left">仅支持自取</text> -->
+					 <text class="address_left">仅支持自取</text>
 				    <view class="wo_address">附近地址 </view>
 				    <view>
-				      <view class="fjdizhi" v-for="(item,index) in areaList" :key="index" @click="qiehuan(item)" >{{item.stores_name}}<text class="address_left">{{item.distance}}km</text></view>
+				      <view class="fjdizhi" v-for="(item,index) in areaList" :key="index" @click="qiehuan(item)" >{{item.stores_name}}
+						<text class="address_left">{{item.distance}}km</text>
+					  </view>
 				    </view>
 				    
 				  </view>
@@ -290,10 +292,23 @@
 								'content-type':'application/x-www-form-urlencoded'
 							},
 							data:pdata,
-							success: res => {								
+							success: res => {	
+								
+								try {
+									//console.log(uni.getStorageSync('xshopInfo'));
+									uni.setStorage({
+										key: 'addressList',
+										data:res.data.data,
+										success: function () {
+										}
+									});
+								} catch (e) {
+									// error
+								}	
 								//console.log(res.data);
 								that.datanum = res.data.data.length;
 								that.areaList = res.data.data;
+							
 								console.log('获取地址成功啦')
 							},
 							fail: () => {},

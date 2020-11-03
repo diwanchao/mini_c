@@ -84,7 +84,9 @@
 			   </view>
 			 </view>
 		 </view>
-
+		<view class="Suspension" @click="goGwc">
+				<view><image class="Suspensionimg" src="https://div.buy315.com.cn/xcx_imgs/gouwuche.png"></image></view>
+		</view>
 
 	</view>
 </template>
@@ -148,6 +150,11 @@
 			console.log('45645646')
 		},
 		methods: {
+			goGwc() {
+				uni.switchTab({//reLaunch 这是直接进入，没有滑动效果。switchTab有滑动效果
+					url:"../shoppingcart/shoppingcart?acom_id="+this.sData.acom_id
+				})
+			},
 			gotoyouhuiq(){
 				uni.navigateTo({
 					url:'/pagesb/center/xjj_list'
@@ -227,10 +234,10 @@
 			jrShoppingCart(num_s, goods_info, type, v) {
 				 if (this.memberinfo.length == 0) {
 				      uni.navigateTo({
-				       url: "/pages/login/login"
+				        url: "/pages/login/login"
 				      })
 				      return;
-				     }
+				    }
 				     
 			uni.showToast({
 			      title: '加入成功',
@@ -617,4 +624,23 @@ page{
 	left: 42%;
 	top: 60upx;
 }
+	.Suspension{
+		position: relative;
+		height: 80upx;
+		width: 80upx;
+		background-color: #FC8282;
+		border-radius: 50%;
+		position: fixed;
+		right: 40rpx;
+		bottom: 50rpx;
+		z-index: 9999;
+	}
+	.Suspensionimg{
+		height: 35upx;
+		width: 35upx;
+		position: absolute;
+		left: 20upx;
+		top: 25upx;
+		z-index: 9999999;
+	}
 </style>

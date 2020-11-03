@@ -23,6 +23,9 @@
 		      <view class="text8"><image class="shop_img01" src="https://div.buy315.com.cn/xcx_imgs/jia.png"></image></view>
 		    </view>
 		  </view>
+		  <view class="Suspension" @click="gotogouwuc">
+		  	 <view><image class="Suspensionimg" src="https://div.buy315.com.cn/xcx_imgs/gouwuche.png"></image></view>
+		  </view>
 		</view>
 	</view>
 </template>
@@ -77,7 +80,11 @@
 			this.getexlosIve();
 		},
 		methods: {
-		
+		gotogouwuc(){
+			uni.switchTab({
+				url:'/pages/shoppingcart/shoppingcart'
+			})
+		},
 			jrShoppingCart(num_s,goods_info){
 				uni.showToast({
 				      title: '加入成功',
@@ -724,5 +731,22 @@ page{
 	right: 20rpx;
 	font-size: 24rpx;
 	color: #999;
+}
+.Suspension{
+	position: relative;
+	height: 80upx;
+	width: 80upx;
+	background-color: #FC8282;
+	border-radius: 50%;
+	position: fixed;
+	right: 40rpx;
+	bottom: 50rpx;
+}
+.Suspensionimg{
+	height: 35upx;
+	width: 35upx;
+	position: absolute;
+	left: 20upx;
+	top: 25upx;
 }
 </style>

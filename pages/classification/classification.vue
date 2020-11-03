@@ -227,7 +227,8 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 					title: '分类信息',
 					color: '#ffffff',
 					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
+					statusBarFontColor:'#fff',
+					back:false,
 				},
 				tabIndex:0,
 			xShow:false,

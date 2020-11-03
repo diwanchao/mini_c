@@ -29,9 +29,9 @@
 							<view class="uni-input">{{date}}</view>
 						</picker>
 					</view>
-					<view class="x-auto float-right"  style="padding-top: 24upx;">
+		<!-- 			<view class="x-auto float-right"  style="padding-top: 24upx;">
 						<image src="https://div.buy315.com.cn/xcx_imgs/yjt.png" style="width: 16upx; height: 28upx;"></image>
-					</view>
+					</view> -->
 				</view>
 				<view class=" x12 padding-top border-top border-gray" v-if="headimgs==true" style="margin-top: 18rpx;">
 					<view class="x-auto">

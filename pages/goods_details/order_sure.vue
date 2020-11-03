@@ -3,14 +3,15 @@
 		<hx-navbar :config="config" />
 
 		<view class="x12 padding" style="padding-bottom: 0;">
-			<view class="x-auto" style="margin-left: -15upx;">
+			<!--  -->
+			<view class="x-auto" style="margin-left: -15upx;" v-if="yikeda==true">
 				<view class="x-auto" style="padding-left: 15upx;" v-if="self_mention==1 && deliverys==1" v-for="(item,index) in menu" :key="index"  @click="qhMenu(item.id)">
-					
 					<image :src="item.img" class="float-left" style="width: 350upx; height: 80upx;" v-if="item.site==1"></image>
 					<image :src="item.img2" class="float-left" style="width: 350upx; height: 80upx; margin-right: 4upx;"  v-else></image>
 				</view>
-
-				
+			</view>
+			<view v-else>
+				<view class="daodian_only">到店自提</view>
 			</view>
 			<view class="x12 bg-white padding" >
 				<view class="x12 padding" style="font-size: 12pt; color: #393D4A;" v-for="(sitem,sindex) in pay_info.address" :key="sindex">
@@ -218,6 +219,7 @@
 					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
 					statusBarFontColor:'#fff'
 				},
+			yikeda:true,
 			xShow:false,
 			deployinfo:{},//配置信息货币单位，符号，以及其他的一些配置参数
 			login:false,
@@ -267,6 +269,8 @@
 			}
 		},
 		onShow:function(){//返回时接收子页面的传参
+		this.getaddressziti();
+		console.log('走这个调用啦-----------------')
 				uni.showLoading({
 					title: '加载中'
 				});
@@ -302,28 +306,35 @@
 				//console.log(currPage.data.psDate);
 		},
 		onLoad:function(data){
-			//console.log(data);
+			console.log(data,'$$$$$$$$$$$$$$$');
 			try {//从本地缓存中同步获取指定 key 对应的内容。
 				const value = uni.getStorageSync('memberinfo');
 				const valuex = uni.getStorageSync('shoppingCarts');
 				const values = uni.getStorageSync('xshopInfo');
+				const valuei = uni.getStorageSync('addressList');
 				this.deployinfo = uni.getStorageSync('deployinfo');
 				//console.log(this.deployinfo);
 				if (value) {
-					//console.log(this.deployinfo);
+					console.log(this.deployinfo,'^^^^^^^^^^^^^^^^^^^^^');
 					this.memberinfo = value;
 					this.login = true;
 					//console.log(value);
 				}
 				if(valuex){
+					console.log()
 					this.goodslist = valuex;
 				}
 				if(values){
 					this.xshopInfo = values;
 				}
+				if(valuei){
+					this.onlyziqu = valuei
+					
+				}
 			} catch (e) {
 				// error
 			}
+
 			this.setZt();
 			this.setCj();
 			for (let a in this.menu) {
@@ -366,7 +377,21 @@
 					url:"../goods_details/address_list"
 				})
 			},
+			getaddressziti(){
+				if(this.onlyziqu){
+				console.log('难道是没有接到数据',this.onlyziqu)
+					for(let i = 0 ; i>this.onlyziqu ; i++){
+						console.log(i,'这个i打印的准不准啥也不是')
+						if( i > 0){
+							this.yikeda == false
+						}else{
+							return
+						}
+					}
+				}
+			},
 			//查询是否显示自提
+			
 			setZt(){
 				var arr ={
 						};
@@ -979,5 +1004,21 @@
 	.shouhuoxinxi text{
 		color: #999;
 		margin-left: 10upx;
+	}
+	.daodian_only{
+		height: 40upx;
+		background-color: #fff;
+		z-index: 99999;
+		color: #FE0000;
+		height: 40rpx;
+		width: 96%;
+		padding: 2%;
+		z-index: 99999;
+		color: #FE0000;
+		border-radius: 10rpx;
+		line-height: 40rpx;
+		font-size: 24rpx;
+		text-align: center;
+		border-bottom: 1rpx solid #F7F7F7;
 	}
 </style>

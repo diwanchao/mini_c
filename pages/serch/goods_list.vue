@@ -1,51 +1,54 @@
 <template>
     <view>
 		<hx-navbar :config="config" />
-		<view class="x12 text-333 text-default" style="padding-bottom: 130upx;">
-			<view class="x12 border-bottom border-gray padding-top padding-bottom" v-for="(item,msindex) in goodsList" :key="msindex">
-				<view class="tctj-body-left" @click="goDetails(item)">
-					<image :src="item.img" mode="aspectFill"></image>
+		<view class="search_text">
+			<view class="search_this" v-for="(item,msindex) in goodsList" :key="msindex">
+				<view class="search_img" @click="goDetails(item)">
+					<image class="this_img" :src="item.img" mode="aspectFill"></image>
 				</view>
-				<view class="tctj-body-right">
-					<view class="x-auto" @click="goDetails(item)">
+				<view class="text_two">
+					<view class="left_this_text" @click="goDetails(item)">
 						<view class="x12 tctj-body-right-title" style="height: auto;">
-							<view class="x12"  style="overflow:hidden;  text-overflow:ellipsis; white-space:nowrap;">{{item.goods_title}}</view>
-							<view class="x12" v-if="(item.price*1) < (item.original_price*1)" style="font-size: 10pt; height: 30upx; padding-top: 10upx; color: #999; text-decoration: line-through; font-weight: 100;">
-								<view>{{deployinfo.monetary_symbol}}{{item.original_price}}<span style="font-size: 9pt; color: #666;">/{{item.unit}}</span></view>
+							<view class="x12 search_shoptitle" >{{item.goods_title}}</view>
+							<view class="x12" v-if="(item.price*1) < (item.original_price*1)" >
+								<view>{{deployinfo.monetary_symbol}}{{item.original_price}}<span >/{{item.unit}}</span></view>
 							</view>
 						</view>
-						<view class="x12 tctj-body-right-price" style="padding-top: 10upx;">
-							{{deployinfo.monetary_symbol}}{{item.price}}<span style="font-size: 9pt; color: #666;">/{{item.unit}}</span>
+						<view class="x12 tctj-body-right-price" >
+							{{deployinfo.monetary_symbol}}{{item.price}}<span >/{{item.unit}}</span>
 						</view>
 					</view>
-					<view class="x-auto float-right" style="padding-top: 20upx;">
+					<view class="x-auto float-right this_jia" >
 						<view class="x-auto" v-for="(cartitme,cartindex) in shoppingCarts" :key="cartindex" v-if="cartitme.barcode_id==item.barcode_id">
 							<view class="x-auto" v-if="cartitme.num>0" @click="jrShoppingCart(0,item)"><image src="https://div.buy315.com.cn/xcx_imgs/jian.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image></view>
-							<view class="x-auto" v-if="cartitme.num>0" style="color: #393D4A; padding: 0 10upx;font-size: 12pt; font-weight: 700; padding-top: 8upx;">{{cartitme.num}}</view>
+							<view class="x-auto" v-if="cartitme.num>0" >{{cartitme.num}}</view>
 						</view>
 						<view class="x-auto" @click="jrShoppingCart(1,item)"  v-if="item.more==1 && (item.sale_num==='' || item.sale_num>0)"><image src="https://div.buy315.com.cn/xcx_imgs/jia.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image></view>
 						<view class="x-auto" v-if="item.more==2 && (item.sale_num==='' || item.sale_num>0)">
-							<button type="primary"  @click="togglePopup('bottom', 'popup',item)" style=" width:auto; height:auto; padding:0; line-height: 35upx; background:#fff;display:inline;border:0;">
+							<button type="primary"  @click="togglePopup('bottom', 'popup',item)">
 								<image src="https://div.buy315.com.cn/xcx_imgs/jia.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image>
 							</button>
 						</view>
 						<view class="x-auto" v-if="item.sale_num===0"><image src="https://div.buy315.com.cn/xcx_imgs/jian.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image></view>
 					</view>
-					<view class="x12" style="font-size: 8pt; color: #fff; margin-top: 4px; padding-bottom: 4px;">
+<!-- 					<view class="x12" style="font-size: 8pt; color: #fff; margin-top: 4px; padding-bottom: 4px;">
 						<view class="float-left" style="border: #f60 solid 1px; padding: 1px 4px; border-radius:2px;background-color: #f60; margin-right: 5px;" v-if="item.show_month_sales==1">月销 {{item.month_sales}}</view>
 						<view class="float-left" style="border: #FF9900 solid 1px; padding: 1px 4px; border-radius:2px; background-color: #FF9900;" v-if="item.sale_num>0 && item.show_sale_num==1">库存 {{item.sale_num}}</view>
 						<view class="float-left" style="border: #FF9900 solid 1px; padding: 1px 4px; border-radius:2px; background-color: #FF9900;" v-if="item.sale_num===0 && item.show_sale_num==1">售罄</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 		</view>
 		<view class="x12 text-center padding-big" v-if="lim==0">{{lim_info}}</view>
 		<view class="x12 shop-menu">
-			<view class="x12 bg-white text-default text-333 border-top border-gray">
-				<view class="x12 text-center" style="line-height: 115upx; width: 100%; font-size: 14pt;background-color: #F65A2A; color: #fff;" @click="goGwc">
-					购物车
-				</view>				
+			
+			<view class="Suspension" @click="goGwc">
+				<view><image class="Suspensionimg" src="https://div.buy315.com.cn/xcx_imgs/gouwuche.png"></image></view>
 			</view>
+		<!-- 		<view class="x12 text-center"  @click="goGwc">
+					购物车
+				</view>	 -->			
+	
 		</view>
 		<!--多规格弹窗的显示开始-->
 		<view class="x12" v-if="xpopup==1">
@@ -845,11 +848,10 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 					url:"../goods_details/goods_details?barcode_id="+item.barcode_id
 				})
 			},
-			goGwc() {
-				uni.switchTab({//reLaunch 这是直接进入，没有滑动效果。switchTab有滑动效果
-					url:"../shoppingcart/shoppingcart?acom_id="+this.sData.acom_id
-				})
-			},
+				// uni.switchTab({//reLaunch 这是直接进入，没有滑动效果。switchTab有滑动效果
+				// 	url:"../shoppingcart/shoppingcart?acom_id="+this.sData.acom_id
+				// })
+		
 			//扫码
 			sm(){
 				uni.scanCode({
@@ -925,20 +927,20 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 								this.lim = res.data.total;
 								var max_page = res.data.total/this.limit;
 								if(max_page<=this.page){
-									uni.showToast({
-									    icon: 'none',
-									    title: '已到底'
-									});
+									// uni.showToast({
+									//     icon: 'none',
+									//     title: '已到底'
+									// });
 									return;
 								}
 								if(res.data.status=='y'){
 									var datax = res.data.data.goods;
 								}else{
 									var datax = [];
-									uni.showToast({
-									    icon: 'none',
-									    title: '已到底'
-									});
+									// uni.showToast({
+									//     icon: 'none',
+									//     title: '已到底'
+									// });
 								}
 								if (action === 'refresh') {
 									this.goodsList = [];
@@ -1051,44 +1053,75 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 </script>
 <style>
 	page {
-		background-color: #FFFFFF;
+		background-color: #F7F7F7;
+		margin: 0 auto;
 	}
-	.shop-menu{
-		position: fixed; z-index: 1000; bottom: 0upx;
+	.search_this{
+		height: 190upx;
+		width: 710upx;
+		background-color: #fff;
+		border-radius: 10upx;
+		margin-top: 20upx;
+		display: flex;
+		margin-left: 20upx;
+
+		box-sizing: border-box;
+		position: relative;
 	}
-	.tctj-body-left{
-		width: 120upx;
-		height: auto;
-		float:left;
-		padding-left: 36upx;
-	}
-	.tctj-body-left image{
-		width: 120upx;
+	.search_img{
 		height: 120upx;
-		float:left;
+		width: 120upx;
+		border-radius: 10upx;
+		margin-top: 20upx;
+				padding-left: 20upx;
+		box-sizing: border-box;
 	}
-	.tctj-body-right{
-		width: 540upx;
-		height: auto;
-		float:left;
-		padding-left:20upx;
-		line-height:1.2em;
+	.this_img{
+		height: 120upx;
+		width: 120upx;
+		border-radius: 10upx;
 	}
-	.tctj-body-right-title{
-		font-size:28upx;
-		color:#333;
+	.left_this_text{
+		height: 190upx;
+		line-height: 60upx;
+		margin-top: 20upx;
+		box-sizing: border-box;
+	}
+	.search_shoptitle{
+		font-size: 28upx;
+		width: 92%;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+	.this_jia{
+		z-index: 999;
+		position: absolute;
+		right: 20upx;
+		bottom: 20upx;
+	}
+	.Suspension{
+		position: relative;
 		height: 80upx;
+		width: 80upx;
+		background-color: #FC8282;
+		border-radius: 50%;
+		position: fixed;
+		right: 40rpx;
+		bottom: 50rpx;
+		z-index: 9999;
 	}
-	.tctj-body-right-describe{
-		font-size:28upx;
-		color:#666;
+	.Suspensionimg{
+		height: 35upx;
+		width: 35upx;
+		position: absolute;
+		left: 20upx;
+		top: 25upx;
+		z-index: 9999999;
 	}
-	.tctj-body-right-price{
-		font-size:28upx;
-		color:#E84C3E;
-		font-weight: 700;
-	}
-	button::after{
-		border:none;
+	.text_two{
+		padding-left: 40upx;
+		box-sizing: border-box;
+		width: 80%;
 	}
 </style>
