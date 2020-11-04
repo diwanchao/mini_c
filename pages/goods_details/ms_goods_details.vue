@@ -1466,10 +1466,11 @@ import url from '../../main.js';
 		margin-left: 20upx;
 	}
 	.text_title{
-		font-size: 28upx;
+		font-size: 36upx;
 		color: #333333;
 		margin-top: 30upx;
 		margin-left: 20upx;
+		line-height: 90upx;
 	}
 	.textmiaoshu{
 		font-size: 24upx;

@@ -2,8 +2,8 @@
 	<view>
 		<hx-navbar :config="config" />
 	<view v-if="xShow==true">
-		<view class="x12 bg-white">
-			<!-- <view class="x12 padding-big" style="font-size: 12pt; color: #393D4A;">
+		<view class="x12 bg-white" style="border-bottom: #CCCCCC solid 6upx;" @click="goAddressXlist">
+			<view class="x12 padding-big" style="font-size: 12pt; color: #393D4A;">
 				<view class="x-auto" style="padding-right: 20upx;">
 					<image src="https://div.buy315.com.cn/xcx_imgs/gwcdw.png" class="float-left" style="width: 36upx; height: 46upx;"></image>
 				</view>
@@ -20,7 +20,7 @@
 				<view class="x-auto float-right" style="padding-top: 7upx;">
 					<image src="https://div.buy315.com.cn/xcx_imgs/yjt.png" class="float-left" style="width: 18upx; height: 32upx;"></image>
 				</view>
-			</view> -->
+			</view>
 		</view>
 		<view class="x12 padding">
 			<view class="tctj"  v-if="goodslist.length>0">				
@@ -178,6 +178,7 @@
 			address_list:[],
 			addressNum:0,
 			shoppingCarts:[],
+			newshopcart:[],
 			shoppingCartNum:0,
 			xshopInfo:[],
 			stores_name:'',
@@ -200,6 +201,7 @@
 		    try {//从本地缓存中同步获取指定 key 对应的内容。
 		    	const value = uni.getStorageSync('memberinfo');
 		    	const valuex = uni.getStorageSync('shoppingCarts');
+				const valuei = uni.getStorageSync('newshopcart');
 				const values = uni.getStorageSync('xshopInfo');
 				if(values){
 					this.xshopInfo = values;
@@ -225,6 +227,7 @@
 			try {//从本地缓存中同步获取指定 key 对应的内容。
 				const value = uni.getStorageSync('memberinfo');
 				const valuex = uni.getStorageSync('shoppingCarts');
+				const valuei = uni.getStorageSync('newshopcart');
 				const values = uni.getStorageSync('xshopInfo');
 				const de = uni.getStorageSync('deployinfo');
 				if(de){
@@ -292,7 +295,14 @@
 					success: function () {
 					}
 				});
+				uni.setStorage({
+					key: 'newshopcart',
+					data:[],
+					success: function () {
+					}
+				});
 				this.shoppingCarts = [];
+				this.newshopcart = [];
 				this.goodslist = [];
 				uni.setTabBarBadge({
 				  index: 2,
@@ -592,6 +602,12 @@
 				//写入缓存
 				uni.setStorage({
 					key: 'shoppingCarts',
+					data:this.goodslist,
+					success: function () {
+					}
+				});
+				uni.setStorage({
+					key: 'newshopcart',
 					data:this.goodslist,
 					success: function () {
 					}

@@ -139,7 +139,7 @@
 								<view class="things_text6" >{{item.goods_title ? item.goods_title : '正在获取中' }}</view>
 								<view class="things_foot5">
 									<view class="things_text7">￥{{item.activity_price ? item.activity_price : '正在获取中'}}</view>
-									<!-- <view class="things_text8">￥25.00</view> -->
+									<view class="things_text8">￥{{item.retail_price}}</view>
 								</view>
 							</view>
 						</view>	
@@ -887,7 +887,7 @@
 				}
 				var arr ={
 					stores_id:this.xshopInfo.store.stores_id,
-					member_openid: this.memberinfo.openid,
+					// member_openid: this.memberinfo.openid,
 				};
 				var pdata = url.getSignStr(arr);
 				uni.request({

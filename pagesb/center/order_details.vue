@@ -38,15 +38,24 @@
 		      <!-- <view class="zf_anlj zasi zf_dele">删除订单</view> -->
 		    </view>
 		  </view>
-		<!-- 待收货 -->
-		  <view v-if='yemxList.order_status == 1 && (yemxList.to_pay == 2 || yemxList.order_type == 2) &&  yemxList.logistics_status < 3'> 
-		    <view class="za_sj">待收货</view>
-		    <!-- <view class="zf_tisy">您的订单正在配送</view> -->
+		<!-- 待发货 -->
+		<view v-if='yemxList.order_status == 1 && yemxList.temp_logistics_status == 1 && (yemxList.temp_pay_status == 2 || yemxList.temp_type == 2)'>
+		    <view class="za_sj">待发货</view>
 		    <view class="zf_an">
-		      <!-- <view class="zf_anlj zasi zf_dele">删除订单</view> -->
+		    </view>
+		  </view> 
+		  <!-- 待收货 -->
+		  <view v-if='yemxList.order_status == 1 && yemxList.temp_logistics_status == 2 && (yemxList.temp_pay_status == 2 || yemxList.temp_type == 2)'>
+		    <view class="za_sj">待收货</view>
+		    <view class="zf_an">
 		    </view>
 		  </view> 
 		  <!-- 退款 -->
+		  <view v-if='yemxList.order_status==4 '>
+		    <view class="za_sj">退货成功</view>
+		    <view class="zf_an">
+		    </view>
+		  </view> 
 		</view>
 		<view class="x12 bg-white padding-big margin-top text-center" v-if="yemxList.mode==2 && yemxList.logistics_status<3 && yemxList.barcode_img!=''">
 			<view class="x12" style="font-size: 14pt;">- 提货码 -</view>
@@ -54,10 +63,10 @@
 			<view class="x12" style="margin-top: 20upx;"><image :src="yemxList.barcode_img"  mode="aspectFill" style="width: 444upx; height:99upx;"></image></view>
 			<view class="x12" style="font-size: 14pt;">{{yemxList.delivery_code}}</view>
 		</view>
-		<view class="x12 bg-white padding-big margin-top text-center" v-else-if="yemxList.qrcode_img!=''">
+<!-- 		<view class="x12 bg-white padding-big margin-top text-center" v-else-if="yemxList.qrcode_img!=''">
 			<view class="x12"><image :src="yemxList.qrcode_img"  mode="aspectFill" style="width: 200upx; height: 200upx;"></image></view>
 			<view class="x12" style="font-size: 10pt; color: #9B9B9B;">- 店员扫码可退货 -</view>
-		</view>
+		</view> -->
 		<!-- 弹出层 -->
 <!-- 		  <view class="group" hidden="{{hiddenName}}">
 		    <view class="group_bg" bindtap="showMask"></view>

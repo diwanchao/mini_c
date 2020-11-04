@@ -276,7 +276,7 @@
 		font-size: 32upx;
 		color: #FE0000;
 		position: absolute;
-		left: 254upx;
+		left: 200upx;
 		top: 95upx;
 		font-weight: bold;
 	}
@@ -380,9 +380,9 @@
 }
 .erewima{
 	position: absolute;
-	top: 200rpx;
-	width: 300rpx;
-	height: 100rpx;
-	left: 225rpx;
+	top: 150rpx;
+	width: 440rpx;
+	height: 150rpx;
+	left: 130rpx;
 }
 </style>

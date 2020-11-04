@@ -39,7 +39,12 @@
 				</view>
 			</view>
 		</view>
-		<view class="x12 text-center padding-big" v-if="lim==0">{{lim_info}}</view>
+		<view class="x12 text-center padding-big" v-if="lim==0">{{lim_info}}
+			<viwe style="margin-top: 120upx;">
+				<viwe class="zanwushik"><image class="imgthis" src="../../static/hui.png"></image></viwe>
+				<viwe class="textwenzi">暂未搜索到商品</viwe>
+			</viwe>
+		</view>
 		<view class="x12 shop-menu">
 			
 			<view class="Suspension" @click="goGwc">
@@ -254,6 +259,11 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 			serchAll(){
 				uni.navigateTo({
 					url:"../serch/goods_list?goods_title="+this.goods_title
+				})
+			},
+			goGwc() {
+				uni.switchTab({//reLaunch 这是直接进入，没有滑动效果。switchTab有滑动效果
+					url:"../shoppingcart/shoppingcart?acom_id="+this.sData.acom_id
 				})
 			},
 			chooseItem(item, n, event, index) {

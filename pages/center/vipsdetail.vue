@@ -3,6 +3,7 @@
 		<hx-navbar :config="config"/>
 		<view style="position: relative;">
 			<view><image class="vips_img" src="https://div.buy315.com.cn/xcx_imgs/vips.png" ></image></view>
+			<!-- <view><image class="vips_img" src="../../static/vips.png" ></image></view> -->
 			<view class="text1">账户余额：￥{{listScroll.money_sum}}</view>
 			<view><image class="erewima" :src="yemxList.barcode_img"></image></view>
 		</view>
@@ -13,9 +14,9 @@
 		 </view>
 		 <view class="active_footer">
 		   <view class="active_rules">
-			   <view>1.	充值即成为会员；</view>
+			   <view>1.	登录即成为普通会员，充值成为尊贵会员；</view>
 			   <view>2.	会员可享受会员价格；</view>
-			   <view>3.	会员卡仅限申请者本人使用，会员卡会籍及卡内积分不可转让或出借；</view>
+			   <view>3.	会员卡仅限申请者本人使用，会员卡会籍及卡内积分不可转让或出借。</view>
 		   </view>
 		 </view>
 		</view>
@@ -183,7 +184,7 @@
 	font-size: 32upx;
 	color: #FE0000;
 	position: absolute;
-	left: 220upx;
+	left: 265upx;
 	top: 138upx;
 	font-weight: bold;
 }
@@ -235,9 +236,9 @@
 .erewima{
 	position: absolute;
 	top: 200rpx;
-	width: 300rpx;
-	height: 100rpx;
-	left: 225rpx;
+	width: 440rpx;
+	height: 150rpx;
+	left: 170rpx;
 }
 .viptext{
 	font-size: 30rpx;

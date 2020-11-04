@@ -14,6 +14,10 @@
 				搜索
 			</view>
 		</view> 
+		<viwe style="margin-top: 120upx;">
+			<viwe class="zanwushik"><image class="imgthis" src="../../static/hui.png"></image></viwe>
+			<viwe class="textwenzi">暂未搜索到商品</viwe>
+		</viwe>
     </view>
 </template>
 <script>import url from '../../main.js';
@@ -156,5 +160,25 @@
 	.this_imgsearch{
 		margin-left: 30rpx;
 		margin-right: 20rpx;
+	}
+	.imgthis{
+		height: 243upx;
+		width: 200upx;
+		margin: 0 auto;
+	}
+	.textwenzi{
+		font-size: 24upx;
+		color: #999999;
+		text-align: center;
+		width: 750upx;
+		display: flex;
+		justify-content: center;
+		margin-top: 180upx;
+	}
+	.zanwushik{
+		width: 750upx;
+		text-align: center;
+		display: flex;
+		justify-content: center;
 	}
 </style>

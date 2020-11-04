@@ -21,14 +21,14 @@
 		      </view>
 		    </view>
 			<view class="newGiftConCouponBtnAdd" @click="gotoyouhuiq" >
-			  <image src="../../static/ananiuuioj.png" mode="widthFix" class="bg3"></image>
+			  <image src="https://div.buy315.com.cn/xcx_imgs/ananiuuioj.png" mode="widthFix" class="bg3"></image>
 			</view>
 		  </view>
 		  </view>
 		
 		  <!-- 商品 -->
 		  <view class="new_t1"  >
-		    <image class="new_images" src="../../static/xiangou.png"></image>
+		    <image class="new_images" src="https://div.buy315.com.cn/xcx_imgs/xiangou.png"></image>
 		  </view>
 		  <view >
 		    <view class="shop_1" v-for="(item,index) in newlist" :key='index' >
@@ -45,8 +45,12 @@
 		          <view class="shop_t4">{{item.label_name}}</view>
 		        </view>
 		      </view>
-		      <view class="shop_gou" @click="jrShoppingCart(1,item,item.group_id,'dh'+item.group_id+'-'+item.barcode_id)">
+			  
+		      <view v-if="pointer==true" class="shop_gou" @click="jrShoppingCart(1,item,item.group_id,'dh'+item.group_id+'-'+item.barcode_id)">
 				  <image class="shop_moreimg" src="https://div.buy315.com.cn/xcx_imgs/jia.png" mode=""></image>
+			  </view>
+			  <view v-else class="shop_gou" @click="tips_xiangou">
+					<image class="shop_moreimg" src="https://div.buy315.com.cn/xcx_imgs/jia.png" mode=""></image>
 			  </view>
 		    </view>
 		  </view>
@@ -58,33 +62,22 @@
 			 </view>
 			 <view class="active_footer">
 			   <view class="active_rules">
-			 	<view style="color: #FE0000;">参与对象</view>
-				<view>每日菜场首次登录用户</view>
-				<view style="color: #FE0000;">参与城市</view>
-				<view>长春</view>
-				<view style="color: #FE0000;">使用范围</view>
-				<view>在指定时间、指定商品品类下的商品可使用，详见优惠券说明。</view>
-				<view style="color: #FE0000;">如何获得</view>
-				<view>上述城市用户首次登录每日菜场用户，即可获得。</view>
-				<view style="color: #FE0000;">如何查看</view>
-				<view>打开每日菜场小程序→“我的”→“优惠券”即可查看。</view>
-				<view style="color: #FE0000;">使用规则</view>
-				
-				
-				<view>①每个订单只能使用一张优惠券，不找零、不兑换现金。</view>
+			 	<view style="color: #FE0000;">使用规则</view>
+				<view>①每个订单每天只能使用一张同种类优惠券，不找零、不兑换现金。</view>
 				<view>②优惠券有使用时间、品类及金额限制，需要在对应品类下且满足使用金额后方可使用。</view>
-				<view>③同一登录账号、同一手机号、同一终端设备号、同一支付账号、同一IP地址或其他合理显示为同一用户的情形，均视为同一用户，仅限领取一次。</view>
+				<view>③同一登陆账号、同一手机号、同一终端设备号、同一支付账号、同一IP地址或其他合理显示为同一用户的情形，均视为同一用户，仅限领取一次。</view>
 				<view>④若发生取消订单，系统将自动返还相关优惠券（优惠券有效期不变）；若发生退款退货，仅退回该商品实际支付金额，优惠券抵扣部分不予退回。</view>
 				<view>⑤若通过不正当手段获取，或存在恶意套利、作弊等其他不诚信行为，每日菜场商城有权撤销该用户优惠券资格，并废止优惠券。</view>
-				
 				<view style="color: #FE0000;">首单一元购</view>
+				
 				<view>①本活动仅限通过“新人专享”区进行下单；</view>
 				<view>②本活动1元商品每个用户仅限参与一次，且购买1件，若购买多件，超出部分恢复原价。</view>
 				<view>③用户选定1元商品后，需与其他商品共同下单，若仅下单一元商品则不予配送。</view>
+				<view>①每个订单只能使用一张优惠券，不找零、不兑换现金。</view>
 			   </view>
 			 </view>
 		 </view>
-		<view class="Suspension" @click="goGwc">
+		<view class="Suspension" @click="gotogouwuc">
 				<view><image class="Suspensionimg" src="https://div.buy315.com.cn/xcx_imgs/gouwuche.png"></image></view>
 		</view>
 
@@ -130,7 +123,9 @@
 					barcode_id:'',
 					
 				}],
-				newCouponList:[]
+				newCouponList:[],
+				pointer:true
+				
 			}
 		},
 		created() {
@@ -138,6 +133,7 @@
 			this.getnewCoupon();
 		},
 		onLoad() {	
+			this.getnewgoodsid();
 			console.log(this.xshopInfo)
 			// 获取系统高度
 			uni.getSystemInfo({
@@ -150,11 +146,36 @@
 			console.log('45645646')
 		},
 		methods: {
-			goGwc() {
-				uni.switchTab({//reLaunch 这是直接进入，没有滑动效果。switchTab有滑动效果
-					url:"../shoppingcart/shoppingcart?acom_id="+this.sData.acom_id
+			// 获取新人商品id
+			getnewgoodsid() {
+				
+				var xarr = {};
+				var xpdata = url.getSignStr(xarr);
+				uni.request({
+					url: url.websiteUrl + '/api_v2/stores/getnewpeoplegoods',
+					method: 'POST',
+					dataType: 'json',
+					header: {
+						'content-type': 'application/x-www-form-urlencoded'
+					},
+					data: xpdata,
+					success: res => {
+						
+						this.newpeopleid = res.data.data
+						console.log('this.newpeopleid',this.newpeopleid)
+					}
+				});
+			},
+			gotogouwuc(){
+				uni.switchTab({
+					url:'/pages/shoppingcart/shoppingcart'
 				})
 			},
+			// goGwc() {
+			// 	uni.switchTab({//reLaunch 这是直接进入，没有滑动效果。switchTab有滑动效果
+			// 		url:"../shoppingcart/shoppingcart?acom_id="+this.sData.acom_id
+			// 	})
+			// },
 			gotoyouhuiq(){
 				uni.navigateTo({
 					url:'/pagesb/center/xjj_list'
@@ -231,6 +252,44 @@
 					url:"../goods_details/goods_details?barcode_id=" + item.barcode_id
 				})
 			},
+			shopCart(barcode_id,type,v){
+				//console.log(v);
+				var glist = [];
+				glist[0] = {
+					barcode_id:barcode_id,
+					type:type,
+				}
+				this.amintiond_list = glist;
+				uni.getSystemInfo({
+					success: res => {
+						this.wheight = res.windowHeight+60;
+					}
+				});
+				//console.log(this.wheight);
+				var animation = uni.createAnimation({
+					duration: 400,
+					 transformOrigin: "50% 50%",
+					 timingFunction: "linear",
+					 delay: 0
+				})
+				animation.translate(0,0).step({duration: 10})
+				this.animationData = animation.export()
+				let view = uni.createSelectorQuery().select("#"+v);
+				view.boundingClientRect(data => {
+				    // animation.translate(-20,-20).step({duration: 50}).translate(-40,-10).step({duration: 50}).translate(-data.left+240,this.wheight-data.bottom).step({duration: 150})
+				    this.animationData = animation.export()
+				}).exec();				
+				setTimeout(function() {
+				  this.amintiond_list = [];
+				}.bind(this), 400)
+				
+			},
+			// tips_xiangou(){
+			// 	uni.showToast({
+			// 		title:'购买的数量已经超出了总数',
+			// 		icon:'none'
+			// 	})
+			// },
 			jrShoppingCart(num_s, goods_info, type, v) {
 				 if (this.memberinfo.length == 0) {
 				      uni.navigateTo({
@@ -246,24 +305,45 @@
 			     });
 				//num_s参数   0和1，0为减，1为加
 				//goods_info参数  一维数组				
-				//console.log(goods_info);
+				console.log(goods_info,'%%%%%%%%%%%%%%%%%%%%%');
+				
 				//console.log(goods_info);
 				//if(num_s==1){
 				//console.log(123);
 				//return;
 				//}
 				//限购数量和购物车数量对比
-				for (let ixs in this.shoppingCarts) {
-					if (this.shoppingCarts[ixs].barcode_id == goods_info.barcode_id) {
-						if (goods_info.astrict_num !== '' && ((parseFloat(this.shoppingCarts[ixs].num) + 1) > goods_info.astrict_num)) {
+				for(let ixs in this.newshopcart) {
+					if(this.newshopcart[ixs].barcode_id == goods_info.barcode_id) {
+						if(this.shoppingCarts[ixs].num>0){
 							uni.showToast({
-								icon: 'none',
-								title: '商品【' + this.shoppingCarts[ixs].goods_title + '】限购' + goods_info.astrict_num + goods_info.unit
-							});
-							return;
+								title:'新人的商品只能购买一件哦',
+								icon:'none'
+							})
+							return false
 						}
 					}
+					console.log(this.newshopcart.length,'长度==================')
+					if(this.newshopcart.length>0){
+						uni.showToast({
+							title:'新人的商品只能购买一件哦',
+							icon:'none'
+						})
+						return false
+					}
 				}
+				
+				// for (let ixs in this.shoppingCarts) {
+				// 	if (this.shoppingCarts[ixs].barcode_id == goods_info.barcode_id) {
+				// 		if (goods_info.astrict_num !== '' && ((parseFloat(this.shoppingCarts[ixs].num) + 1) > goods_info.astrict_num)) {
+				// 			uni.showToast({
+				// 				icon: 'none',
+				// 				title: '商品【' + this.shoppingCarts[ixs].goods_title + '】限购' + goods_info.astrict_num + goods_info.unit
+				// 			});
+				// 			return;
+				// 		}
+				// 	}
+				// }
 				//如果重复，查询下重复的商品在购车的数量
 				var snum = 0;
 				for (let ix in this.shoppingCarts) {
@@ -323,8 +403,15 @@
 				}
 				
 				this.shoppingCarts = glistx.concat(glist);
+				this.newshopcart = glistx.concat(glist);
 				//console.log(this.shoppingCarts);
 				//console.log(this.shoppingCarts);
+				// 写入缓存
+				uni.setStorage({
+					key: 'newshopcart',
+					data: this.shoppingCarts,
+					success: function() {}
+				});
 				//写入缓存
 				uni.setStorage({
 					key: 'shoppingCarts',
@@ -338,6 +425,20 @@
 					this.shopCart(goods_info.barcode_id, type, v);
 				}
 				//console.log(this.shoppingCarts);
+			},
+			sumShoppingCartNum(){
+				//合计购物车数量
+				var snum = 0;
+				for(let i in this.shoppingCarts){
+					if(this.shoppingCarts[i].stores_id==this.xshopInfo.store.stores_id){
+						snum+=parseFloat(this.shoppingCarts[i].num);
+					}					
+				}
+				this.shoppingCartNum = snum;
+				uni.setTabBarBadge({
+				  index: 2,
+				  text: ''+snum+'',
+				})
 			},
 			goDetails(s_itme, group_id, gtype) {
 				//console.log(s_itme);

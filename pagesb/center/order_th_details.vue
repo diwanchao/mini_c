@@ -9,7 +9,7 @@
 			</view>
 		</view>
 		<!--商品信息 -->
-		<view class="shop" v-for="xitem in goodsList" >
+	<!-- 	<view class="shop" v-for="xitem in goodsList" >
 		 <view class="shop_al">
 		   <view class='shop_mc'>商品信息</view>
 		 </view>
@@ -25,22 +25,22 @@
 		         <view class="shop_yj">￥{{xitem.retail_price}}</view>
 		         <view class="shop_sl">x{{parseInt(xitem.num)}}</view>
 		       </view>
-		       <!-- <view class="biaoqian">
+		       <view class="biaoqian">
 		         <view class="biaoq_text">一刻达</view>
 		         <view class="biaoq_text">满30减5</view>
-		       </view> -->
+		       </view>
 		     </view>
 		   </view>
 		 </view>
-		</view>
+		</view> -->
 		<!-- 底部信息 -->
-		<view class="ddbh">
+<!-- 		<view class="ddbh">
 			  <view>订单编号：<text>{{yemxList.order_code}}</text></view>
 			  <view>下单时间：<text>{{yemxList.order_time}}</text></view>
 			  <view v-if="yemxList.order_type == 1">支付方式：<text>在线支付</text></view>
 			  <view v-else>支付方式：<text>货到付款</text></view>
-			 </view>
-			<view class="ddbhss">
+		</view> -->
+<!-- 			<view class="ddbhss">
 			  <view class="xinxi">
 			    <view>商品总额</view>
 			    <view class="xinxi_je">￥{{yemxList.price}}</view>
@@ -49,13 +49,13 @@
 			    <view>优惠金额</view>
 			    <view class="xinxi_je">￥{{yemxList.discount_money}}</view>
 			  </view>
-		<!-- 	  <view class="xinxi">
+			  <view class="xinxi">
 			    <view>运费</view>
 			    <view class="xinxi_je">￥0.00</view>
-			  </view> -->
+			  </view>
 			  <view class="sfk">实付款:<text>￥{{yemxList.price}}</text></view>
-			 </view>
-		<!-- <view class="x12">
+			 </view> -->
+<!-- 		<view class="x12">
 			<view class="x12 bg-white padding-big margin-top">
 				
 					<view class="x6" style="width: 100upx;">

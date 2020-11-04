@@ -269,8 +269,7 @@
 			}
 		},
 		onShow:function(){//返回时接收子页面的传参
-		this.getaddressziti();
-		console.log('走这个调用啦-----------------')
+
 				uni.showLoading({
 					title: '加载中'
 				});
@@ -303,6 +302,8 @@
 				// #endif
 				this.zf = 2;
 				this.getAddress();
+				this.getaddressziti();
+				console.log('this.getaddressziti-----走这个调用啦',)
 				//console.log(currPage.data.psDate);
 		},
 		onLoad:function(data){
@@ -377,19 +378,31 @@
 					url:"../goods_details/address_list"
 				})
 			},
-			getaddressziti(){
-				if(this.onlyziqu){
-				console.log('难道是没有接到数据',this.onlyziqu)
-					for(let i = 0 ; i>this.onlyziqu ; i++){
-						console.log(i,'这个i打印的准不准啥也不是')
-						if( i > 0){
-							this.yikeda == false
-						}else{
-							return
-						}
-					}
-				}
-			},
+	
+			// getaddressziti(){
+			// 	console.log('this.onlyziqu------------',this.onlyziqu)
+			// 	var ziqu = this.onlyziqu
+			// 	console.log(this.yikeda);
+			// 	for (let index of ziqu.keys()){
+			// 	    console.log(index);
+					
+			// 		if(index>0){
+			// 			this.yikeda == false
+			// 			console.log(this.yikeda,'%%%%%%%%%%%%%%%%%');
+			// 		}
+					
+			// 	}
+			// },
+			// getaddressziti(){
+			// 	console.log('this.onlyziqu------------',this.onlyziqu)
+			// 	var ziqu = this.onlyziqu
+			// 	function ziqu(first,...ziqu){
+				
+			// 		for(let val=0; val<ziqu.length;val++){
+			// 			console.log(val+' '+'常用的 for循环') // 0-6 便利出下标
+			// 		}
+			// 		}
+			// },
 			//查询是否显示自提
 			
 			setZt(){

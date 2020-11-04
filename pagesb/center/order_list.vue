@@ -44,7 +44,7 @@
 							<image class="boximg1" v-else  :src="item.imgs_original"></image>
 							</view>
 							<view v-if="xid ==4" class="text2">共{{xitme.nums}}件商品</view>
-							<!-- <view  class="text2">共{{xitme.nums}}件商品</view> -->
+							<view  class="text2">共{{xitme.nums}}件商品</view>
 							
 						</view>
 						<view class="boxBtom">
@@ -53,9 +53,10 @@
 							<view class="boxstatus" >
 							 <!-- <view class="right" v-if="">确认收货</view>
 							 <view class="right" bindtap="getClickToast">催货</view> -->
-							 <view class="right"v-if="xitme.status_name !== '正常'">{{xitme.status_name}} </view>
+							 <view class="right" v-if="xitme.status_name !== '正常'">{{xitme.status_name}} </view>
 							 <view class="right" v-if="xitme.refund_status == '未审核'">{{xitme.refund_status}}</view>
-							 <view class="right" @click="tuiHuo(xitme)" v-if='xitme.temp_logistics_status == 3 && xitme.order_status < 4 && xitme.temp_pay_status == 2' >我要退货 </view>
+							
+<view class="right" @click="tuiHuo(xitme)" v-if='xitme.order_status==1 && xitme.status_name == "正常" && xitme.temp_type==1 && xitme.temp_pay_status ==2 && xitme.temp_logistics_status==3 && xitme.refund_status == "未审核" '>我要退货</view>
 							 <!-- <view class="right" @click="gopl(xitme.order_code)" v-if="xitme.to_pj==1" >去评价</view> -->
 							 <!-- <view class="right" v-if="xid==3 && xitme.to_pj==2" >已评价</view> -->
 							 <view class="right rights" @click="goPay(xitme.order_code)" v-if="xitme.to_pay==1" >去支付</view>
@@ -215,8 +216,8 @@
 				// 	})
 				if (this.xid == 4) {
 					uni.navigateTo({
-						// url: "order_details?order_id=" + item.order_id + "&order_code=" + item.order_code
-						url: "order_th_details?refund_id=" + item.refund_id
+						url: "order_details?order_id=" + item.order_id + "&order_code=" + item.order_code
+						// url: "order_th_details?refund_id=" + item.refund_id
 					})
 					return;
 				} else {

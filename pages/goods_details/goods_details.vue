@@ -501,46 +501,6 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 				 this.newkuan = (Math.floor(100/400*10000) / 100.00 + "%")
 				 console.log(this.newkuan,'新的宽值')
 			},
-		jrShoppingCart(xj,xbarcode_id,type,v){
-			//console.log(this.goodslist);
-			if(xj==2){					
-				//限购数量和购物车数量对比
-				for(let ixs in this.goodslist){
-					if(this.goodslist[ixs].barcode_id==xbarcode_id){
-						if(this.goodslist[ixs].astrict_num !== '' && ((parseFloat(this.goodslist[ixs].num)+1) > this.goodslist[ixs].astrict_num)){
-							uni.showToast({
-								icon: 'none',
-								title: '商品【'+this.goodslist[ixs].goods_title+'】限购'+this.goodslist[ixs].astrict_num+this.goodslist[ixs].unit,
-							});
-							return;
-						}
-					}					
-				}
-			}
-			//console.log(xbarcode_id);
-			var list = [];
-			var mi = 0;
-			for (var i in this.goodslist) {
-				if(this.goodslist[i].barcode_id==xbarcode_id && this.goodslist[i].stores_id==this.xshopInfo.store.stores_id && xj==1){
-					this.goodslist[i].num = parseFloat(this.goodslist[i].num)-1;
-					this.goodslist[i].bzf = (Math.ceil(parseFloat(this.goodslist[i].num)/parseFloat(this.goodslist[i].pack_num))*parseFloat(this.goodslist[i].pack_money)).toFixed(2);
-					if(this.goodslist[i].num<=0){
-						this.goodslist.splice(i,1);
-					}						
-				}else if(this.goodslist[i].barcode_id==xbarcode_id && this.goodslist[i].stores_id==this.xshopInfo.store.stores_id && xj==2){
-					this.goodslist[i].num = parseFloat(this.goodslist[i].num)+1;
-					this.goodslist[i].bzf = (Math.ceil(parseFloat(this.goodslist[i].num)/parseFloat(this.goodslist[i].pack_num))*parseFloat(this.goodslist[i].pack_money)).toFixed(2);
-				}
-			}
-			//console.log(this.goodslist);
-			this.xzAll();
-			this.xhc();
-			this.sumShoppingCartNum();
-			// if(xj==2){
-			// 	//调取动画效果
-			// 	this.shopCart(xbarcode_id,type,v);
-			// }
-		},
 			
 			get_xxb() { //获取希希贝
 				//获取信息
@@ -1222,10 +1182,6 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 					});
 					return;
 				}
-				uni.showToast({
-					title: '加入成功',
-					duration: 1000
-				});
 				//console.log(this.goodsinfo);
 				var xxx={
 					stores_id:this.xshopInfo.store.stores_id,
@@ -1249,22 +1205,51 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 				this.jrShoppingCart(1,xxx);
 			},
 			jrShoppingCart(num_s,goods_info){
+				console.log('***********************')
+				
 				//num_s参数   0和1，0为减，1为加
 				//goods_info参数  一维数组
 				//console.log(goods_info);
 				//console.log(this.shoppingCarts);return;
 				//限购数量和购物车数量对比
-				for(let ixs in this.shoppingCarts){
-					if(this.shoppingCarts[ixs].barcode_id==goods_info.barcode_id){
-						if(goods_info.astrict_num !== '' && ((parseFloat(this.shoppingCarts[ixs].num)+1) > goods_info.astrict_num)){
-							uni.showToast({
-							    icon: 'none',
-							    title: '商品【'+this.shoppingCarts[ixs].goods_title+'】限购'+goods_info.astrict_num+goods_info.unit
-							});
-							return;
+				if(this.isNew==true){
+					for(let ixs in this.newshopcart) {
+						if(this.newshopcart[ixs].barcode_id == goods_info.barcode_id) {
+							if(this.newshopcart[ixs].num>0){
+								uni.showToast({
+									title:'新人的商品只能购买一件哦',
+									icon:'none'
+								})
+								return false
+							}
 						}
-					}					
+						console.log(this.newshopcart.length,'长度==================')
+						if(this.newshopcart.length>0){                                       
+							uni.showToast({
+								title:'新人的商品只能购买一件哦',
+								icon:'none'
+							})
+							return false
+						}
+					}
+				}else{
+					for(let ixs in this.shoppingCarts){
+						if(this.shoppingCarts[ixs].barcode_id==goods_info.barcode_id){
+							if(goods_info.astrict_num !== '' && ((parseFloat(this.shoppingCarts[ixs].num)+1) > goods_info.astrict_num)){
+								uni.showToast({
+								    icon: 'none',
+								    title: '商品【'+this.shoppingCarts[ixs].goods_title+'】限购'+goods_info.astrict_num+goods_info.unit
+								});
+								return;
+							}
+						}					
+					}
 				}
+				uni.showToast({
+					title: '加入成功',
+					duration: 1000
+				});
+			
 				//如果重复，查询下重复的商品在购车的数量
 				var snum = 0;
 				for(let ix in this.shoppingCarts){
@@ -1323,13 +1308,18 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 				}
 				//console.log(glist);
 				this.shoppingCarts = glistx.concat(glist);
-				
+				this.newshopcart = glistx.concat(glist);
 				//写入缓存
 				uni.setStorage({
 					key: 'shoppingCarts',
 					data:this.shoppingCarts,
 					success: function () {
 					}
+				});
+				uni.setStorage({
+					key: 'newshopcart',
+					data: this.shoppingCarts,
+					success: function() {}
 				});
 				this.sumShoppingCartNum();
 				//console.log(this.shoppingCarts);

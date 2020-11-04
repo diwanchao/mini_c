@@ -19,7 +19,7 @@
 		      </view>
 		    </view>
 		    <view class="text9" @click="jrShoppingCart(1,item,item.group_id,'dh'+item.group_id+'-'+item.barcode_id)">
-		      <!-- <view class="tetx7">{{item.shengy}}</view> -->
+		      <view class="tetx7">{{item.shengy}}</view>
 		      <view class="text8"><image class="shop_img01" src="https://div.buy315.com.cn/xcx_imgs/jia.png"></image></view>
 		    </view>
 		  </view>
