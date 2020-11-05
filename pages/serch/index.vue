@@ -14,10 +14,10 @@
 				搜索
 			</view>
 		</view> 
-		<viwe style="margin-top: 120upx;">
+<!-- 		<viwe style="margin-top: 120upx;">
 			<viwe class="zanwushik"><image class="imgthis" src="../../static/hui.png"></image></viwe>
 			<viwe class="textwenzi">暂未搜索到商品</viwe>
-		</viwe>
+		</viwe> -->
     </view>
 </template>
 <script>import url from '../../main.js';

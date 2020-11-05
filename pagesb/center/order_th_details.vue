@@ -5,8 +5,9 @@
 		<view>
 			<view class="return_bg">
 				<view>退款/售后受理中</view>
-				<view></view>
+				<uni-steps :options="[{title: '受理中'}, {title: '银行受理'}, {title: '已完成'}]" :active="status"></uni-steps>
 			</view>
+		
 		</view>
 		<!--商品信息 -->
 	<!-- 	<view class="shop" v-for="xitem in goodsList" >
@@ -92,7 +93,9 @@
     </view>
 </template>
 <script>import url from '../../main.js';
+import uniSteps from '@/components/uni-steps/uni-steps.vue'
 	export default {
+		 components: {uniSteps},
 		//#ifdef MP-WEIXIN
 		onShareAppMessage(res) {//分享
 			try {//从本地缓存中同步获取指定 key 对应的内容。
@@ -119,6 +122,7 @@
 			datanum:0,
 			refund_id:0,
 			send_info:[],
+			status:'',
 			config:{
 				title: '订单详情',
 				color: '#ffffff',

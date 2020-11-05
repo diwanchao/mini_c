@@ -415,6 +415,7 @@
 								data: pdata,
 								success: res => {
 									if (res.data.status == 'y') {
+										uni.removeStorageSync('newshopcart');
 										uni.redirectTo({
 											url: "order_list?status=0"
 										})
@@ -458,6 +459,7 @@
 							})
 						} else {
 							console.log('2222222222')
+							uni.removeStorageSync('newshopcart');
 							uni.showToast({
 								title: '订单超时已经取消啦',
 								duration: 1000,

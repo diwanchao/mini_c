@@ -17,6 +17,7 @@
 			</view>
 			<!-- 新人专享 -->
 			<view v-if="newcomer==true">
+				<!--  -->
 				<view class="new" @click="gotonewlist" >
 					<view class="bgnew"><image class="new01" src="https://div.buy315.com.cn/xcx_imgs/newbg.png"></image></view>
 					<view class="newlist">
@@ -44,7 +45,8 @@
 				<view class="text2">更多优惠 > </view>
 		</view> 
 		<!-- 轮播图 -->
-		<view class="new" v-else>
+		<view class="new" v-else >
+			<!--  -->
 			<view class="bgnew">
 				<view v-if="bannerLen>0" class="lunbotu">
 					<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
@@ -102,7 +104,7 @@
 				<view><image class="img4" src="https://div.buy315.com.cn/xcx_imgs/tongzhi.png" ></image></view>
 				<text class="text7">您有一笔待付款订单未支付 请尽快支付</text>
 			</view> -->
-			<view class="thingstwo">
+			<view class="thingstwo" :style="{display:wanandmiao}">
 				<view class="things_foot">
 					<view class="things_foot1"  :style="{display:miaosha}" >
 						<view class="things_foot2" @click="gotolimited">
@@ -246,6 +248,7 @@
 						name: '',
 						desc: '',
 					},
+					wanandmiao:'block',
 					markers: '',
 					index:1,
 					login: false,
@@ -552,16 +555,16 @@
 								console.log(res,'再次调用成功');
 								if (res.confirm){
 									console.log('用户点击确认')
-									// uni.openSetting({
-									// 	success: (res) => {
-									// 		console.log(res,'用户确认成功','%%%%%%%%%%%%%%%%%%%%%%%')
-									// 	}
-									// })
+									uni.openSetting({
+										success: (res) => {
+											console.log(res,'用户确认成功','%%%%%%%%%%%%%%%%%%%%%%%')
+										}
+									})
 								}else{
 									console.log('用户点击取消了')
-									// uni.redirectTo({
-									// 	url:'/pages/login/location'
-									// })
+									uni.redirectTo({
+										url:'/pages/login/location'
+									})
 								}
 							}
 						})
@@ -916,8 +919,7 @@
 						success: res => {
 							console.log(res.data,'晚间菜场')
 							this.evenimglist = res.data.data
-							if(res.data.data.length != 0){
-								// this.eveningList = res.data.data.data;
+							if(this.evenimglist.length != 0){
 								this.eveningList_midd = res.data.data.data;
 							}
 						setTimeout(function(){
@@ -933,31 +935,25 @@
 			pd_mshewanjian(){
 				console.log(this.eveningList_midd,'开始执行晚间菜场this.eveningList')
 				console.log(this.spikeList_midd,'开始执行限时秒杀this.spikeList_midd')
-				if(this.eveningList_midd.length==0){
-					console.log('晚间菜场this.eveningList_midd为空')
+				if(!this.eveningList_midd){
 					this.wanjian = 'none'
-				}else if(this.spikeList_midd.length==0){
-					console.log('限时秒杀this.spikeList为空')
+				}
+				if(this.spikeList_midd.length==0){
 					this.miaosha ='none'
 				}
-				if(this.eveningList_midd.length > 0 && this.spikeList_midd.length > 0){
+				if(!this.eveningList_midd && this.spikeList_midd.length==0){
+					this.wanandmiao = 'none'
+				}
+				if((this.eveningList_midd && this.eveningList_midd.length > 0) && (this.spikeList && this.spikeList_midd.length > 0)){
 					this.eveningList = this.eveningList_midd.slice(0,2);
 					var spikelenght = this.spikeList_midd
 					this.spikeList = spikelenght.slice(0,2);
-					// this.spikeList = this.miaosha
-					console.log(this.eveningList_midd,'晚间菜场截断成功')
-					console.log(this.spikeList,'限时秒杀截断成功')
 				}
-				if(this.eveningList_midd.length==0 && this.spikeList_midd.length>4){
-					console.log(this.spikeList_midd,'限时秒杀4个成功')
+				if((!this.eveningList_midd) && (this.spikeList && this.spikeList_midd.length>0)){
 					this.spikeList = this.spikeList_midd.slice(0,4);
-				}else if(this.eveningList_midd.length>4 && this.spikeList_midd.length==0){
-					console.log(this.eveningList_midd,'晚间菜场4个成功')
-					this.eveningList = this.eveningList_midd .slice(0,4);
 				}
-				if(this.eveningList_midd.length==0 && this.spikeList_midd.length==0){
-					this.wanjian = 'none'
-					this.miaosha ='none'
+				if((this.eveningList_midd && this.eveningList_midd.length>0) && (this.spikeList && this.spikeList_midd.length==0)){
+					this.eveningList = this.eveningList_midd .slice(0,4);
 				}
 			},
 			// 晚间菜场
@@ -2299,6 +2295,9 @@
 										data: res.data.data,
 										success: function() {}
 									});
+									if(this.newcomer) {
+										uni.removeStorageSync('newshopcart'); // 清空新人订单
+									}
 									uni.setStorage({
 										key: 'shoppingCarts',
 										data: [],
@@ -2392,6 +2391,9 @@
 										data: [],
 										success: function() {}
 									});
+									if(this.newcomer) {
+										uni.removeStorageSync('newshopcart'); // 清空新人订单
+									}
 									if (res.data.data.address.length == 0) {
 										xxx.maddress = res.data.data.current;
 									} else {

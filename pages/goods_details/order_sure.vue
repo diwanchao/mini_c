@@ -269,7 +269,10 @@
 			}
 		},
 		onShow:function(){//返回时接收子页面的传参
-
+				const ziqu = uni.getStorageSync('daodianziti')
+				if(ziqu){
+					this.yikeda=false
+				}
 				uni.showLoading({
 					title: '加载中'
 				});
@@ -302,8 +305,6 @@
 				// #endif
 				this.zf = 2;
 				this.getAddress();
-				this.getaddressziti();
-				console.log('this.getaddressziti-----走这个调用啦',)
 				//console.log(currPage.data.psDate);
 		},
 		onLoad:function(data){

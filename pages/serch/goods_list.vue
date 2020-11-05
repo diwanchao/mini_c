@@ -39,9 +39,9 @@
 				</view>
 			</view>
 		</view>
-		<view class="x12 text-center padding-big" v-if="lim==0">{{lim_info}}
-			<viwe style="margin-top: 120upx;">
-				<viwe class="zanwushik"><image class="imgthis" src="../../static/hui.png"></image></viwe>
+		<view class="x12 text-center " v-if="lim==0">{{lim_info}}
+			<viwe >
+				<viwe class="zanwushik"><image class="imgthis" src="../../static/hui.png" style="marign-top::;"></image></viwe>
 				<viwe class="textwenzi">暂未搜索到商品</viwe>
 			</viwe>
 		</view>
@@ -931,9 +931,9 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 					data:pdata,
 					success: res => {
 							//console.log(res.data);
-							if(res.data.data.goods.length == 0){
-								this.lim_info="没有搜索到商品";
-							}
+							// if(res.data.data.goods.length == 0){
+							// 	this.lim_info="没有搜索到商品";
+							// }
 								this.lim = res.data.total;
 								var max_page = res.data.total/this.limit;
 								if(max_page<=this.page){
@@ -1133,5 +1133,25 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 		padding-left: 40upx;
 		box-sizing: border-box;
 		width: 80%;
+	}
+	.textwenzi{
+		font-size: 24upx;
+		color: #999999;
+		text-align: center;
+		width: 750upx;
+		display: flex;
+		justify-content: center;
+		margin-top: 180upx;
+	}
+	.zanwushik{
+		width: 750upx;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+	}
+	.imgthis{
+		height: 243upx;
+		width: 200upx;
+		margin: 0 auto;
 	}
 </style>

@@ -46,7 +46,7 @@
 		        </view>
 		      </view>
 			  
-		      <view v-if="pointer==true" class="shop_gou" @click="jrShoppingCart(1,item,item.group_id,'dh'+item.group_id+'-'+item.barcode_id)">
+		      <view v-if="pointer==true" class="shop_gou" @click="jrShoppingCart(1,item,item.group_id,'dh'+item.group_id+'-'+item.barcode_id,item.barcode_id)">
 				  <image class="shop_moreimg" src="https://div.buy315.com.cn/xcx_imgs/jia.png" mode=""></image>
 			  </view>
 			  <view v-else class="shop_gou" @click="tips_xiangou">
@@ -290,14 +290,29 @@
 			// 		icon:'none'
 			// 	})
 			// },
-			jrShoppingCart(num_s, goods_info, type, v) {
+			jrShoppingCart(num_s, goods_info, type, v, barcode_id) {
 				 if (this.memberinfo.length == 0) {
 				      uni.navigateTo({
 				        url: "/pages/login/login"
 				      })
 				      return;
 				    }
-				     
+				const newshopcart =  uni.getStorageSync('newshopcart')
+				if(newshopcart) {
+					if(newshopcart === barcode_id){
+						uni.showToast({
+							title:'您已经下单过该商品了',
+							icon: 'none'
+						})
+					} else {
+						uni.showToast({
+							title: '您已经下单过别的商品了',
+							icon: 'none'
+						})
+					}
+					return false;
+				}
+				
 			uni.showToast({
 			      title: '加入成功',
 			      duration: 1000,
@@ -313,25 +328,25 @@
 				//return;
 				//}
 				//限购数量和购物车数量对比
-				for(let ixs in this.newshopcart) {
-					if(this.newshopcart[ixs].barcode_id == goods_info.barcode_id) {
-						if(this.shoppingCarts[ixs].num>0){
-							uni.showToast({
-								title:'新人的商品只能购买一件哦',
-								icon:'none'
-							})
-							return false
-						}
-					}
-					console.log(this.newshopcart.length,'长度==================')
-					if(this.newshopcart.length>0){
-						uni.showToast({
-							title:'新人的商品只能购买一件哦',
-							icon:'none'
-						})
-						return false
-					}
-				}
+				// for(let ixs in this.newshopcart) {
+				// 	if(this.newshopcart[ixs].barcode_id == goods_info.barcode_id) {
+				// 		if(this.shoppingCarts[ixs].num>0){
+				// 			uni.showToast({
+				// 				title:'新人的商品只能购买一件哦',
+				// 				icon:'none'
+				// 			})
+				// 			return false
+				// 		}
+				// 	}
+				// 	console.log(this.newshopcart.length,'长度==================')
+				// 	if(this.newshopcart.length>0){
+				// 		uni.showToast({
+				// 			title:'新人的商品只能购买一件哦',
+				// 			icon:'none'
+				// 		})
+				// 		return false
+				// 	}
+				// }
 				
 				// for (let ixs in this.shoppingCarts) {
 				// 	if (this.shoppingCarts[ixs].barcode_id == goods_info.barcode_id) {
@@ -407,11 +422,7 @@
 				//console.log(this.shoppingCarts);
 				//console.log(this.shoppingCarts);
 				// 写入缓存
-				uni.setStorage({
-					key: 'newshopcart',
-					data: this.shoppingCarts,
-					success: function() {}
-				});
+				uni.setStorageSync('newshopcart', barcode_id);
 				//写入缓存
 				uni.setStorage({
 					key: 'shoppingCarts',

@@ -245,7 +245,7 @@
 							<view style="font-size: 24upx;">回首页</view>
 						</view>
 					</view>
-					<view class="x6 text-white float-right text-center gouwuche_two"   v-if="goodsinfo.sale_num !== 0" @click="addToCart">
+					<view class="x6 text-white float-right text-center gouwuche_two" data- v-if="goodsinfo.sale_num !== 0" @click="addToCart">
 						加入购物车
 					</view>
 				</view>
@@ -1115,6 +1115,26 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 				return;
 			},
 			addToCart() {
+				// 判断新人是否添加过商品
+				const barcodeId = uni.getStorageSync('newshopcart');
+				const currentBarCodeId = this.goodsinfo.barcode_id;
+				if(this.isNew){
+					if(barcodeId) {
+						if(barcodeId === currentBarCodeId) {
+							uni.showToast({
+								title: '您已经添加过该商品了',
+								icon: 'none'
+							})
+						} else {
+							uni.showToast({
+								title: '您已经添加过其他商品了',
+								icon: 'none'
+							})
+						}
+						return false;
+					}
+				}
+	
 				//加入购物前先检查有没有选择规格
 				if(this.choice.choice_spec.length > 0){
 					var selectArrx = [];
@@ -1200,8 +1220,7 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 					remark:bjRemark,
 					sgt_ids:sgt_ids,
 				};
-				//console.log(xxx);
-				//console.log(this.goodsinfo);return;
+				uni.setStorageSync('newshopcart', currentBarCodeId);
 				this.jrShoppingCart(1,xxx);
 			},
 			jrShoppingCart(num_s,goods_info){
@@ -1212,39 +1231,40 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 				//console.log(goods_info);
 				//console.log(this.shoppingCarts);return;
 				//限购数量和购物车数量对比
-				if(this.isNew==true){
-					for(let ixs in this.newshopcart) {
-						if(this.newshopcart[ixs].barcode_id == goods_info.barcode_id) {
-							if(this.newshopcart[ixs].num>0){
-								uni.showToast({
-									title:'新人的商品只能购买一件哦',
-									icon:'none'
-								})
-								return false
-							}
-						}
-						console.log(this.newshopcart.length,'长度==================')
-						if(this.newshopcart.length>0){                                       
-							uni.showToast({
-								title:'新人的商品只能购买一件哦',
-								icon:'none'
-							})
-							return false
-						}
-					}
-				}else{
-					for(let ixs in this.shoppingCarts){
-						if(this.shoppingCarts[ixs].barcode_id==goods_info.barcode_id){
-							if(goods_info.astrict_num !== '' && ((parseFloat(this.shoppingCarts[ixs].num)+1) > goods_info.astrict_num)){
-								uni.showToast({
-								    icon: 'none',
-								    title: '商品【'+this.shoppingCarts[ixs].goods_title+'】限购'+goods_info.astrict_num+goods_info.unit
-								});
-								return;
-							}
-						}					
-					}
-				}
+
+				// if(this.isNew==true){
+				// 	for(let ixs in this.newshopcart) {
+				// 		if(this.newshopcart[ixs].barcode_id == goods_info.barcode_id) {
+				// 			if(this.newshopcart[ixs].num>0){
+				// 				uni.showToast({
+				// 					title:'新人的商品只能购买一件哦',
+				// 					icon:'none'
+				// 				})
+				// 				return false
+				// 			}
+				// 		}
+				// 		console.log(this.newshopcart.length,'长度==================')
+				// 		if(this.newshopcart.length>0){                                       
+				// 			uni.showToast({
+				// 				title:'新人的商品只能购买一件哦',
+				// 				icon:'none'
+				// 			})
+				// 			return false
+				// 		}
+				// 	}
+				// }else{
+				// 	for(let ixs in this.shoppingCarts){
+				// 		if(this.shoppingCarts[ixs].barcode_id==goods_info.barcode_id){
+				// 			if(goods_info.astrict_num !== '' && ((parseFloat(this.shoppingCarts[ixs].num)+1) > goods_info.astrict_num)){
+				// 				uni.showToast({
+				// 				    icon: 'none',
+				// 				    title: '商品【'+this.shoppingCarts[ixs].goods_title+'】限购'+goods_info.astrict_num+goods_info.unit
+				// 				});
+				// 				return;
+				// 			}
+				// 		}					
+				// 	}
+				// }
 				uni.showToast({
 					title: '加入成功',
 					duration: 1000
@@ -1316,11 +1336,7 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 					success: function () {
 					}
 				});
-				uni.setStorage({
-					key: 'newshopcart',
-					data: this.shoppingCarts,
-					success: function() {}
-				});
+				
 				this.sumShoppingCartNum();
 				//console.log(this.shoppingCarts);
 			},

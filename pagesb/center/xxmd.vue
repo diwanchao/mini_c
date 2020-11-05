@@ -44,7 +44,7 @@
 					 <text class="address_left">仅支持自取</text>
 				    <view class="wo_address">附近地址 </view>
 				    <view>
-				      <view class="fjdizhi" v-for="(item,index) in areaList" :key="index" @click="qiehuan(item)" >{{item.stores_name}}
+				      <view class="fjdizhi" v-for="(item,index) in areaList" :key="index" @click="qiehuan(item,index)" >{{item.stores_name}}
 						<text class="address_left">{{item.distance}}km</text>
 					  </view>
 				    </view>
@@ -302,6 +302,7 @@
 										success: function () {
 										}
 									});
+									uni.removeStorageSync('daodianziti')
 								} catch (e) {
 									// error
 								}	
@@ -319,14 +320,18 @@
 
 			},
 
-			qiehuan(data){
-				//console.log(this.xshopInfo);
+			qiehuan(data,index){
+				console.log(index,'%%%%%%%%%%%%')
+				if(index){
+					uni.setStorageSync('daodianziti', true);
+				}
 				//写入缓存
 				var xxx = {
 					address:this.xshopInfo.address,
 					current:this.xshopInfo.current,
 					store:data,
 				}
+				
 				try {
 					uni.setStorageSync('xshopInfo', xxx);
 					uni.setStorageSync('sfQhStores', 2);//用来判断换了店铺是否重新加载数据，默认1或空时，不加载，2时重新加载。对应会用到分类页判断是否重新加载数据

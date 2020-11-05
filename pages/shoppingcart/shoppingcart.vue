@@ -223,7 +223,6 @@
 		},
 		onShow:function(){//返回时接收子页面的传参
 		
-	
 			try {//从本地缓存中同步获取指定 key 对应的内容。
 				const value = uni.getStorageSync('memberinfo');
 				const valuex = uni.getStorageSync('shoppingCarts');
@@ -295,12 +294,7 @@
 					success: function () {
 					}
 				});
-				uni.setStorage({
-					key: 'newshopcart',
-					data:[],
-					success: function () {
-					}
-				});
+				uni.removeStorageSync('newshopcart');
 				this.shoppingCarts = [];
 				this.newshopcart = [];
 				this.goodslist = [];
@@ -555,9 +549,22 @@
 				this.xhc();
 			},
 			//加减商品数量
-			//第一个参数1减二加
+			//第一个参数1减2加
 			//商品的唯一id
 			jrShoppingCart(xj,xbarcode_id,type,v){
+				const barcodeId = uni.getStorageSync('newshopcart');
+				if(xbarcode_id === barcodeId) {
+					if(xj == 1) {  // 减少
+						uni.removeStorageSync('newshopcart');
+					} else {  // 添加
+						uni.showToast({
+							title: '新人商品只能添加一个',
+							icon: 'none'
+						})
+						return false;
+					}
+				}
+				
 				//console.log(this.goodslist);
 				if(xj==2){					
 					//限购数量和购物车数量对比
@@ -602,12 +609,6 @@
 				//写入缓存
 				uni.setStorage({
 					key: 'shoppingCarts',
-					data:this.goodslist,
-					success: function () {
-					}
-				});
-				uni.setStorage({
-					key: 'newshopcart',
 					data:this.goodslist,
 					success: function () {
 					}
@@ -676,6 +677,15 @@
 					success: res => {
 						//console.log(res.data);return;
 						if(res.data.status=='y'){
+							// 清空购物车
+							uni.setStorage({
+								key: 'shoppingCarts',
+								data:[],
+								success: function () {
+								}
+							});
+							this.shoppingCarts = [];
+							this.goodslist = [];
 							uni.showToast({
 								title: '正在加载...',
 								icon:'none',

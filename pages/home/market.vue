@@ -3,7 +3,7 @@
 		<!--pages/index/market.wxml-->
 		  <hx-navbar :config="config"/>
 		  <view class="nav">
-		    <view class="icon_wjcc"><image class="icon_wjcc" src="https://div.buy315.com.cn/xcx_imgs/icon_wjcc.png"></image></view>
+		    <view class="icon_wjcc"><image class="icon_wjcc" src="https://div.buy315.com.cn/xcx_imgs/caichang.png"></image></view>
 		   <!-- <view class="icon_text">晚间特价：9.9三件起</view> -->
 		  </view>
 		  <view class="marth_text">
