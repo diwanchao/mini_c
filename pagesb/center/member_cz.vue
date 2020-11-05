@@ -93,12 +93,12 @@
 			  id:'3',
 			  title:'充50元',
 			}],
-			config:{
-				title: '充值金额',
-				color: '#ffffff',
-				backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-				statusBarFontColor:'#fff'
-			},
+			// config:{
+			// 	title: '充值金额',
+			// 	color: '#ffffff',
+			// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+			// 	statusBarFontColor:'#fff'
+			// },
 			}
 		},
 		onLoad:function(){

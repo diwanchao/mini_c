@@ -1,6 +1,6 @@
 <template>
 	<view style="font-size: 12pt;">
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 		<view class="add">
 		  <view class="addtext">
 		    <view class="text1">收货人</view>
@@ -151,12 +151,12 @@
 				map_address:1,//配送商城是否关闭收货地址地图选择 1否 2是 默认1
 				//psd_info:[],
 				programtype:3,
-				config:{
-					title: '编辑地址',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '编辑地址',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 			}
 		},
 		onShow:function(){

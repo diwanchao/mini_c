@@ -1,6 +1,6 @@
 <template>
 		<view>
-			<hx-navbar :config="config"/>
+			<!-- <hx-navbar :config="config"/> -->
 			<view style="position: relative;">
 				<view><image class="pointsimg" src="https://div.buy315.com.cn/xcx_imgs/my_small.png" mode=""></image></view>
 				<view class="text22">
@@ -51,12 +51,12 @@
 		//#endif
 		data() {
 			return {
-				config:{
-					title:'积分详情',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff',
-				},
+				// config:{
+				// 	title:'积分详情',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff',
+				// },
 			memberinfo:[],
 			login:false,
 			index1:0,

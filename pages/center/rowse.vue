@@ -1,13 +1,13 @@
 <template>
 	<view>
 		
-	 <hx-navbar :config="config"/>
+	 <!-- <hx-navbar :config="config"/> -->
 	<view class="_notice">
 		<view class="rowes" v-for="(item,index) in getRowselist" :key="index" >
 			<view @click="goDetails(item)">
 				<image class="rower_image" :src="item.imgs_original" mode=""></image>
 			</view>
-			<view class="_notice" @click="goDetails(item)">
+			<view class="_notice" @click="goDetails(item)" style="padding-left: 20upx;">
 				<view class="titlesss">{{item.goods_title}}</view>
 				<view class="money">
 					<view class="money_p">￥{{item.retail_price}}</view>
@@ -44,12 +44,12 @@
 	//#endif
 		data() {
 			return {
-				config:{
-					title: '浏览记录',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '浏览记录',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 				getRowselist:[
 					{
 						id:0,
@@ -253,7 +253,6 @@
 	._notice{
 		height: 150upx;
 		line-height: 75upx;
-		margin-left: 20upx;
 		box-sizing: border-box;
 		width: 100%;
 		margin-top: 20upx;

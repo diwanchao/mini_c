@@ -1,6 +1,6 @@
 <template>
 	<view>
-<hx-navbar :config="config"/>
+<!-- <hx-navbar :config="config"/> -->
 		<view v-if="xShow==true">
 			<view class="x12 bg-white" v-if="goodsinfo.imgs!=''">
 				<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" class="imgwidth"  v-if="wh==1">
@@ -306,12 +306,12 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 		//#endif
 		data() {
 			return {
-				config:{
-					title: '商品详情',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '商品详情',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 			xShow:false,
 			deployinfo:{},//配置信息货币单位，符号，以及其他的一些配置参数
 			app_xxb:-1,
@@ -1122,12 +1122,12 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 					if(barcodeId) {
 						if(barcodeId === currentBarCodeId) {
 							uni.showToast({
-								title: '您已经添加过该商品了',
+								title: '新人商品限购1件哦',
 								icon: 'none'
 							})
 						} else {
 							uni.showToast({
-								title: '您已经添加过其他商品了',
+								title: '新人商品限购1件哦',
 								icon: 'none'
 							})
 						}

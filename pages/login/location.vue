@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<hx-navbar :config="config"/>
+		<!-- <hx-navbar :config="config"/> -->
 		<view class="address" @click="getLocation">需要您的地理位置授权</view>
 	</view>
 </template>
@@ -9,13 +9,12 @@
 	export default {
 		data() {
 			return {
-				config:{
-					title: '地理位置',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff',
-					back:false,
-				},
+				// config:{
+				// 	title: '地理位置',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff',
+				// },
 			}
 		},
 		methods: {
@@ -49,6 +48,9 @@
 			                                                "scope.userLocation": true,
 			                                            }
 			                                            console.log("openSetting: success");
+														uni.switchTab({
+															url:'../home/index'
+														})
 			                                        }
 			                                    });
 			                                } else {
@@ -62,7 +64,7 @@
 			            } else {
 			                console.log('获取位置')
 			                uni.navigateTo({
-			                    url: '../getlocation/getlocation',
+			                    url: '../home/index',
 			                })
 			            }
 			        },

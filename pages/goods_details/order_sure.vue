@@ -1,23 +1,27 @@
 <template>
 	<view>
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 
 		<view class="x12 padding" style="padding-bottom: 0;">
 			<!--  -->
 			<view class="x-auto" style="margin-left: -15upx;" v-if="yikeda==true">
 				<view class="x-auto" style="padding-left: 15upx;" v-if="self_mention==1 && deliverys==1" v-for="(item,index) in menu" :key="index"  @click="qhMenu(item.id)">
 					<image :src="item.img" class="float-left" style="width: 350upx; height: 80upx;" v-if="item.site==1"></image>
-					<image :src="item.img2" class="float-left" style="width: 350upx; height: 80upx; margin-right: 4upx;"  v-else></image>
+					<image :src="item.img2" class="float-left" style="width: 350upx; height: 80upx; margin-right: 4upx;" v-else></image>
 				</view>
 			</view>
 			<view v-else>
-				<view class="daodian_only">到店自提</view>
+				<view class="daodian_only" v-if="xid==2">到店自提</view>
 			</view>
+	<!-- 		<view v-if="this.zffs_id!=1 && yikeda==false">
+				v-if="this.zffs_id==2" 
+				<view class="daodian_only" >到店自提</view>
+			</view> -->
 			<view class="x12 bg-white padding" >
 				<view class="x12 padding" style="font-size: 12pt; color: #393D4A;" v-for="(sitem,sindex) in pay_info.address" :key="sindex">
 					<view class="x-auto" style="width: 670upx;" v-if="addressNum>0">
-						<view class="x12" v-if="xid==1">
-							<!--  " -->
+						<view class="x12" v-if="xid==1 && yikeda==true">
+							<!--  一刻达 -->
 							<view class="x-auto" @click="goAddressXlist">
 								<view style="font-size: 28upx;">{{sitem.xq_name}}{{sitem.mbh}}</view>
 								<view>
@@ -29,6 +33,7 @@
 								<!-- <image src="https://div.buy315.com.cn/xcx_imgs/yjt.png" class="float-left" style="width: 16upx; height: 30upx;"></image> -->
 							</view>
 						</view>
+						<!-- 到店 -->
 						<view class="x12" v-else>
 							<view>{{xshopInfo.store.stores_name}}</view>
 							<view>
@@ -37,14 +42,14 @@
 						</view>
 					</view>
 				</view>
-					<view class="x12 padding" style="border-top:#F5F5F5 solid 6upx; font-size: 12pt; align-items: center;" >
+					<view class="x12 padding" style="border-top:#F5F5F5 solid 6upx; font-size: 12pt; align-items: center;"  >
 						<!-- <view class="x-auto" style="padding-top: 8upx;">
 							<image src="https://div.buy315.com.cn/xcx_imgs/sj.png" class="float-left" style="width: 28upx; height: 28upx;"></image>
 						</view> -->
-						<view class="x-auto" style="padding-left:10upx; font-size: 24upx; color: #999; margin-top: 10upx;"  v-if="xid==1">今日达</view>
+						<view class="x-auto" style="padding-left:10upx; font-size: 24upx; color: #999; margin-top: 10upx;"  v-if="xid==1 && yikeda==true">今日达</view>
 						<view class="x-auto" style="padding-left:10upx;"  v-else>提货时间</view>
 						<view class="x-auto float-right" style="padding-top: 6upx;">
-							<view class="x-auto" style="color: #F65A2A; margin-top: -8upx; padding-right: 10upx;" v-if="xid==1">
+							<view class="x-auto" style="color: #F65A2A; margin-top: -8upx; padding-right: 10upx;" v-if="xid==1 && yikeda==true ">
 								<view v-if="start_time!='' && end_time!=''">
 									<!-- <view class="x-auto">{{date_name}}</view> -->
 									<view class="x-auto">{{dates}}</view>
@@ -175,16 +180,17 @@
 					</view>
 					<!-- <view class="text-gray">已优惠{{deployinfo.monetary_symbol}}{{pay_info_order.discount_money}}</view> -->
 				</view>
-				<view class="x-auto text-center text-white float-right" v-if="zf==1"  style="width: 250upx; font-size: 26upx; line-height: 115upx; background-color:#666;">
+				<view class="x-auto text-center text-white float-right" v-if="zf==1 && yikeda==true"  style="width: 250upx; font-size: 26upx; line-height: 115upx; background-color:#666;">
 					去支付
 				</view>
 				<view class="x-auto float-right" v-else>
-					<view class="x-auto text-center text-white float-right" v-if="psytype==1" @click="goPay"  style="width: 250upx; font-size: 26upx; line-height: 115upx; background-color:#FE0000;">
+					<view class="x-auto text-center text-white float-right" v-if="psytype==1 && yikeda==true" @click="goPay"  style="width: 250upx; font-size: 26upx; line-height: 115upx; background-color:#FE0000;">
 						去支付
 					</view>
-					<view class="x-auto text-center text-white float-right" v-else @click="dyxcx" style="width: 250upx; font-size: 26upx; line-height: 115upx; background-color:#FE0000;">
+					<view class="x-auto text-center text-white float-right" v-else="yikeda==false" @click="dyxcx" style="width: 250upx; font-size: 26upx; line-height: 115upx; background-color:#FE0000;">
 						去支付
 					</view>
+
 				</view>
 			</view>
 		</view>
@@ -213,12 +219,12 @@
 		//#endif
 		data() {
 			return {
-				config:{
-					title: '确认订单',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '确认订单',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 			yikeda:true,
 			xShow:false,
 			deployinfo:{},//配置信息货币单位，符号，以及其他的一些配置参数
@@ -272,7 +278,9 @@
 				const ziqu = uni.getStorageSync('daodianziti')
 				if(ziqu){
 					this.yikeda=false
+					this.xid=2
 				}
+				console.log(this.xid,'当一刻达为fales的时候 this.xid==2',this.yikeda)
 				uni.showLoading({
 					title: '加载中'
 				});
@@ -480,6 +488,7 @@
 				}
 				this.getXdsj(id);
 				this.xid=id;
+			
 				//console.log(123);return;
 			},
 			//获取下单数据
@@ -648,6 +657,7 @@
 						data:pdata,
 						success: res => {
 							//console.log(res.data);return;
+						
 							if(res.data.status=='y'){
 								uni.showToast({
 									title: '正在加载...',
@@ -1031,7 +1041,7 @@
 		color: #FE0000;
 		border-radius: 10rpx;
 		line-height: 40rpx;
-		font-size: 24rpx;
+		font-size: 28rpx;
 		text-align: center;
 		border-bottom: 1rpx solid #F7F7F7;
 	}

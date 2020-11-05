@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<hx-navbar :config="config"/>
+		<!-- <hx-navbar :config="config"/> -->
 		  <view class="nav">
 		    <view class="icon_wjcc"><image class="icon_wjccs" src="https://div.buy315.com.cn/xcx_imgs/baopin.png"></image></view>
 		  <!--  <view class="icon_text">晚间特价：9.9三件起</view> -->
@@ -53,12 +53,12 @@
 		//#endif
 		data() {
 			return {
-				config:{
-					title: '爆品好货',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '爆品好货',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 				active_rules:[1,2,3],
 				height:'',
 				goodsinfo:[],

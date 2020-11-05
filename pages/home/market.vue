@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!--pages/index/market.wxml-->
-		  <hx-navbar :config="config"/>
+		  <!-- <hx-navbar :config="config"/> -->
 		  <view class="nav">
 		    <view class="icon_wjcc"><image class="icon_wjcc" src="https://div.buy315.com.cn/xcx_imgs/caichang.png"></image></view>
 		   <!-- <view class="icon_text">晚间特价：9.9三件起</view> -->
@@ -52,8 +52,8 @@
 		      <view class="active_rules">
 		        <view>活动时间：每日18:00-21:00；</view>
 				<view>活动内容：当日未售完的菜品可参与晚间菜场活动；</view>
-				<view>活动规则：</view>
-				<view>①限时抢购；②不支持退换货；③不支持优惠券。</view>
+				<view>活动规则：限时抢购。</view>
+				
 		      </view>
 		   </view>
 		   <view class="Suspension" @click="gotogouwuc">
@@ -74,12 +74,12 @@
 		},
 		data() {
 			return {
-				config:{
-					title: '晚间菜场',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '晚间菜场',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 				active_rules:[1,2,3],
 				marketList:[],
 				m:10,

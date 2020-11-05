@@ -1,6 +1,6 @@
 <template>
     <view>
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 		<view class="search_text">
 			<view class="search_this" v-for="(item,msindex) in goodsList" :key="msindex">
 				<view class="search_img" @click="goDetails(item)">
@@ -171,12 +171,12 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 		data() {
 			return {
 				deployinfo:{},//配置信息货币单位，符号，以及其他的一些配置参数
-				config:{
-					title:'搜索页面',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff',
-				},
+				// config:{
+				// 	title:'搜索页面',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff',
+				// },
 			goodsList:[],
 			login:false,
 			memberinfo:[],
@@ -1135,7 +1135,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 		width: 80%;
 	}
 	.textwenzi{
-		font-size: 24upx;
+		font-size: 32upx;
 		color: #999999;
 		text-align: center;
 		width: 750upx;

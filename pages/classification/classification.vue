@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
     <view v-if="xShow==true">
 		<view class="serchall" @click="gotoserch">
 		   <view class="search">
@@ -223,13 +223,13 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 		},
 		data() {
 			return {
-				config:{
-					title: '分类信息',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff',
-					back:false,
-				},
+				// config:{
+				// 	title: '分类信息',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff',
+				// 	back:false,
+				// },
 				tabIndex:0,
 			xShow:false,
 			deployinfo:{},//配置信息货币单位，符号，以及其他的一些配置参数

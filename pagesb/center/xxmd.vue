@@ -1,6 +1,6 @@
 <template>
     <view>
-		<hx-navbar :config="config"/>
+		<!-- <hx-navbar :config="config"/> -->
 		<view class="searchall">
 			<view class="search" @click="xzaddress">
 				<view><image class="search_01" src="https://div.buy315.com.cn/xcx_imgs/search.png"></image></view>
@@ -95,12 +95,12 @@
 		//#endif
 		data() {
 			return {
-				config:{
-					title: '地址管理',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '地址管理',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 			memberinfo:[],
 			login:false,
 			areaList:[],

@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<hx-navbar :config="config"/>
+		<!-- <hx-navbar :config="config"/> -->
 		<view class="rech_top">
 		  <image src="https://div.buy315.com.cn/xcx_imgs/my_small.png" class="image"></image>
 		  <view class="content">

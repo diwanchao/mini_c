@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- 新人专享大礼包 -->
-	<hx-navbar :config="config"/>
+	<!-- <hx-navbar :config="config"/> -->
 		<!-- <view class="newGiftBanner">
 		  <image class="bg1" src="https://div.buy315.com.cn/xcx_imgs/bg1.png" mode="widthFix"></image>
 		</view> -->
@@ -66,14 +66,14 @@
 				<view>①每个订单每天只能使用一张同种类优惠券，不找零、不兑换现金。</view>
 				<view>②优惠券有使用时间、品类及金额限制，需要在对应品类下且满足使用金额后方可使用。</view>
 				<view>③同一登陆账号、同一手机号、同一终端设备号、同一支付账号、同一IP地址或其他合理显示为同一用户的情形，均视为同一用户，仅限领取一次。</view>
-				<view>④若发生取消订单，系统将自动返还相关优惠券（优惠券有效期不变）；若发生退款退货，仅退回该商品实际支付金额，优惠券抵扣部分不予退回。</view>
+				<view>④若发生取消订单或退款退货，仅退回该商品实际支付金额，优惠券抵扣部分不予退回。</view>
 				<view>⑤若通过不正当手段获取，或存在恶意套利、作弊等其他不诚信行为，每日菜场商城有权撤销该用户优惠券资格，并废止优惠券。</view>
 				<view style="color: #FE0000;">首单一元购</view>
 				
 				<view>①本活动仅限通过“新人专享”区进行下单；</view>
 				<view>②本活动1元商品每个用户仅限参与一次，且购买1件，若购买多件，超出部分恢复原价。</view>
 				<view>③用户选定1元商品后，需与其他商品共同下单，若仅下单一元商品则不予配送。</view>
-				<view>①每个订单只能使用一张优惠券，不找零、不兑换现金。</view>
+				<view>④每个订单只能使用一张优惠券，不找零、不兑换现金。</view>
 			   </view>
 			 </view>
 		 </view>
@@ -106,12 +106,12 @@
 		//#endif
 		data() {
 			return {
-				config:{
-					title: '新人专享',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '新人专享',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 				height:'',
 				newlist:[{
 					id:0,
@@ -301,12 +301,12 @@
 				if(newshopcart) {
 					if(newshopcart === barcode_id){
 						uni.showToast({
-							title:'您已经下单过该商品了',
+							title:'新人商品限购1件哦',
 							icon: 'none'
 						})
 					} else {
 						uni.showToast({
-							title: '您已经下单过别的商品了',
+							title: '新人商品限购1件哦',
 							icon: 'none'
 						})
 					}

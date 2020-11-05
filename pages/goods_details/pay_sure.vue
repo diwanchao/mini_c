@@ -1,7 +1,7 @@
 <template>
     <!-- <view v-if="xShow==true"> -->
 	<view>
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 		<view class="x12 padding">
 			<view class="x12 bg-white padding-big" style="border-radius: 6px;">
 				<view class="x-auto">
@@ -61,12 +61,12 @@
 		//#endif
 		data() {
 			return {
-				config:{
-					title: '支付确认',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '支付确认',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 			xShow:false,
 			deployinfo:{},//配置信息货币单位，符号，以及其他的一些配置参数
 			memberinfo:[],

@@ -1,7 +1,7 @@
 <template>
 
 	<view>
-		<hx-navbar :config="config" style="width: 750rpx; display: flex; justify-content: center;"/>
+		<!-- <hx-navbar :config="config" style="width: 750rpx; display: flex; justify-content: center;"/> -->
 		<view  v-if="xShow==true">
 			<view class="x12 height-big bg-white text-center text-default text-gray text-333" style="white-space:nowrap;  z-index: 10000; top: 0;">
 				<scroll-view scroll-x="true" scroll-left="0" scroll-with-animation="true">
@@ -56,7 +56,7 @@
 							 <view class="right" v-if="xitme.status_name !== '正常'">{{xitme.status_name}} </view>
 							 <view class="right" v-if="xitme.refund_status == '未审核'">{{xitme.refund_status}}</view>
 							
-<view class="right" @click="tuiHuo(xitme)" v-if='xitme.order_status==1 && xitme.status_name == "正常" && xitme.temp_type==1 && xitme.temp_pay_status ==2 && xitme.temp_logistics_status==3 && xitme.refund_status == "未审核" '>我要退货</view>
+<view class="right" @click="tuiHuo(xitme)" v-if='xitme.order_status==1 && xitme.status_name == "正常" && xitme.temp_type==1 && xitme.temp_pay_status ==2 && xitme.temp_logistics_status==3 && xitme.to_refund==1'>我要退货</view>
 							 <!-- <view class="right" @click="gopl(xitme.order_code)" v-if="xitme.to_pj==1" >去评价</view> -->
 							 <!-- <view class="right" v-if="xid==3 && xitme.to_pj==2" >已评价</view> -->
 							 <view class="right rights" @click="goPay(xitme.order_code)" v-if="xitme.to_pay==1" >去支付</view>
@@ -105,12 +105,12 @@
 		//#endif
 		data() {
 			return {
-				config: {
-					title: '订单列表',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor: '#fff'
-				},
+				// config: {
+				// 	title: '订单列表',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor: '#fff'
+				// },
 				xShow: false,
 				deployinfo: {}, //配置信息货币单位，符号，以及其他的一些配置参数
 				xid: 0,

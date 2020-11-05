@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 	<view class="x12" >
 		<view  class="selected">
 			<view class="categories">
@@ -90,12 +90,12 @@
 			limit:30,
 			page:0,
 			acom_id:'',
-			config:{
-				title: '优惠券',
-				color: '#ffffff',
-				backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-				statusBarFontColor:'#fff'
-			},
+			// config:{
+			// 	title: '优惠券',
+			// 	color: '#ffffff',
+			// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+			// 	statusBarFontColor:'#fff'
+			// },
 			tabIndex:0,
 				listScrollShop:[{
 					id:0,

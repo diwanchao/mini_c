@@ -2,7 +2,7 @@
     <view  v-if="xShow==true">
 		<!--pages/order/detail.wxml-->
 	
-	<hx-navbar :config="config"/>
+	<!-- <hx-navbar :config="config"/> -->
 		<!-- 支付信息 -->
 		<!-- 等待支付 -->
 		<view class="pageall" >
@@ -256,12 +256,12 @@ import uniCountdown from "@/components/linnian-CountDown/uni-countdown.vue";
 		//#endif
 		data() {
 			return {
-				config:{
-					title: '订单详情',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '订单详情',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 			xShow:false,
 			isselect:2,
 			deployinfo:{},//配置信息货币单位，符号，以及其他的一些配置参数

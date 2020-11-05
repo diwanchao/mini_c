@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 		<view>
 		  <view class="topimg">
 		    <image class="luimg" src="https://div.buy315.com.cn/xcx_imgs/mareak.png"></image>
@@ -53,7 +53,7 @@
 		   </view>
 		  </view>
 		</view>
-
+			
 	</view>
 </template>
 
@@ -80,13 +80,13 @@
 		//#endif
 		data() {
 			return {
-				config:{
-					title:'拼团',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff',
-					fontSize:'16px',
-				},
+				// config:{
+				// 	title:'拼团',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff',
+				// 	fontSize:'16px',
+				// },
 				buyList:[],
 				buyListlenght:0,
 				 getshopping:[],
@@ -96,6 +96,7 @@
 				newkuan:'',
 				qiuqiu:[{}],
 				qiuqiu2:[],
+				
 			}
 		},
 		onLoad() {
@@ -131,6 +132,7 @@
 					data: pdata,
 					success: res => {
 						this.buyList = res.data.data
+					
 						
 					},
 					fail: () => {},

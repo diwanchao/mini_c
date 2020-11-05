@@ -1,7 +1,7 @@
 <template>
 	<view>
 		
-	<hx-navbar :config="config" />
+	<!-- <hx-navbar :config="config" /> -->
 	<view class="x12" style="padding:35upx 25upx 15upx 25upx; width: 700upx;">
 		<view class="x12" style="margin-bottom:20upx;" v-for="(item,index) in cl_list" :key="index">
 			<view class="float-left" style="width: 250upx;">
@@ -56,12 +56,12 @@
 			datanum:0,
 			limit:30,
 			page:0,
-			config:{
-				title: '可用券',
-				color: '#ffffff',
-				backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-				statusBarFontColor:'#fff'
-			},
+			// config:{
+			// 	title: '可用券',
+			// 	color: '#ffffff',
+			// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+			// 	statusBarFontColor:'#fff'
+			// },
 			}
 		},
 		onLoad:function(data){

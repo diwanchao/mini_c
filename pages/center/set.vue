@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 		<view class="set">
 		  <view class="jingying" @click="gotojingying">
 		    <view>经营证照</view>
@@ -27,12 +27,12 @@
 	export default {
 		data() {
 			return {
-				config:{
-					title: '设置',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '设置',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 			}
 		},
 		methods: {

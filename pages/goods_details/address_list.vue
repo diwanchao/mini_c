@@ -1,6 +1,6 @@
 <template>
 	<view class="center" style=" ">
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 		<view class="x12 float-left">
 			<view class="center-list x12" style="margin-top: 0;">
 				<view class="center-list-item border-top x12" style="min-height: 150upx; height: auto; border-color: #ddd;" v-for="(item,index) in address_list" :key="index">
@@ -49,12 +49,12 @@
 		//#endif
 		data() {
 			return {
-				config:{
-					title: '地址管理',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '地址管理',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 				login:false,
 				memberinfo:[],
 				address_list:[],

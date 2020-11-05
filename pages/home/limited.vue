@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!--pages/index/market.wxml-->
-		 <hx-navbar :config="config"/>
+		 <!-- <hx-navbar :config="config"/> -->
 		  <view class="nav">
 		    <view><image class="icon_wjcc" src="https://div.buy315.com.cn/xcx_imgs/qianggou.png"></image></view>
 		    <!-- <view class="icon_text">晚间特价：9.9三件起</view> -->
@@ -77,12 +77,12 @@
 		//#endif
 		data() {
 			return {
-				config:{
-					title: '限时抢购',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '限时抢购',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 				
 				spikeList:[{
 					goods_title:'获取中',

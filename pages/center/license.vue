@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 		<view>
 			<view class="text">经营证照</view>
 			<view ><image class="img" :src="licenseList"></image></view>
@@ -35,12 +35,12 @@
 			return {
 				licenseList:'',
 				hygieneList:'',
-				config:{
-					title: '经营证照',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '经营证照',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 			}
 		},
 		onLoad() {

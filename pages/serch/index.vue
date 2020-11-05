@@ -1,6 +1,6 @@
 <template>
     <view>
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 		<view class="x12 padding search_add" style="font-size: 11pt;">			
 			<view class="this_search">
 				<view class="x-auto" >
@@ -43,12 +43,12 @@
 		data() {
 			return {
 			goods_title:'',
-			config:{
-				title:'搜索页面',
-				color: '#ffffff',
-				backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-				statusBarFontColor:'#fff',
-			},
+			// config:{
+			// 	title:'搜索页面',
+			// 	color: '#ffffff',
+			// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+			// 	statusBarFontColor:'#fff',
+			// },
 			}
 		},
 		onLoad:function(){

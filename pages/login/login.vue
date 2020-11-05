@@ -1,6 +1,6 @@
 <template>
     <view class="x12">
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 <!-- 		<view class="x12">
 			<image src="https://div.buy315.com.cn/xcx_imgs/toplogin.png" style="width: 750upx; height: 180upx;" mode="aspectFit"></image>		
 				<image style="margin: 0 auto; height: 100upx; width: 350upx;" src="https://div.buy315.com.cn/xcx_imgs/bg_bg" mode=""></image>
@@ -82,12 +82,12 @@
 				tjr_id:'',
 				deployinfo:{},
 				login:false,
-				config:{
-					title: '购物车',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff',
-				},
+				// config:{
+				// 	title: '购物车',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff',
+				// },
             }
         },
 		onShow() {

@@ -1,7 +1,7 @@
 <template>
 	<view>
 		
-	<hx-navbar :config="config" />
+	<!-- <hx-navbar :config="config" /> -->
     <view class="x12 text-center">
 		<view class="x12" style="margin-top: 30%;">
 			<image src="https://div.buy315.com.cn/xcx_imgs/czcg.png"  mode="aspectFill" style="width: 96upx; height: 96upx;"></image>
@@ -91,12 +91,12 @@
 			leftTime: 0,
 			seconds: 0,
 			but:false,
-			config:{
-				title: '充值成功',
-				color: '#ffffff',
-				backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-				statusBarFontColor:'#fff'
-			},
+			// config:{
+			// 	title: '充值成功',
+			// 	color: '#ffffff',
+			// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+			// 	statusBarFontColor:'#fff'
+			// },
 			}
 		},
 		onLoad:function(data){

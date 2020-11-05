@@ -1,6 +1,6 @@
 <template>
     <view>
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 		<view class="x12 padding">
 			<view class="x12 bg-white padding-big" style="border-radius: 6px;">
 				<view class="x-auto">
@@ -63,12 +63,12 @@
 			login:false,
 			payinfo:[],
 			pay_methods:[],
-			config:{
-				title: '充值确认',
-				color: '#ffffff',
-				backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-				statusBarFontColor:'#fff'
-			},
+			// config:{
+			// 	title: '充值确认',
+			// 	color: '#ffffff',
+			// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+			// 	statusBarFontColor:'#fff'
+			// },
 			}
 		},
 		onLoad:function(data){

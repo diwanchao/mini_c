@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<hx-navbar :config="config"/>
+		<!-- <hx-navbar :config="config"/> -->
 		<view class="top_or">
 			<view style="position: relative;">
 				<!-- <view><image class="vips_img" src="https://div.buy315.com.cn/xcx_imgs/vips.png" mode=""></image></view> -->
@@ -54,12 +54,12 @@
 		//#endif
 		data() {
 			return {
-				config:{
-					title:'余额明细',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff',
-				},
+				// config:{
+				// 	title:'余额明细',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff',
+				// },
 				index1:0,
 				yemxList:[],
 				couTop:[{

@@ -1,6 +1,6 @@
 <template>
     <view>
-		<hx-navbar :config="config"/>
+		<!-- <hx-navbar :config="config"/> -->
 		<!-- 退货进度 -->
 		<view>
 			<view class="return_bg">
@@ -123,12 +123,12 @@ import uniSteps from '@/components/uni-steps/uni-steps.vue'
 			refund_id:0,
 			send_info:[],
 			status:'',
-			config:{
-				title: '订单详情',
-				color: '#ffffff',
-				backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-				statusBarFontColor:'#fff'
-			},
+			// config:{
+			// 	title: '订单详情',
+			// 	color: '#ffffff',
+			// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+			// 	statusBarFontColor:'#fff'
+			// },
 			}
 		},
 		onLoad:function(data){

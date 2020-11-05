@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 	<view v-if="xShow==true">
 		<view class="x12 bg-white" style="border-bottom: #CCCCCC solid 6upx;" @click="goAddressXlist">
 			<view class="x12 padding-big" style="font-size: 12pt; color: #393D4A;">
@@ -188,13 +188,13 @@
 			fwqGoods:[],
 			bzf_sum:0,
 			wx_tpl:[],
-			config:{
-				title: '购物车',
-				color: '#ffffff',
-				backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-				statusBarFontColor:'#fff',
-				back:false,
-			},
+			// config:{
+			// 	title: '购物车',
+			// 	color: '#ffffff',
+			// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+			// 	statusBarFontColor:'#fff',
+			// 	back:false,
+			// },
 			}
 		},
 		onPullDownRefresh() {

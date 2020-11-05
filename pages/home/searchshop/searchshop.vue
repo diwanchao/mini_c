@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 		<view class="serchall">
 			<view class="search">
 				<view><image class="search_img" src="../https://div.buy315.com.cn/xcx_imgs/search.png"></image></view>
@@ -57,12 +57,12 @@
 		data() {
 			return {
 				name:'',
-				config:{
-					title:'搜索页面',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff',
-				},
+				// config:{
+				// 	title:'搜索页面',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff',
+				// },
 				index1:0,
 				couTop:[{
 					id:0,

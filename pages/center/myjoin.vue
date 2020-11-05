@@ -1,6 +1,6 @@
 <template>
 	<view>
-	<hx-navbar :config="config"/>
+	<!-- <hx-navbar :config="config"/> -->
 		<view class="cou_top" >
 		  <view class="top" :class="{'active' : index1==index}" v-for="(item,index) in couTop" :key="index" @tap="clickTab(index)" >
 		    <text class="t1">{{item.name}}</text>
@@ -53,6 +53,12 @@
 				</view>
 			</view>
 		</view>
+		<view class="x12 text-center " :style="{block:block}">
+			<viwe >
+				<viwe class="zanwushik"><image class="imgthis" src="../../static/hui.png" style="marign-top::;"></image></viwe>
+				<viwe class="textwenzi">暂无拼团</viwe>
+			</viwe>
+		</view>		
 	</view>
 </template>
 
@@ -79,12 +85,12 @@
 		//#endif
 		data() {
 			return {
-				config:{
-					title: '我的拼团',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '我的拼团',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 				couTop:[{
 					id:0,
 					name:'全部',
@@ -103,6 +109,7 @@
 				}],
 				index1:0,
 				pintuanList:[],
+				block:'block'
 			}
 		},
 		onLoad() {
@@ -136,6 +143,9 @@
 					},
 					data: pdata,
 					success: res => {
+						if(this.buyList.order_info.length!=0){
+							this.block = 'none'
+						}
 						if (res.data.data.order_status = 1) {
 							uni.navigateTo({
 								url: "/pages/goods_details/order_sure?order_code=" + order_code
@@ -327,5 +337,25 @@
 		margin-right: 20upx;
 		line-height: 50upx;
 		text-align: center;
+	}
+	.textwenzi{
+		font-size: 32upx;
+		color: #999999;
+		text-align: center;
+		width: 750upx;
+		display: flex;
+		justify-content: center;
+		margin-top: 180upx;
+	}
+	.zanwushik{
+		width: 750upx;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+	}
+	.imgthis{
+		height: 243upx;
+		width: 200upx;
+		margin: 0 auto;
 	}
 </style>

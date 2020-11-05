@@ -21,7 +21,7 @@
 				<view class="new" @click="gotonewlist" >
 					<view class="bgnew"><image class="new01" src="https://div.buy315.com.cn/xcx_imgs/newbg.png"></image></view>
 					<view class="newlist">
-						<view class="newone" v-for="(item,index) in newList" :key='item.index' >
+						<view class="newone" v-for="(item,index) in newList.slice(0,4)" :key='item.index' >
 							<view>
 								<image class="img02" src="https://div.buy315.com.cn/xcx_imgs/zwtpo.jpg" v-if="item.imgs_original==''"></image>
 								<image class="img02" :src="item.imgs_original" v-else ></image>
@@ -244,13 +244,9 @@
 			data() {
 				return {
 					xShow: false,
-					textData: {
-						name: '',
-						desc: '',
-					},
 					wanandmiao:'block',
 					markers: '',
-					index:1,
+					index:'',
 					login: false,
 					memberinfo:{
 						mobile:'',
@@ -336,7 +332,7 @@
 								fontSize:'14px'
 							}],
 					},
-					tabIndex:1,
+					tabIndex:6,
 					height:'',
 					limit:30,
 					newList:[],
@@ -415,7 +411,8 @@
 					newcomer:true,
 					evenimglist:'',
 					mar_top:20,
-					mar_iosTop:60
+					mar_iosTop:60,
+					sData:''
 				}
 			},
 			onTabItemTap:function(){
@@ -468,7 +465,7 @@
 				// this.getEvening();
 				this.getnewList();
 				this.getnewCoupon();
-				this.clickTab(0);
+				this.clickTab(6);
 				this.getbuyList();
 				console.log('@@@@@@@@@@@@@@@@@@')
 				this.getTimespike();
@@ -509,8 +506,7 @@
 				// if(uni.getSystemInfo().platform == 'ios'){
 				// 	this.mar_iosTop = 60
 				// }
-				this.wanjian ='block',
-				this.miaosha ='block'
+
 				//#ifdef MP-WEIXIN
 				wx.login({
 				  success: res =>{
@@ -536,6 +532,8 @@
 				}
 			},
 			onLoad(data) {
+				this.wanjian ='block',
+				this.miaosha ='block'
 				uni.getLocation({
 					type: 'wgs84',
 					success: function(res) {
@@ -574,12 +572,11 @@
 				
 				this.getnewList();
 				
-				this.clickTab(0);
+				this.clickTab();
 				
 				this.getnewShopList();
 				this.getnewCoupon();
 				this.getexlosIve();
-				this.getClass();
 				// this.getEvening();
 				this.getbuyList();
 				this.getTimespike();
@@ -627,7 +624,7 @@
 				// console.log(this.newcomer)
 				this.initializeData();
 				this.checkItem(-1);
-				this.clickTab(0);
+				// this.clickTab(0);
 			},
 			methods: {
 				// gotonewdetail(){
@@ -1033,8 +1030,9 @@
 					});
 				},
 				clickTab(index){
+					console.log('第一步打印的是不是这个index',index)
 					this.tabIndex = index
-					console.log('data',index)
+					
 					uni.showLoading({
 					    title: '正在加载中'
 					});
@@ -1045,7 +1043,7 @@
 					// this.shopclass = [];
 					this.towMenu = [];
 					this.getGoods(index);
-					// this.getClass(index,'!!!!!!!!');
+					this.getClass(index);
 				},
 				// 获取分类
 				getClass(index){
@@ -1107,6 +1105,7 @@
 				},
 				getGoods(index,action = 'add'){
 					this.sData = index;
+					console.log(index,'++++++++++++++++++++++确认这个index,是成功没有任何问题的')
 					//console.log(this.memberinfo.openid);
 					//获取信息
 					var arr ={
@@ -1312,7 +1311,7 @@
 								} else {
 									// xthis.$refs.hxnb.conf.leftButton[0].txt = values.store.stores_name;
 									xthis.getHome();
-									xthis.clickTab(0);
+									xthis.clickTab(6);
 									xthis.getnewList();
 									xthis.getnewShopList();
 									xthis.getbuyList();
@@ -1323,7 +1322,6 @@
 									// 	xthis.pd_mshewanjian();
 									// },1000)
 									xthis.getexlosIve();
-									xthis.getClass();
 								}
 								//console.log(res.data);						
 								if (xthis.memberinfo.length != 0) {
@@ -2338,18 +2336,18 @@
 										complete: () => {}
 									});
 									xxx.getHome();
-									xxx.clickTab(0);
+									xxx.clickTab(6);
 									xxx.getnewList();
 									xxx.getnewShopList();
 									xxx.getnewCoupon();
 									xxx.getbuyList();
 									// xxx.getEvening();
+									xxx.getClass();
 									xxx.getTimespike();
 									// setTimeout(function(){
 									// 	xxx.pd_mshewanjian();
 									// },1000)
 									xxx.getexlosIve();
-									xxx.getClass();
 								}
 							});
 						},
@@ -2431,7 +2429,7 @@
 									});
 									xxx.getHome();
 									xxx.getexlosIve();
-									xxx.clickTab(0);
+									xxx.clickTab(6);
 									xxx.getClass();
 									xxx.getnewList();
 									xxx.getnewShopList();
@@ -2658,7 +2656,7 @@
 					//4次卡
 					//5分类
 					//group_id==1000秒杀分组
-					console.log(type,jump_id,title,group_id,gtype,'#############');return;
+					// console.log(type,jump_id,title,group_id,gtype,'#############');return;
 					if (this.memberinfo.length == 0) {
 					     uni.navigateTo({
 					      url: "/pages/login/login"
@@ -2687,12 +2685,13 @@
 							})
 						} else if (type == 5) {
 							console.log(type,'########################')
-							uni.switchTab({
-								url: "../classification/classification?category_id=" + jump_id + "&title=" + title
-							})
-							// uni.navigateTo({
-							// 	url: "../home/classgoods?category_id=" + jump_id + "&title=" + title
+							// uni.switchTab({
+							// 	url: "../classification/classification?category_id=" + jump_id + "&title=" + title
+							// 	url: "../classification/classification?category_id=" + jump_id 
 							// })
+							uni.navigateTo({
+								url: "../home/classgoods?category_id=" + jump_id + "&title=" + title
+							})
 						} else if (type == 6) {
 							uni.navigateTo({
 								url: "../home/ms"

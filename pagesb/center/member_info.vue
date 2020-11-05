@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<hx-navbar :config="config"/>
+		<!-- <hx-navbar :config="config"/> -->
 			<view class="x12 text-center bg-white padding-big" style="color: #393D4A;">
 				<view class="x12" style="font-size: 12pt;">{{member_info.mobile}}</view>
 				<view class="x12" style="font-size: 11pt;">{{member_info.grade_name}}</view>
@@ -116,12 +116,12 @@
 				format: true
 			})
 			return {
-				config:{
-					title: '个人信息',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '个人信息',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 				areaListOne: [],
 				imageList: [], //保存图片路径集合
 				imageLength: 1, //限制图片张数

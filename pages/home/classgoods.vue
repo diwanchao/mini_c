@@ -1,6 +1,6 @@
 <template>
     <view>		
-	<hx-navbar :config="config"/>
+	<!-- <hx-navbar :config="config"/> -->
 		<view class="x12 text-333 text-default" v-if="lim > 0" style="padding-bottom: 130upx;">
 			<view class="x12 border-bottom border-gray padding-top padding-bottom" v-for="(item,index) in goodsList" :key="index">
 				<view class="tctj-body-left" @click="goDetails(item)">
@@ -41,13 +41,16 @@
 			</view>
 		</view>
 		<view class="x12 text-center padding-big" v-else>{{lim_info}}</view>
-		<view class="x12 shop-menu">
+		<view class="Suspension" @click="gotogouwuche">
+			<view><image class="Suspensionimg" src="https://div.buy315.com.cn/xcx_imgs/gouwuche.png"></image></view>
+		</view>
+<!-- 		<view class="x12 shop-menu">
 			<view class="x12 bg-white text-default text-333 border-top border-gray">
 				<view class="x12 text-center" style="line-height: 115upx; width: 100%; font-size: 14pt;background-color: #F65A2A; color: #fff;" @click="goGwc">
 					购物车
 				</view>				
 			</view>
-		</view>
+		</view> -->
 		<!--多规格弹窗的显示开始-->
 		<view class="x12" v-if="xpopup==1">
 			<uni-popup ref="showpopup" :type="type" @change="change"  style="position: absolute; z-index: 1000000; bottom: 0;">
@@ -163,12 +166,12 @@
 			goodsList:[],
 			login:false,
 			memberinfo:[],
-			config:{
-				title: '分类商品',
-				color: '#ffffff',
-				backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-				statusBarFontColor:'#fff'
-			},
+			// config:{
+			// 	title: '分类商品',
+			// 	color: '#ffffff',
+			// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+			// 	statusBarFontColor:'#fff'
+			// },
 			sData:[],
 			lim:0,
 			lim_info:'',
@@ -256,6 +259,11 @@
 		    this.loadData('add',this.sData);
 		},
 		methods: {
+			gotogouwuche(){
+				uni.switchTab({
+					url:'/pages/shoppingcart/shoppingcart'
+				})
+			},
 			chooseItem(item, n, event, index) {
 				if (this.selectArr[n] != item) {
 					this.$set(this.selectArr, n, item);
@@ -1054,5 +1062,22 @@
 	}
 	button::after{
 		border:none;
+	}
+	.Suspension{
+		position: relative;
+		height: 80upx;
+		width: 80upx;
+		background-color: #FC8282;
+		border-radius: 50%;
+		position: fixed;
+		right: 40rpx;
+		bottom: 50rpx;
+	}
+	.Suspensionimg{
+		height: 35upx;
+		width: 35upx;
+		position: absolute;
+		left: 20upx;
+		top: 25upx;
 	}
 </style>

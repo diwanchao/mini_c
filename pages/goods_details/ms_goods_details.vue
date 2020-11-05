@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<hx-navbar :config="config"/>
+		<!-- <hx-navbar :config="config"/> -->
 		<view v-if="xShow==true">
 			<view class="x12 bg-white" v-if="goodsinfo.imgs!=''">
 				<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" class="imgwidth"  v-if="wh==1">
@@ -224,12 +224,12 @@ import url from '../../main.js';
 		//#endif
 		data() {
 			return {
-				config:{
-					title: '秒杀详情',
-					color: '#ffffff',
-					backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
-					statusBarFontColor:'#fff'
-				},
+				// config:{
+				// 	title: '秒杀详情',
+				// 	color: '#ffffff',
+				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
+				// 	statusBarFontColor:'#fff'
+				// },
 				wh:1,
 				time: 0,///多少毫秒
 				xShow:false,
