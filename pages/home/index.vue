@@ -82,7 +82,7 @@
 
 		
 		<!-- 爆品好物 -->
-		<view>
+		<view style="margin-top: 20rpx;">
 			<view class="things" v-if="thingsList.length != 0">
 				<view class="things_top" >
 					<view class="things_top1" @click="gotoexplosive">
@@ -158,12 +158,16 @@
 				<view class="this_fenshu">已累计拼成:{{buyList.current_number}}份</view>
 			</view>
 			<view class="jindutiao">
-				<viwe class="this_qiuqiu" v-for="item in 4" :key='index'>
+				<view v-for="(item,index) in buyList.data" :key='index'>
 					
-						<!-- <view class="schedule_down">{{items.unit_price}}元/份</view> -->
+					<view class="schedule_down">{{item.unit_price}}元/份</view>
+				</view>
+				<viwe class="qiuqiu_all" >
+					<view class="this_qiuqiu" v-for="item in 4"></view>
+				</viwe>
 					
 					<view class="kuan"></view>
-				</viwe>
+				
 			</view>
 <!-- 			<viwe>
 				<view class="this_qiuqiu">
@@ -177,7 +181,7 @@
 			</viwe> -->
 		</view>
 		<!-- 导航 -->
-		<view  class="selected">
+		<view  class="selected" style="position: sticky;z-index: 9999999999;" :style="[{top:mar_top + 'px'}]">
 			<scroll-view scroll-x="true" class="topScroll">
 				<view class="categories"> 
 					<view v-for="(item,index) in shopclass" class="catlistone" :key='index' @click="clickTab(item.category_id)" 
@@ -410,9 +414,9 @@
 					miaosha:'block',
 					newcomer:true,
 					evenimglist:'',
-					mar_top:20,
-					mar_iosTop:60,
-					sData:''
+					mar_top:'',
+					sData:'',
+					ScrollHeight:'',
 				}
 			},
 			onTabItemTap:function(){
@@ -499,13 +503,6 @@
 				}
 			},
 			onShow: function(e) {
-				console.log(uni.getSystemInfoSync().platform,'uni.getSystemInfoSync().platform','%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-				if(uni.getSystemInfo().platform == 'android'){
-					this.mar_top = 60
-				}
-				// if(uni.getSystemInfo().platform == 'ios'){
-				// 	this.mar_iosTop = 60
-				// }
 
 				//#ifdef MP-WEIXIN
 				wx.login({
@@ -532,6 +529,18 @@
 				}
 			},
 			onLoad(data) {
+				console.log('进入这个方法啦------------------')
+				uni.getSystemInfo({
+					success(res) {
+						this.ScrollHeight = res.screenHeight
+						
+					}
+				})
+				console.log('%%%%%%%%%%%%%%%%%%%%%%%',ScrollHeight >= 812)
+				if(ScrollHeight >= 812){
+					this.mar_top = 84
+					console.log(this.mar_top,'%%%%%%%%%%%%%%%%%%%%%%%')
+				}
 				this.wanjian ='block',
 				this.miaosha ='block'
 				uni.getLocation({
@@ -2296,11 +2305,12 @@
 									if(this.newcomer) {
 										uni.removeStorageSync('newshopcart'); // 清空新人订单
 									}
-									uni.setStorage({
-										key: 'shoppingCarts',
-										data: [],
-										success: function() {}
-									});
+									// uni.removeStorageSync('shoppingCarts'); // 清空购物车订单
+									// uni.setStorage({
+									// 	key: 'shoppingCarts',
+									// 	data: [],
+									// 	success: function() {}
+									// });
 									if (res.data.data.address.length == 0) {
 										xxx.maddress = res.data.data.current;
 									} else {
@@ -3162,7 +3172,8 @@
 		color: #fff;
 		position: absolute;
 		top: 20upx;
-		right: 7upx;
+		/* right: 7upx; */
+		left: 178upx;
 	}
 	.things_img3{
 		height: 130upx;
@@ -3228,7 +3239,7 @@
 		width: 750upx;
 		background-color: #fff;
 		margin-top: 20upx;
-		position: relative;
+		
 	}
 	scroll-view{
 		line-height: 2.5;
@@ -3387,8 +3398,8 @@
 		border-radius: 50%;
 	}
 	.this_qiuqiu{
-		height: 14upx;
-		width: 14upx;
+		height: 15upx;
+		width: 15upx;
 		background-color: #70BC26;
 		border-radius: 50%;
 		box-sizing: border-box;
@@ -3404,6 +3415,20 @@
 		top: 150upx;
 		display: flex;
 		justify-content: space-between;
+	}
+	.schedule_down{
+		font-size: 18upx;
+		color: #333;
+		padding-top: 25upx;
+		width: 90upx;
+	}
+	.qiuqiu_all{
+		display: flex;
+		width: 104%;
+		justify-content: space-between;
+		position: absolute;
+		top: -4rpx;
+		left: -8rpx;
 	}
 /* 	.puticon{
 		height: ;

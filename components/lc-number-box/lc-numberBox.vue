@@ -3,10 +3,12 @@
 		<view class="lc-minus" @click="minus" :style="{'color':color,'border-color':color,'border-radius':fillet?'99px':'0rpx'}">
 			<image style="width: 36upx; height: 36upx;" src="https://div.buy315.com.cn/xcx_imgs/jian.png" mode=""></image>
 		</view>
-		<view class="lc-number"><input type="number" :disabled="isDisabled" v-model="inputValue" :style="{ width: inputValue.toString().length * 20 + 'rpx' }" /></view>
+		<view class="lc-number">
+			<input type="number" :disabled="isDisabled" v-model="inputValue" :style="{ width: inputValue.toString().length * 20 + 'rpx'  }" />
+		</view>
 		<view class="lc-add" @click="add" :style="{'color':color,'border-color':color,'border-radius':fillet?'99px':'0rpx'}">
 			<image style="width: 36upx; height: 36upx;" src="https://div.buy315.com.cn/xcx_imgs/jia.png" mode=""></image>
-			</view>
+		</view>
 	</view>
 </template>
 
@@ -103,6 +105,8 @@ $themeColor: rgb(87, 208, 127);
 	}
 	.lc-number {
 		padding: 0 30rpx;
+		background-color: #D8D8D8;
+		color: #000;
 	}
 }
 </style>

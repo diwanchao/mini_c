@@ -10,8 +10,8 @@
 		   <view class="text1">搜索</view>
 		  </view>
 		<view class="x12">
-			<view  class="selected">
-				<scroll-view scroll-x="true" class="topScroll">
+			<view  class="selected" id="selected">
+				<scroll-view scroll-x class="topScroll"  :scroll-into-view="selected">
 					<view class="categories">
 						<view v-for="(item,index) in oneMenu" class="catlistone" :key='index' @click="oMenu(item.category_id)" 
 						 :class="{'active' : tabIndex==item.category_id}">
@@ -1203,7 +1203,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 				this.shopList = [];
 				this.page = 0;
 				this.limit = 10;
-				this.oneMenu = [];
+				// this.oneMenu = [];
 				this.towMenu = [];
 				this.getClass(data);
 			},

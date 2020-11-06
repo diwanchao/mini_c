@@ -2291,4 +2291,7 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 		height: 90upx;
 		line-height: 45upx;
 	}
+	lc-number-box{
+		background-color: #000000;
+	}
 </style>

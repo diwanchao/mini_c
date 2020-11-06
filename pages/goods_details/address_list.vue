@@ -12,6 +12,11 @@
 						<view class="" style="color: #393D4A;">{{item.xq_name}}{{item.mbh}}</view>
 						<view class="" style="color: #393D4A;">
 							<view class="x-auto">{{item.name}}</view>
+							<view>
+								<view class="x-auto padding-left" v-if="item.gender==2">女</view>
+								<view class="x-auto padding-left" v-else>男</view>
+							</view>
+							
 							<view class="x-auto padding-left">{{item.tel}}</view>
 						</view>						
 					</view>
