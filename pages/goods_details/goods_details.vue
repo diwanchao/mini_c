@@ -384,10 +384,10 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 			newkuan:'',
 			flag:false,
 			numbersss:0,
-			isHot:true,
-			isNew:true,
-			isMark:true,
-			isgroups:true
+			isHot:'',
+			isNew:'',
+			isMark:'',
+			isgroups:''
 			}
 		},
 		onShow:function(){//返回时接收子页面的传参
@@ -1116,9 +1116,13 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 			},
 			addToCart() {
 				// 判断新人是否添加过商品
-				const barcodeId = uni.getStorageSync('newshopcart');
+				
+			
 				const currentBarCodeId = this.goodsinfo.barcode_id;
 				if(this.isNew){
+					console.log(this.isNew,'这个居然是新人商品')
+					const barcodeId = uni.getStorageSync('newshopcart');
+					
 					if(barcodeId) {
 						if(barcodeId === currentBarCodeId) {
 							uni.showToast({
@@ -1220,7 +1224,10 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 					remark:bjRemark,
 					sgt_ids:sgt_ids,
 				};
-				uni.setStorageSync('newshopcart', currentBarCodeId);
+				if(this.isNew){
+					uni.setStorageSync('newshopcart', currentBarCodeId);
+				}
+				
 				this.jrShoppingCart(1,xxx);
 			},
 			jrShoppingCart(num_s,goods_info){
@@ -1485,6 +1492,7 @@ import lcNumberBox from '@/components/lc-number-box/lc-numberBox.vue'
 						console.log(res.data.data,'res.data.data')
 						this.isHot = res.data.data.goods[0].is_hot_money
 						this.isNew = res.data.data.goods[0].is_new_people_goods
+						console.log(this.isNew,'*************')
 						this.isMark = res.data.data.goods[0].is_evening_market
 						this.isgroups = res.data.data.goods[0].is_group_buying
 						this.buylistpintuan = res.data.data.goods[0].group_buying_info

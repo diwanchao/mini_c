@@ -53,12 +53,12 @@
 				</view>
 			</view>
 		</view>
-		<view class="x12 text-center " :style="{block:block}">
+<!-- 		<view class="x12 text-center " :style="{block:block}">
 			<viwe >
 				<viwe class="zanwushik"><image class="imgthis" src="../../static/hui.png" style="marign-top::;"></image></viwe>
 				<viwe class="textwenzi">暂无拼团</viwe>
 			</viwe>
-		</view>		
+		</view>	 -->	
 	</view>
 </template>
 
@@ -143,9 +143,6 @@
 					},
 					data: pdata,
 					success: res => {
-						if(this.buyList.order_info.length!=0){
-							this.block = 'none'
-						}
 						if (res.data.data.order_status = 1) {
 							uni.navigateTo({
 								url: "/pages/goods_details/order_sure?order_code=" + order_code
