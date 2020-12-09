@@ -1,7 +1,7 @@
 // #ifdef MP-WEIXIN
 import uma from 'umtrack-wx';
 uma.init({
-  appKey: '5ee89e03978eea085c54686b',
+  appKey: '5f6879e1b473963242a34653',
   useOpenid: false,
   autoGetOpenid: false,
   debug: true
@@ -18,7 +18,7 @@ uma.init({
 // #ifdef MP-TOUTIAO
 import uma from './libs/umtrack-tt/uma.min.js';
 uma.init({
-    appKey:'yourappkey', //由友盟分配的APP_KEY
+    appKey:'5f6879e1b473963242a34653', //由友盟分配的APP_KEY
     autoGetOpenid: true, // 是否需要通过友盟后台获取openid或匿名openid，如若需要，请到友盟后台设置appId及secret
     debug: true, //是否打开调试模式
     uploadUserInfo: true // 自动上传用户信息，设为false取消上传，默认为false

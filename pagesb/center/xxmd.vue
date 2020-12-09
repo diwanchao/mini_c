@@ -15,9 +15,10 @@
 			        <view><image class="address_icon" src="https://div.buy315.com.cn/xcx_imgs/address.png"></image></view>
 			        <view>当前位置</view>
 			      </view>
-			      <view class="cx_address" @click="getaddress">
-			      <image class="address_icon" src="https://div.buy315.com.cn/xcx_imgs/shuxin.png"></image>
-			        <view>重新定位</view>
+			      <!-- <view class="cx_address" @click="getaddress"> -->
+				  <view class="cx_address" @click="xzaddress">
+			      <!-- <image class="address_icon" src="https://div.buy315.com.cn/xcx_imgs/shuxin.png"></image> -->
+			        <view>切换地址</view>
 			      </view>
 			    </view>
 			    <!-- <view class="text">{{address}}</view> -->
@@ -41,7 +42,7 @@
 			        </view>
 			    </view>
 				  <view class="wodedd">
-					 <text class="address_left">仅支持自取</text>
+					 <text class="address_left" style="line-height: 60upx;">仅支持自取</text>
 				    <view class="wo_address">附近地址 </view>
 				    <view>
 				      <view class="fjdizhi" v-for="(item,index) in areaList" :key="index" @click="qiehuan(item,index)" >{{item.stores_name}}
@@ -211,6 +212,7 @@
 						var arr = {
 							lng :this.lng,
 							lat :this.lat,
+							is_test:1
 						};
 						var pdata = url.getSignStr(arr);
 						uni.request({
@@ -243,6 +245,7 @@
 				var arr = {
 					lng :this.lng,
 					lat :this.lat,
+					is_test:1
 				};
 				var pdata = url.getSignStr(arr);
 				uni.request({
@@ -282,6 +285,7 @@
 						var arr = {
 							lng :res.longitude,
 							lat : res.latitude,
+							is_test:1
 						};
 						var pdata = url.getSignStr(arr);
 						uni.request({
@@ -503,5 +507,7 @@
 	.address_left{
 		position: absolute;
 		right: 40rpx;
+		font-size: 24upx;
+		color: #999;
 	}
 </style>
