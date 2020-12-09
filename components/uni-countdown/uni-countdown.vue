@@ -185,6 +185,7 @@
 	@import '~@/uni.scss';
 	$countdown-height: 48rpx;
 	$countdown-width: 52rpx;
+	
 
 	.uni-countdown {
 		/* #ifndef APP-NVUE */

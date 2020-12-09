@@ -6,10 +6,10 @@
 		    <view>经营证照</view>
 		    <view><image class="set_icon" src="https://div.buy315.com.cn/xcx_imgs/yjt.png"></image></view>
 		  </view>
-<!-- 		 <view class="jingying">
+		 <view class="jingying">
 		    <view>用户协议</view>
 		    <view><image class="set_icon" src="https://div.buy315.com.cn/xcx_imgs/yjt.png"></image></view>
-		  </view> -->
+		  </view>
 <!-- 		  <view class="jingying">
 		    <view>隐私政策</view>
 		    <view><image class="set_icon" src="https://div.buy315.com.cn/xcx_imgs/yjt.png"></image></view>
@@ -46,6 +46,10 @@
 </script>
 
 <style>
+	page{
+		overflow: hidden;
+		background-color: #efefef;
+	}
 /* pages/my/set.wxss */
 .set{
   width: 710rpx;
@@ -53,6 +57,7 @@
   margin-top: 20rpx;
   margin-left: 20rpx;
   border-radius: 10rpx;
+  box-shadow: 0 0 5rpx #efefef;
 }
 .jingying{
   display: flex;
@@ -65,9 +70,10 @@
   margin-left: 20rpx;
   align-items: center;
   border-bottom:1rpx solid #f7f7f7;
+ 
 }
 .set_icon{
   height: 20rpx;
-  width: 20rpx;
+  width: 11rpx;
 }
 </style>

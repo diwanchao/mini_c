@@ -36,8 +36,8 @@
 				<!-- 不是app的时候中返回和left在前面 -->
 				<!-- #ifndef APP-PLUS-NVUE -->
 				<view class="hx-navbar__content__main_back"  @tap="onBack" v-if="conf.back">
-					<text class="hxicon hx-navbar__icon" :class="{'hx-navbar__icontran':bgTransparent == 0}" :style="{color: txtColor}">&#xe679;</text>
-					<text class="hx_font_size" :style="{color: txtColor}" v-if="conf.backTxt">{{conf.backTxt}}</text>
+					<!-- <text class="hxicon hx-navbar__icon" :class="{'hx-navbar__icontran':bgTransparent == 0}" :style="{color: txtColor}">&#xe679;</text> -->
+					<text class="hx_font_size" :style="{color: txtColor}" v-if="conf.backTxt">{{conf.backTxt}}1</text>
 				</view>
 				<view class="hx-navbar__content__main_left"  v-if="conf.leftSlot">
 					<slot name="leftSwitch" v-if="conf.leftSlotSwitch && slotSwitchOpacity == 0" />
@@ -46,9 +46,9 @@
 				<view class="hx-navbar__content__main_left" :style="{'padding': conf.back ||conf.leftSlot ? '0' : '' }"  v-if="conf.leftButton">
 					<block v-for="(btn,index) in conf.leftButton" :key="index">
 						<view class="hx-navbar__content__main_left_btn" @tap="onClickBtn(btn)" :class="{'hx-navbar__btntran':bgTransparent == 0}">
-							<text v-if="btn.position && btn.position == 'left'" class="hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : txtColor,marginRight:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text>
-							<text class="hx-navbar__content__main_lefticon_txt hx_font_size" :style="{color:btn.color ? btn.color : txtColor}" style="font-size: 14px;" v-if="btn.txt">{{btn.txt}}</text>
-							<text v-if="!btn.position || btn.position != 'left'" class="hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : txtColor,marginLeft:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text>
+							<!-- <text v-if="btn.position && btn.position == 'left'" class="hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : txtColor,marginRight:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text> -->
+							<text class="hx-navbar__content__main_lefticon_txt hx_font_size" :style="{color:btn.color ? btn.color : txtColor}" style="font-size: 28rpx;" v-if="btn.txt">{{btn.txt}} <text class="qhmd">切换门店 ></text></text>
+							<!-- <text v-if="!btn.position || btn.position != 'left'" class="hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : txtColor,marginLeft:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text> -->
 						</view>
 					</block>
 				</view>
@@ -72,8 +72,8 @@
 				
 				<!-- #ifdef APP-PLUS-NVUE -->
 				<view class="hx-navbar__content__main_back"  @tap="onBack" v-if="conf.back">
-					<text class="hxicon hx-navbar__icon" :class="{'hx-navbar__icontran':bgTransparent == 0}" :style="{color: txtColor}">&#xe679;</text>
-					<text class="hx_font_size" :style="{color: txtColor}" v-if="conf.backTxt">{{conf.backTxt}}</text>
+					<!-- <text class="hxicon hx-navbar__icon" :class="{'hx-navbar__icontran':bgTransparent == 0}" :style="{color: txtColor}">&#xe679;</text> -->
+					<text class="hx_font_size" :style="{color: txtColor}" v-if="conf.backTxt">{{conf.backTxt}}3</text>
 				</view>
 				<view class="hx-navbar__content__main_left"  v-if="conf.leftSlot">
 				
@@ -83,9 +83,9 @@
 				<view class="hx-navbar__content__main_left" :style="{'padding': conf.back ||conf.leftSlot ? '0' : '' }"  v-if="conf.leftButton">
 					<block v-for="(btn,index) in conf.leftButton" :key="index">
 						<view class="hx-navbar__content__main_left_btn" @tap="onClickBtn(btn)" :class="{'hx-navbar__btntran':bgTransparent == 0}">
-							<text v-if="btn.position && btn.position == 'left'" class="hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : '',marginRight:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text>
-							<text class="hx-navbar__content__main_lefticon_txt hx_font_size" :style="{color:btn.color ? btn.color : txtColor}"  v-if="btn.txt">{{btn.txt}}</text>
-							<text v-if="!btn.position || btn.position != 'left'" class="hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : '',marginLeft:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text>
+							<!-- <text v-if="btn.position && btn.position == 'left'" class="hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : '',marginRight:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text> -->
+							<text class="hx-navbar__content__main_lefticon_txt hx_font_size" :style="{color:btn.color ? btn.color : txtColor}"  v-if="btn.txt">{{btn.txt}}4</text>
+							<!-- <text v-if="!btn.position || btn.position != 'left'" class="hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : '',marginLeft:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text> -->
 						</view>
 					</block>
 				</view>
@@ -111,9 +111,9 @@
 				<view class="hx-navbar__content__main_right" :style="{padding: conf.rightSlot ? '0' : '0 13px 0 9px;'}" v-if="conf.rightButton">
 					<block v-for="(btn,index) in conf.rightButton" :key="index">
 					<view class="hx-navbar__content__main_right_btn" @tap="onClickBtn(btn)" :class="{'hx-navbar__btntran':bgTransparent == 0}">
-						<text v-if="btn.position && btn.position == 'left'" class="hxicon hx-navbar__content__main_right_icon hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : '',marginRight:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text>
-						<text class="hx-navbar__content__main_right_txt hx_font_size" :style="{color:btn.color ? btn.color : txtColor}" v-if="btn.txt">{{btn.txt}}</text>
-						<text v-if="!btn.position || btn.position != 'left'" class="hxicon hx-navbar__content__main_right_icon hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : '',marginLeft:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text>
+						<!-- <text v-if="btn.position && btn.position == 'left'" class="hxicon hx-navbar__content__main_right_icon hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : '',marginRight:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text> -->
+						<text class="hx-navbar__content__main_right_txt hx_font_size" :style="{color:btn.color ? btn.color : txtColor}" v-if="btn.txt">{{btn.txt}}5</text>
+						<!-- <text v-if="!btn.position || btn.position != 'left'" class="hxicon hx-navbar__content__main_right_icon hx-navbar__icon" :class="conf.font" :style="{color:btn.color ? btn.color : '',marginLeft:btn.txt ? '2px': '0'}">{{iconHandle(btn.icon)}}</text> -->
 					</view>
 					</block>
 				</view>
@@ -986,7 +986,7 @@
 		&__fixed{
 			position: fixed;
 			top:0;
-			z-index: 99;
+			z-index: 99999999999999999999999;
 		}
 		&__shadow {
 			box-shadow: 0 2upx 12upx #ccc;
@@ -1028,4 +1028,6 @@
 		// width: 750rpx;
 		text-align: center;
 	}
+	
 </style>
+

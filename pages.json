@@ -3,14 +3,15 @@
 		{
 			"path": "pages/home/index",
 			"style": {
-				"navigationBarTitleText": "配送商城",
+				"navigationBarTitleText": "每日菜场",
 				"backgroundColorTop":"black",
 				// "navigationBarBackgroundColor": "#F0AD4E",
 				"navigationBarTextStyle":"black",
-				"enablePullDownRefresh": true,
+				// "enablePullDownRefresh": true,
 				"navigationStyle":"custom"
 			}
-		},{
+		}
+		,{
 			"path": "pages/home/zt",
 			"style": {
 				"navigationBarTitleText": "专题",
@@ -141,17 +142,27 @@
 				"enablePullDownRefresh": true
 				// "navigationStyle":"custom"
 			}
-		}, {
+		},{
 			"path": "pages/classification/classification",
 			"style": {
-				"navigationBarTitleText": "分类",
+				"navigationBarTitleText": "及时达",
 				"enablePullDownRefresh": true,
 				"navigationBarBackgroundColor": "#fff",
 				"backgroundColorTop":"#fff",
 				"navigationBarTextStyle":"black"
 				// "navigationStyle":"custom"
 			}
-		}, {
+		},{
+			"path": "pages/classification/classification_no",
+			"style": {
+				"navigationBarTitleText": "暂未开启",
+				"enablePullDownRefresh": true,
+				"navigationBarBackgroundColor": "#fff",
+				"backgroundColorTop":"#fff",
+				"navigationBarTextStyle":"black"
+				// "navigationStyle":"custom"
+			}
+		},{
 			"path": "pages/goods_details/goods_details",
 			"style": {
 				"navigationBarTitleText": "商品详情",
@@ -171,7 +182,7 @@
 				"navigationBarTextStyle":"black"
 				// "navigationStyle":"custom"
 			}
-		},{
+		}, {
 			"path": "pages/goods_details/pay_ts",
 			"style": {
 				"navigationBarTitleText": "支付",
@@ -308,7 +319,7 @@
 				// "navigationStyle":"custom"
 			}
         }
-        ,{
+		,{
             "path" : "pages/home/newlist",
             "style" : {
 				"navigationBarTitleText": "新人专享",
@@ -337,7 +348,7 @@
         ,{
             "path" : "pages/center/wallet",
             "style" : {
-				"navigationBarTitleText": "新人详情",
+				"navigationBarTitleText": "账户余额",
 				"navigationBarBackgroundColor": "#fff",
 				"backgroundColorTop":"#f6f6f6",
 				"backgroundColorBottom":"#f6f6f6",
@@ -348,7 +359,7 @@
         ,{
             "path" : "pages/home/group",
             "style" : {
-				"navigationBarTitleText": "晚间菜场",
+				"navigationBarTitleText": "拼团活动",
 				"navigationBarBackgroundColor": "#fff",
 				"backgroundColorTop":"#f6f6f6",
 				"backgroundColorBottom":"#f6f6f6",
@@ -396,12 +407,13 @@
         ,{
             "path" : "pages/center/vipsdetail",
             "style" : {
-				"navigationBarTitleText": "会员详情",
+				"navigationBarTitleText": "提货码",
 				"navigationBarBackgroundColor": "#fff",
 				"backgroundColorTop":"#f6f6f6",
 				"backgroundColorBottom":"#f6f6f6",
-				"navigationBarTextStyle":"black"
-				// "navigationStyle":"custom"
+				"navigationBarTextStyle":"black",
+				"enablePullDownRefresh":true,
+				"navigationStyle":"custom"
 			}
         }
         ,{
@@ -468,6 +480,11 @@
 				// "navigationStyle":"custom"
 			}
         }
+        ,{
+            "path" : "pages/home/url/url",
+            "style" : {}
+        }
+        
     ],
 	"subPackages": [{
 	    "root": "pagesb",
@@ -517,6 +534,17 @@
 				}
 			},{
 				"path": "center/xjj_list",
+				"style": {
+					"navigationBarTitleText": "优惠券",
+					"backgroundColorTop":"#fff",
+					"navigationBarBackgroundColor": "#fff",
+					"navigationBarTextStyle":"black",
+					"enablePullDownRefresh": true
+					// "navigationStyle":"custom"
+					
+				}
+			},{
+				"path": "center/yushou_yhj",
 				"style": {
 					"navigationBarTitleText": "优惠券",
 					"backgroundColorTop":"#fff",
@@ -831,7 +859,71 @@
 					"navigationBarTextStyle":"black"
 					// "navigationStyle":"custom"
 				}
+			},{
+				"path": "new/classification_t",
+				"style": {
+					"navigationBarTitleText": "次日达",
+					"backgroundColorTop":"#fff",
+					"navigationBarBackgroundColor": "#fff",
+					"navigationBarTextStyle":"black"
+					// "navigationStyle":"custom"
+				}
+			},{
+				"path": "new/fenxiang_test",
+				"style": {
+					"navigationBarTitleText": "分享好友",
+					"backgroundColorTop":"#fff",
+					"navigationBarBackgroundColor": "#fff",
+					"navigationBarTextStyle":"black"
+					// "navigationStyle":"custom"
+				}
+			},{
+				"path": "new/shoppingcart_new",
+				"style": {
+					"navigationBarTitleText": "购物车new",
+					"backgroundColorTop":"#fff",
+					"navigationBarBackgroundColor": "#fff",
+					"navigationBarTextStyle":"black"
+					// "navigationStyle":"custom"
+				}
+			},{
+				"path": "new/zdy_goods_details",
+				"style": {
+					"navigationBarTitleText": "砍价总动员",
+					"backgroundColorTop":"#fff",
+					"navigationBarBackgroundColor": "#fff",
+					"navigationBarTextStyle":"black"
+					// "navigationStyle":"custom"
+				}
+			},{
+				"path": "new/fx_goods_details",
+				"style": {
+					"navigationBarTitleText": "砍价总动员",
+					"backgroundColorTop":"#fff",
+					"navigationBarBackgroundColor": "#fff",
+					"navigationBarTextStyle":"black"
+					// "navigationStyle":"custom"
+				}
+			},{
+				"path": "new/zero_goods_details",
+				"style": {
+					"navigationBarTitleText": "0元专享详情",
+					"backgroundColorTop":"#fff",
+					"navigationBarBackgroundColor": "#fff",
+					"navigationBarTextStyle":"black"
+					// "navigationStyle":"custom"
+				}
+			},{
+				"path": "new/zeroqiang",
+				"style": {
+					"navigationBarTitleText": "0元专享",
+					"backgroundColorTop":"#fff",
+					"navigationBarBackgroundColor": "#fff",
+					"navigationBarTextStyle":"black"
+					// "navigationStyle":"custom"
+				}
 			}
+			
 		]
 	}],
 	"globalStyle": {
@@ -847,6 +939,7 @@
 		"backgroundColor": "#ffffff",
 		"list": [{
 			"pagePath": "pages/home/index",
+			// "pagePath": "pages/home/index",
 			"iconPath": "static/index-0.png",
 			"selectedIconPath": "static/index-1.png",
 			"text": "首页"
@@ -854,7 +947,7 @@
 			"pagePath": "pages/classification/classification",
 			"iconPath": "static/tag-0.png",
 			"selectedIconPath": "static/tag-1.png",
-			"text": "分类"
+			"text": "及时达"
 		}, {
 			"pagePath": "pages/shoppingcart/shoppingcart",
 			"iconPath": "static/hot-0.png",

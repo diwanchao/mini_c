@@ -2,17 +2,22 @@
 	<view class="center" style=" ">
 		<!-- <hx-navbar :config="config" /> -->
 		<view class="x12 float-left">
-			<view class="center-list x12" style="margin-top: 0;">
-				<view class="center-list-item border-top x12" style="min-height: 150upx; height: auto; border-color: #ddd;" v-for="(item,index) in address_list" :key="index">
-					<view class="x-auto" style="padding-top: 50upx; padding-right: 20upx; width: 48upx;" @click="isAddress(item)">
+			<view class="center-list x12 zhang" style="margin-top: 0;width: 710rpx;">
+				<view class="center-list-item border-top x12 zhang_son" v-for="(item,index) in address_list" :key="index">
+					<!-- <view class="x-auto" style="padding-top: 50upx; padding-right: 20upx;" @click="isAddress(item)">
 						<image src="https://div.buy315.com.cn/xcx_imgs/xz.png" style="width: 48upx; height: 48upx;" v-if="item.is_default==1"></image>
 						<image src="https://div.buy315.com.cn/xcx_imgs/wxz.png" mode="" style="width: 48upx; height: 48upx;" v-else></image>
-					</view>
-					<view class="x-auto text-big" style="padding-top: 35upx; width: 500upx; height: auto; padding-bottom: 20upx;font-size: 12pt;"  @click="isAddress(item)">
-						<view class="" style="color: #393D4A;">{{item.xq_name}}{{item.mbh}}</view>
-						<view class="" style="color: #393D4A;">
-							<view class="x-auto">{{item.name}}</view>
-							<view>
+					</view> -->
+					<view class="x-auto text-big zhang_G" style="width: 550upx; height: auto;font-size: 12pt;"  @click="isAddress(item)">
+						<view class="" style="font-size: 28rpx;color: #333333;">{{item.xq_name}}<text style="font-size: 28rpx;">{{item.mbh}}</text>
+							<text style="color: #fff;font-size: 22rpx;">
+								<text style="background: #3BA700;padding: 2rpx 19rpx;margin-left: 24rpx;" class="biaoqian" v-if="item.label!=''">{{item.label}}</text>
+								 <text style="background: #3BA700;padding: 2rpx 19rpx;background: #FE0000;margin-left: 24rpx;" v-if="item.is_default==1" class="biaoqian moren">默认</text>
+							</text>
+						</view>
+						<view class="" style="font-size: 24rpx;color: #666;">
+							<view class="x-auto address">{{item.name}} </view>
+							<view style="margin-top: 18rpx;">
 								<view class="x-auto padding-left" v-if="item.gender==2">女</view>
 								<view class="x-auto padding-left" v-else>男</view>
 							</view>
@@ -20,14 +25,15 @@
 							<view class="x-auto padding-left">{{item.tel}}</view>
 						</view>						
 					</view>
-					<view class="x-auto float-right text-red" @click="upAddress(item)" style="padding-top: 45upx;font-size: 12pt;">
-						<image src="https://div.buy315.com.cn/xcx_imgs/shdz3.png" mode="" style="width: 32upx; height: 36upx;"></image>
+					<view class="x-auto float-right text-red" @click="upAddress(item)" style="font-size: 12pt;">
+						<text class="bianji">编辑</text>
 					</view>
 				</view>
 			</view>
 		</view>
 		<view class="x12 padding-big margin-top">
-			<button @click="goAddress" style="background:rgba(255,255,255,1); font-size: 14pt; border:1px solid rgba(246,90,42,1); border-radius:34px; color: #F65A2A;height: 90upx; width: 100%;">添加收货地址</button>
+			<button @click="goAddress" style="background:#FE0000; font-size: 36rpx; border-radius:34px; 
+			color: #fff;height: 90upx; width: 600rpx;margin-top: 618rpx;">添加收货地址</button>
 		</view>
 	</view>
 </template>
@@ -314,4 +320,13 @@
 	.shop-menu{
 		position: fixed; z-index: 1000; bottom: 0upx;
 	}
+	.bianji{
+		display: block;
+		border-left: 2rpx solid #999;
+		font-size: 28rpx;
+		padding-left: 29upx;height: 30rpx;
+		line-height: 30rpx;
+		color: #999;
+	}
+	
 </style>

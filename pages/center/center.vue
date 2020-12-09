@@ -58,7 +58,23 @@
 					</view>
 				</view>
 			</view>
-			<view class="x12 padding-small-bottom text-center text-default" style="padding-top: 35upx; font-size: 24upx;">
+			<view class="x12 padding-small-bottom text-center text-default" style="padding-top: 20upx; font-size: 24upx;">
+				<!-- <view class="x4 orderlisttext"  @click="goDetails(1)">
+					<view style="width: 100upx; margin: auto;">
+						<view class="addcart" style="float: right; width: 12rpx; height: 12rpx; min-width: 0rpx; margin-right: 25rpx; background-color: red;"
+						 v-if="memberList.dfk>0 && login==true"></view>
+						<view class="addcart" style="float: right; width: 12rpx; height: 12rpx; min-width: 0rpx; margin-right: 25rpx;"
+						 v-if="memberList.dfk==0"></view>
+						<view class="x12" style="margin-top: -20upx;">
+							<view style="display: table-cell; vertical-align: middle; text-align: center; width: 100upx; height: 50rpx;">
+								<image src="https://div.buy315.com.cn/xcx_imgs/dqh.png" style="width: 48upx; height: 48upx;"></image>
+							</view>
+						</view>
+						<view class="x12 text22">
+							待自取
+						</view>
+					</view>
+				</view> -->
 				<view class="x4 orderlisttext"  @click="goDetails(1)">
 					<view style="width: 100upx; margin: auto;">
 						<view class="addcart" style="float: right; width: 12rpx; height: 12rpx; min-width: 0rpx; margin-right: 25rpx; background-color: red;"
@@ -117,7 +133,7 @@
 							</view>
 						</view>
 						<view class="x12 text22">
-							退款/售后
+							退款
 						</view>
 					</view>
 				</view>
@@ -135,13 +151,13 @@
 		<view class="servicelist">
 			<view class="servicelisttext">我的服务</view>
 			<view class="servicelall">
-				<view class="serviceone" @click="gotovips">
+				<!-- <view class="serviceone" @click="gotovips">
 					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz11.png" mode=""></image></view>
 					<view class="servicetext">会员卡</view>
-				</view>
-				<view class="serviceone" @click="gotomyjoin" v-if="login==true">
-					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz12.png" mode=""></image></view>
-					<view class="servicetext">我的拼团</view>
+				</view> -->
+				<view class="serviceone" @click="goKanJia" v-if="login==true">
+					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/kanjia.png" mode=""></image></view>
+					<view class="servicetext">我的砍价</view>
 				</view>
 				<view class="serviceone" @click="goDz"  v-if="login==true">
 					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz13.png" mode=""></image></view>
@@ -157,7 +173,13 @@
 					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz14.png" mode=""></image></view>
 					<view class="servicetext">浏览记录</view>
 				</view>
-				<view class="serviceone" @click="gotoSet" style="margin-left: 40rpx;">
+				<view class="serviceone">
+					<button open-type="contact" bindcontact="handleContact" class="kefu_button">
+					</button>
+					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/kefu.png" mode=""></image></view>
+					<view class="servicetext">在线客服</view>
+				</view>
+				<view class="serviceone" @click="gotoSet">
 					<view><image class="serviceimg" src="https://div.buy315.com.cn/xcx_imgs/fwbz15.png" mode=""></image></view>
 					<view class="servicetext">设置</view>
 				</view>
@@ -349,7 +371,7 @@
 				member_xxb: {},
 				listScroll:'',
 				datanum:0,
-				points_sum:'',
+				points_sum:0,
 			}
 		},
 		onShow: function(e) {
@@ -487,8 +509,26 @@
 						member_openid:this.memberinfo.openid,
 					};
 				var pdata = url.getSignStr(arr);
+				//原优惠券
+				// uni.request({
+				// 	url:url.websiteUrl+'/api_v2/stores/getcouponnum',
+				// 	method:'POST',
+				// 	dataType:'json',
+				// 	header:{
+				// 		'content-type':'application/x-www-form-urlencoded'
+				// 	},
+				// 	data:pdata,
+				// 	success: res => {
+				// 		console.log(res.data.data,'优惠券成功')
+				// 		console.log(this.datanum,'优惠券的数量');
+				// 		this.datanum = res.data.data;
+						
+				// 	},
+				// 	fail: () => {},
+				// 	complete: () => {}
+				// });
 				uni.request({
-					url:url.websiteUrl+'/api_v2/stores/getcouponnum',
+					url:url.websiteUrl+'/api_v2/coupon/getmembercouponnumber',
 					method:'POST',
 					dataType:'json',
 					header:{
@@ -513,7 +553,7 @@
 			},
 			gotocoupon(){
 				uni.navigateTo({
-					url:'/pagesb/center/xjj_list'
+					url:'/pagesb/center/yushou_yhj'
 				})
 			},
 			gotomyjoin(){
@@ -894,6 +934,11 @@
 					url: "/pages/center/set"
 				})
 			},
+			goKanJia(){
+				uni.navigateTo({
+					url: "/pagesb/new/zeroqiang"
+				})
+			}
 			
 
 			
@@ -1020,7 +1065,8 @@
 		color: #343434;
 	}
 	.orderlisttext{
-		width: 175upx;
+		width: 25%;
+		/* margin-bottom: 20upx; */
 	}
 	.order_num{
 	  width: 710upx;
@@ -1096,33 +1142,37 @@
 		text-align: center;
 		justify-content: center;
 		font-size: 24upx;
-		margin-right: 95upx;
 		justify-content: space-between;
 		margin-top: 25upx;
+		width: 25%;
+		position: relative;
 	}
-	.serviceone:nth-child(4){
+	/* .serviceone:nth-child(4){
 		margin-right:0;
-	}
-	.serviceone:nth-child(1){
+	} */
+	/* .serviceone:nth-child(1){
 		margin-left:30upx;
-	}
-	.serviceone:nth-child(5){
+	} */
+	/* .serviceone:nth-child(5){
 		margin-left:20upx;
-	}
-	.serviceone:last-child{
-		margin-left:10upx;
-	}
+	} */
+	/* .serviceone:last-child{
+		margin-left:40upx;
+	} */
 	.servicelall{
 		display: flex;
 		flex-wrap: wrap;
 		margin-bottom: 20upx;
+		padding: 0 20upx;
+		box-sizing: border-box;
+		padding-left: 0;
 	}
 	.servicelist{
 		width: 710upx;
 		background-color: #fff;
 		margin-left: 20upx;
 		position: absolute;
-		top: 660upx;
+		top: 650upx;
 		border-radius: 10upx;
 		box-shadow: 1px 2px 18px 0px rgba(4, 0, 0, 0.12)
 	}
@@ -1136,10 +1186,10 @@
 	.servicetext{
 		font-size: 24upx;
 		color: #343434;
-		margin-top: 20upx;
+		margin-top: 10upx;
 		position: relative;
 	}
-/* 	button{
+	button{
 		border: none;
 		background:none;
 		padding: 0;
@@ -1149,6 +1199,19 @@
 	}
 	button::after{
 		border: none;
-	} */
+	}
+	.kefu_button{
+		width: 100%;
+		height: 98upx; 
+		padding-left: 0;
+		padding-right: 0;
+		background-color: transparent;
+		line-height: 40upx;
+		border: none!important;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 111;
+	}
 	
 </style>

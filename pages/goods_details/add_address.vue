@@ -9,28 +9,58 @@
 		  <view class="addtext">
 		    <view class="text1"></view>
 		    <view class="rigaogroup">
-		      <radio-group @change="radioChange" class="radio_group" >
+				<view class="">
+					<text @click="radioChange(1)" :style="gender==1?'border:1px solid #FE0000':''">
+						<text v-if="gender==1" class="red" style="width: 18rpx;height: 18rpx;border:none;margin: 6rpx auto;"></text>
+					</text>先生
+				</view>
+				<view class="">
+					<text @click="radioChange(2)" :style="gender==2?'border:1px solid #FE0000':''">
+						<text v-if="gender==2" class="red" style="width: 18rpx;height: 18rpx;border: none;margin: 6rpx auto;"></text>
+					</text>女士
+				</view>
+		     <!-- <radio-group @change="radioChange" class="radio_group" >
+				<radio value='2' >女士</radio>
 				<radio value='1' checked>先生</radio>
-		        <radio value='2' >女士</radio>
-		      </radio-group>
+		      </radio-group> -->
 		    </view>
 		  </view>
 		  <view class="addtext">
 		    <view class="text1">手机号</view>
 		    <input class="inputclass" placeholder="请填写收货人手机号" type="text" placeholder-class="placeclass" v-model="telphone"/>
 		  </view>
-		  <view class="addtext" @click="xzaddress">
-		    <view class="text1">收货地址</view>
-			<input type="text" value="" class="inputclass" placeholder="点击选择收货地址" placeholder-class="placeclass" v-model="xq_name"/>
+		  <view class="addtext" style="justify-content: space-between;" @click="xzaddress">
+		    <view class="" style="display: flex;align-items: center;">
+		    	<view class="text1">收货地址</view>
+		    	<input type="text" value="" class="inputclass" placeholder="点击选择收货地址" placeholder-class="placeclass" v-model="xq_name"/>
+		    </view>
 		    <view>
-		      <image class="images" src="https://div.buy315.com.cn/xcx_imgs/yjt.png"></image>
+		      <image class="images" style="margin-right: 20rpx;" src="https://div.buy315.com.cn/xcx_imgs/yjt.png"></image>
 		    </view>
 		  </view>
 		  <view class="addtext">
 		    <view class="text1">门牌号</view>
 		    <input class="inputclass" placeholder="详细地址，例如：3号楼2单元105" type="text"  placeholder-class="placeclass" v-model="mbh"/>
 		  </view>
+		  <view class="addtext" style="justify-content: space-between;">
+		    <view class="" style="display: flex;align-items: center;">
+		    	<view class="text1" style="width: 100rpx;">标签</view>
+		    </view>
+		    <view class="biaoArr">
+				<view @click="chooseBiaoArr(item)" :style="item.name == label?'color:#FE0000;border:1px solid #FE0000':''" v-for="(item,index) in biaoArr">{{item.name}}</view>
+		    </view>
+		  </view>
+		  <view class="addtext" style="justify-content: space-between;align-items: center;">
+		    <view class="" style="display: flex;align-items: center;">
+		    	<view class="text1">设为默认地址</view>
+		    </view>
+		    <view style="margin-right: 21rpx;height: 48upx;display: flex;" @click="is_default_c">
+		      <image src="https://div.buy315.com.cn/xcx_imgs/dz_moren.png" style="width: 48upx; height: 48upx;" v-show="is_default == 2"></image>
+		      <image src="https://div.buy315.com.cn/xcx_imgs/dz_choose.png" mode="" style="width: 48upx; height: 48upx;"v-show="is_default == 1"></image>
+		    </view>
+		  </view>
 		</view>
+		
 <!-- 		<view class="x12 text-333">
 			<view class="x12 bg-white">
 				<view class="x3 " >收货人</view>
@@ -101,13 +131,14 @@
 
 		</view> -->
 
-		<view class="x12 padding-big margin-top">
+		<view class="x12 padding-big margin-top" style="margin-top: 51rpx;padding: 0 4%;">
 			<button @click="setLoading" class="text-white"  v-if="address_id==0">保存收货地址</button>
-			<button @click="upAddress" class="text-white"  v-if="address_id!=0">修改收货地址</button>
+			<button @click="upAddress" class="text-white" style="border-radius: 100upx;margin-top: 0;"  v-if="address_id!=0">保存并使用</button>
 		</view>
 		<view class="x12 padding-big margin-top" v-if="address_id!=0">
-			<button @click="delAddress" style="background:rgba(255,255,255,1); border:1px solid rgba(204,204,204,1); border-radius:34px; color: #747C96;">删除地址</button>
+			<div @click="delAddress" class="text-white"  style="background:#C0C0C0; border-radius:34px; color: #fff;margin:0 auto;">删除地址</div>
 		</view>
+		
 	</view>
 </template>
 <script>import url from '../../main.js';
@@ -133,6 +164,7 @@
 		//#endif
 		data() {
 			return {
+				biaoArr: [{name: '家',falg: false},{name:'父母家',falg: false},{name:'公司',falg: false},{name:'学校',falg: false},{name:'其他',falg: false}],
 				deployinfo:{},//配置信息货币单位，符号，以及其他的一些配置参数
 				login:false,
 				memberinfo:[],
@@ -142,7 +174,7 @@
 				mbh:'',
 				xq_name:'',
 				address_id:0,
-				is_default:1,
+				is_default:2,
 				address_list:[],
 				lat:'',
 				lng:'',
@@ -157,6 +189,7 @@
 				// 	backgroundImg: 'https://div.buy315.com.cn/xcx_imgs/content_top.png',
 				// 	statusBarFontColor:'#fff'
 				// },
+				label:[]
 			}
 		},
 		onShow:function(){
@@ -217,15 +250,36 @@
 				this.address_id = addressinfo.address_id
 				this.lat = addressinfo.lat;
 				this.lng = addressinfo.lng
+				this.is_default= addressinfo.is_default,
+				this.label = addressinfo.label,
+				this.gender = addressinfo.gender
+				// if(addressinfo.label.indexOf(',')!=-1){
+				// 	this.label = addressinfo.label.split(",")
+				// }else{
+				// 	this.label.push(addressinfo.label)
+				// }
 			}
 			this.getPsdList();
 			//console.log(JSON.parse(data.addressinfo));
 		},
 		methods: {
-			   
+			chooseBiaoArr(item){
+				this.label = item.name
+			},
+			   is_default_c(){
+				   console.log(this.is_default)
+				   if(this.is_default == 1){
+					   this.is_default = 2
+				   }else{
+					   if(this.is_default == 2){
+					   	   this.is_default = 1
+					   }
+				   }
+				   
+			   },
 			  radioChange(e) {
-				  this.gender = e.detail.value
-				 console.log(e.detail.value,'123459')
+				  this.gender = e
+				 // console.log(e.detail.value,'123459')
 			    // console.log('radio发生change事件，携带value值为：', e.detail.value)
 			  },
 			switch1Change: function (e) {
@@ -399,6 +453,12 @@
 					});
 					return;
 				}
+				// let string = ''
+				// if(this.label.length>1){
+				// 	string = this.label.join(",")
+				// }else{
+				// 	string = this.label[0]
+				// }
 				//获取信息
 				var arr ={
 						openid: this.memberinfo.openid,
@@ -411,7 +471,8 @@
 						is_default: 1,
 						lat:this.lat,
 						lng:this.lng,
-						gender:this.gender
+						gender:this.gender,
+						label: this.label
 					};
 	
 				var pdata = url.getSignStr(arr);
@@ -483,7 +544,12 @@
 					});
 					return;
 				}
-		
+				// let string = ''
+				// if(this.label.length>1){
+				// 	string = this.label.join(",")
+				// }else{
+				// 	string = this.label[0]
+				// }
 				//获取信息
 				var arr ={
 						openid: this.memberinfo.openid,
@@ -495,8 +561,10 @@
 						is_default:this.is_default,
 						lat:this.lat,
 						lng:this.lng,
-						gender:this.gender
+						gender:this.gender,
+						label:this.label
 					};
+					console.log(arr)
 				var pdata = url.getSignStr(arr);
 				uni.request({
 					url:url.websiteUrl+'/api_v2/member_addres_act/add',
@@ -559,9 +627,25 @@
 </script>
 
 <style>
+	.biaoArr{
+		display: flex;
+		/* justify-content: space-between; */
+	}
+	.biaoArr view{
+		width: 90rpx;
+		height: 40rpx;
+		border: 1px solid #999999;
+		border-radius: 40rpx;
+		font-size:22rpx ;
+		line-height: 40rpx;
+		text-align: center;
+		margin-right: 21rpx;
+	}
 	page {
 		background-color: #F6F6F6;
 	}
+	
+	
 	.bg_address{
 		height: 120upx;
 		width: 500upx;
@@ -582,13 +666,12 @@
 		top: 20upx;
 	}
 	.text-white{
-		position: absolute;
-		bottom: 0;
-		left: 0;
+		margin-top: 51rpx;
+		border-radius:98rpx;
 		background-color: #FE0000;
 		font-size: 36upx;
 		color: #fff;
-		width: 100%;
+		width: 600rpx;
 		border-radius: 0;
 		text-align: center;
 		height: 98upx;
@@ -624,12 +707,15 @@
 	}
 	.images{
 	  height: 22rpx;
-	  width: 22rpx;
-	  position: absolute;
-	  right: 40rpx;
+	  width: 12rpx;
+	  /* position: absolute;
+	  right: 40rpx; */
 	}
 	.rigaogroup{
-	  width: 250rpx;
+	  width: 380rpx;
+	  display: flex;
+	  font-size: 24rpx;
+	  color: #333333;
 	}
 	.radio_group{
 	  font-size: 24rpx;
@@ -649,6 +735,19 @@
 	  border: 2rpx solid #999;
 	}
 	
+	.rigaogroup view{
+		display: flex;
+		align-items: center;
+		margin-right: 50rpx;
+	}
+	.rigaogroup text{
+		width: 30rpx;
+		height: 30rpx;
+		border-radius: 30rpx;
+		border: 1px solid #C0C0C0;
+		margin-right: 30rpx;
+		
+	}
 	.inputclass{
 	  font-size: 28rpx;
 	}
@@ -670,4 +769,13 @@
 	  box-sizing: border-box;
 	  padding: 0;
 	}
+	.red{
+		display: block;
+		width: 18px;
+		height: 18rpx;
+		border-radius: 18rpx;
+		background-color: #FE0000;
+		margin: auto auto;
+	}
+	
 </style>

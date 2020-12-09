@@ -139,14 +139,14 @@
 
 		&__number {
 			line-height: $countdown-height;
-			justify-content: center;
+			justify-content: center; 
 			height: $countdown-height;
 			border-radius: $uni-border-radius-base;
 			margin: 0 5upx;
 			font-size: $uni-font-size-base;
 			
 			font-size: $uni-font-size-sm;
-			padding: 0 10upx;
+			padding: 0 0upx;
 		}
 	}
 </style>

@@ -4,11 +4,14 @@
 		<view class="top_or">
 			<view style="position: relative;">
 				<!-- <view><image class="vips_img" src="https://div.buy315.com.cn/xcx_imgs/vips.png" mode=""></image></view> -->
-				<view><image class="vips_img" src="https://div.buy315.com.cn/xcx_imgs/my_small.png" mode=""></image></view>
-				<view class="text1">账户余额：￥{{zhanghuyue.money_sum}}</view>
-				<view><image class="erewima" :src="yemxList.barcode_img"></image></view>
+				<view class="top-bg">
+					<view class="text1">账户余额：￥{{zhanghuyue.money_sum}}</view>
+					<view class="white"><image class="erewima" :src="yemxList.barcode_img"></image></view>
+					<view class="bot-text">1231232135611231654132</view>
+				</image></view>
+				
 			</view>
-			<view  @click="gotorecharge" v-if="cz==1">
+			<view  @click="gotorecharge" v-if="cz==2">
 				<text class="text2">充值</text>
 			</view>
 			<view @click="gotorecharge" v-else></view>
@@ -252,6 +255,7 @@
 					},
 					data:pdata,
 					success: res => {
+						console.log("cs",res.data.data)
 						this.cz = res.data.data.cz
 					},
 					fail: () => {},
@@ -267,18 +271,47 @@
 	page{
 		background-color: #F7F7F7;
 	}
-	.vips_img{
-		height: 400upx;
-		width: 710upx;
-
+	.bot-text{
+		margin-top: 7rpx;
+		height: 18upx;
+		font-size: 24upx;
+		color: #333333;
+		}
+	.white{
+		width: 310rpx;
+		height: 100rpx;
+		background-color: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 47rpx;
+		
 	}
+	.top-bg{
+		width: 710rpx;
+		/* overflow: hidden; */
+		height: 400rpx;
+		background: url('https://div.buy315.com.cn/xcx_imgs/my_small.png');
+		background-size: 820rpx 480rpx;
+		background-position: -30rpx 0;
+		border-radius: 10rpx;
+		display: flex;
+		flex-direction:column;
+		align-items: center;
+	}
+	
+/* 	.vips_img{
+		height: 400upx;
+		width: 780upx;
+		position: absolute;
+		right: 0rpx;
+
+	} */
 	.text1{
 		font-size: 32upx;
-		color: #FE0000;
-		position: absolute;
-		left: 200upx;
-		top: 95upx;
+		color: #fff;
 		font-weight: bold;
+		margin-top: 95rpx;
 	}
 /* pages/my/wallet.wxss */
 .top_or{
@@ -350,6 +383,7 @@
 .ul .li .price{
   line-height: 46rpx;
   font-size: 30rpx;
+  color: #333;
 }
 .ul .li .status{
   position: absolute;
@@ -379,10 +413,10 @@
 	text-align: center;
 }
 .erewima{
-	position: absolute;
-	top: 150rpx;
-	width: 440rpx;
-	height: 150rpx;
-	left: 130rpx;
+	
+	/* top: 150rpx; */
+	width: 269rpx;
+	height: 76rpx;
+	/* left: 130rpx; */
 }
 </style>

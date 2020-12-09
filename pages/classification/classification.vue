@@ -76,14 +76,14 @@
 											<view class="x-auto" v-if="cartitme.num>0" @click="jrShoppingCart(0,s_itme)"><image src="https://div.buy315.com.cn/xcx_imgs/jian.png"  mode="aspectFill" style="width: 45upx; height: 45upx;position: absolute; bottom: 30rpx; right: 114rpx;"></image></view>
 											<view class="x-auto" v-if="cartitme.num>0" style="color: #393D4A; position: absolute; bottom: 34rpx; right: 86rpx">{{cartitme.num}}</view>
 										</view>
-							<view class="x-auto" :id="'dh1'+'-'+s_itme.barcode_id"  v-if="s_itme.more==1 && (s_itme.sale_num==='' || s_itme.sale_num>0)" @click="jrShoppingCart(1,s_itme,1,'dh1'+'-'+s_itme.barcode_id)">
+							<view class="x-auto c2" :id="'dh1'+'-'+s_itme.barcode_id"  v-if="s_itme.more==1 && (s_itme.sale_num==='' || s_itme.sale_num>0)" @click="jrShoppingCart(1,s_itme,1,'dh1'+'-'+s_itme.barcode_id)">
 							
 								<view class="x-auto" :animation="animationData" style="background:#F65A2A;height:45upx;width:45upx; border-radius: 45upx; position: absolute;" v-for="(ditem,dindex) in amintiond_list" :key="dindex" v-if="ditem.barcode_id==s_itme.barcode_id"></view>
 								
 								<view class="x-auto"><image src="https://div.buy315.com.cn/xcx_imgs/jia.png"  mode="aspectFill" style="width: 45upx; height: 45upx; position: absolute; right: 26rpx; bottom: 30rpx;"></image></view>
 							</view>
 										<view class="x-auto"   v-if="s_itme.more==2 && (s_itme.sale_num==='' || s_itme.sale_num>0)">
-											<button type="primary"  @click="togglePopup('bottom', 'popup',s_itme)" style=" width:auto; height:auto; padding:0; border:0;border-color:#fff;line-height: 35upx; background:#fff;display:inline;">
+											<button type="primary c1"  @click="togglePopup('bottom', 'popup',s_itme)" style=" width:auto; height:auto; padding:0; border:0;border-color:#fff;line-height: 35upx; background:#fff;display:inline;">
 												<view class="x-auto" :animation="animationData" style="background:#F65A2A;height:45upx;width:45upx; border-radius: 45upx; position: absolute;" v-for="(ditem,dindex) in amintiond_list" :key="dindex" v-if="ditem.barcode_id==s_itme.barcode_id"></view>
 												<view class="x-auto"><image src="https://div.buy315.com.cn/xcx_imgs/jia.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image></view>
 											</button>
@@ -817,6 +817,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 					barcode_id:this.goodsinfo.barcode_id,
 					category_id:this.goodsinfo.category_id,
 					goods_id:this.goodsinfo.goods_id,
+					delivery_type:this.goodsinfo.delivery_type,
 					goods_title:this.goodsinfo.goods_title,
 					img:this.goodsinfo.imgs[0],
 					original_price:this.goodsinfo.original_price,
@@ -1280,6 +1281,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 							barcode_id:this.shoppingCarts[i].barcode_id,
 							category_id:this.shoppingCarts[i].category_id,
 							goods_id:this.shoppingCarts[i].goods_id,
+							delivery_type:this.shoppingCarts[i].delivery_type,
 							goods_title:this.shoppingCarts[i].goods_title,
 							img:this.shoppingCarts[i].img,
 							original_price:this.shoppingCarts[i].original_price,
@@ -1310,6 +1312,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 						category_id:goods_info.category_id,
 						goods_id:goods_info.goods_id,
 						goods_title:goods_info.goods_title,
+						delivery_type:goods_info.delivery_type,
 						img:goods_info.img,
 						original_price:goods_info.original_price,
 						price:goods_info.price,
@@ -1387,7 +1390,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 	}
 
 	.catlistone{
-		margin-right: 65upx;
+		margin-right: 20upx;
 		/* line-height: 50upx; */
 		font-weight: bold;
 	}

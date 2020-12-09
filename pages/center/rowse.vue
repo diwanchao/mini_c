@@ -4,13 +4,22 @@
 	 <!-- <hx-navbar :config="config"/> -->
 	<view class="_notice">
 		<view class="rowes" v-for="(item,index) in getRowselist" :key="index" >
-			<view @click="goDetails(item)">
+			<view @click="goDetails(item)" style="position: relative;">
+				<!-- <view class="icon">
+					新人
+				</view> -->
 				<image class="rower_image" :src="item.imgs_original" mode=""></image>
 			</view>
 			<view class="_notice" @click="goDetails(item)" style="padding-left: 20upx;">
-				<view class="titlesss">{{item.goods_title}}</view>
+				<view class="titlesss"><text>[</text>{{item.goods_title}}<text style="margin-left: 5rpx;">]</text></view>
+				<view class="pinglun">
+					{{item.goods_describe}}
+				</view>
 				<view class="money">
-					<view class="money_p">￥{{item.retail_price}}</view>
+					<view class="money_p">
+						￥{{item.retail_price}} 
+						<!-- <text style="color: #999;text-decoration: line-through;margin-left: 10rpx;font-weight: 500;font-size: 26rpx;">￥{{item.retail_price}}</text> -->
+					</view>
 					<!-- <view class="money_h">￥{{item.moeys}}</view> -->
 				</view>
 			</view>
@@ -229,12 +238,19 @@
 	page{
 		background-color: #f7f7f7;
 	}
+		
+	text{
+		font-weight:600;
+		margin-right: 5rpx;
+		
+	}
 	.rowes{
 		height: 190upx;
 		width: 710upx;
 		background-color: #fff;
 		margin-left: 20upx;
 		margin-top: 20upx;
+		padding: 18rpx 21rpx;
 		border-radius: 10upx;
 		box-sizing: border-box;
 		display: flex;
@@ -247,20 +263,20 @@
 		height: 150upx;
 		width: 150upx;
 		border-radius: 10upx;
-		margin-top: 20upx;
-		margin-left: 20upx;
 	}
 	._notice{
 		height: 150upx;
-		line-height: 75upx;
+		/* line-height: 75upx; */
 		box-sizing: border-box;
-		width: 100%;
-		margin-top: 20upx;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		/* margin-top: 20upx; */
 	}
 	.titlesss{
 		font-size: 28upx;
 		color: #333;
-		width: 70%;
+		/* width: 70%; */
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		overflow: hidden;
@@ -287,5 +303,24 @@
 		position: absolute;
 		right: 20upx;
 		top: 70upx;
+	}
+	.pinglun{
+		color: #999999;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		width: 500upx;
+		font-size: 24rpx;
+	}
+	.icon{
+		position: absolute;
+		right: 0;
+		top: 0;
+		background: #FE0000;
+		opacity: 0.6;
+		border-radius: 10rpx;
+		padding: 2rpx 18rpx;
+		color: #ffffff;
+		font-size: 22rpx;
 	}
 </style>

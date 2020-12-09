@@ -399,3 +399,25 @@ button.register {
 .detail-btn-view .setting {
 	flex: 1;
 }
+.zhang{
+	/* border-radius: 10rpx; */
+	margin-left: 20rpx;
+	
+	/* margin-top: 10rpx; */
+	background:rgba(0 ,0,0,0) ;
+}
+.zhang_son{
+	min-height: 150upx; 
+	height: auto;
+	 width: 710rpx;
+	 border: none;
+	 border-radius: 10rpx;
+	margin-top: 10rpx;
+	background: #fff;
+	padding: 31rpx 13rpx;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-right: 26rpx;
+	
+}
