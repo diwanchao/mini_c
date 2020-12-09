@@ -82,6 +82,7 @@
 				tjr_id:'',
 				deployinfo:{},
 				login:false,
+				menb_id:'',
 				// config:{
 				// 	title: '购物车',
 				// 	color: '#ffffff',
@@ -109,7 +110,10 @@
 			//#endif
 			try {//从本地缓存中同步获取指定 key 对应的内容。
 				var value = uni.getStorageSync('tjr_member_openid');
+				var value11 = uni.getStorageSync('menb_id');
 				this.tjr_id = value;
+				this.menb_id = value11;
+				console.log('menb_id-------',this.menb_id)
 			} catch (e) {
 				// error
 			}
@@ -122,6 +126,7 @@
         methods: {
 			gotoindex(){
 				uni.switchTab({
+					// url:'/pages/home/index'
 					url:'/pages/home/index'
 				})
 			},
@@ -155,13 +160,16 @@
 				}
 			  },
 			wxlogin(iv,encryptedData){
+				var that = this
+				console.log('进入微信LOG')
 				if (this.xcode) {
 				  //获取信息
 				  var arr ={
 				  		code: this.xcode,
 						iv:iv,
 						encryptedData:encryptedData,
-						re_openid:this.tjr_id,
+						// re_openid:this.tjr_id,
+						re_openid:this.menb_id
 				  	};
 				  var pdata = url.getSignStr(arr);
 				  
@@ -190,7 +198,7 @@
 										name: res.data.name,
 										openid: res.data.openid,
 									},
-									success: function () {										
+									success: function () {			
 										uni.switchTab({
 											url: '../home/index',
 										});
@@ -285,6 +293,7 @@
 									success: function () {
 										//console.log('success');
 										uni.switchTab({
+											// url: '../home/index',
 											url: '../home/index',
 										});
 									}
@@ -391,4 +400,5 @@
 		margin-top: 20upx;
 		text-decoration: underline;
 	}
+	
 </style>

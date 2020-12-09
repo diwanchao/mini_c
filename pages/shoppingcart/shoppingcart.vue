@@ -2,7 +2,7 @@
 	<view>
 		<!-- <hx-navbar :config="config" /> -->
 	<view v-if="xShow==true">
-		<view class="x12 bg-white" style="border-bottom: #CCCCCC solid 6upx;" @click="goAddressXlist">
+		<!-- <view class="x12 bg-white" style="border-bottom: #CCCCCC solid 6upx;" @click="goAddressXlist">
 			<view class="x12 padding-big" style="font-size: 12pt; color: #393D4A;">
 				<view class="x-auto" style="padding-right: 20upx;">
 					<image src="https://div.buy315.com.cn/xcx_imgs/gwcdw.png" class="float-left" style="width: 36upx; height: 46upx;"></image>
@@ -21,9 +21,9 @@
 					<image src="https://div.buy315.com.cn/xcx_imgs/yjt.png" class="float-left" style="width: 18upx; height: 32upx;"></image>
 				</view>
 			</view>
-		</view>
+		</view> -->
 		<view class="x12 padding">
-			<view class="tctj"  v-if="goodslist.length>0">				
+			<view class="tctj"  v-if="goodslist.length>0">
 				<view class="tctj-title">
 					<view class="x-auto">
 						<image src="https://div.buy315.com.cn/xcx_imgs/xz.png" class="float-left" style="width: 36upx; height: 36upx;" @click="isNoXz(1,1)" v-if="goodslist.length==xnum"></image>
@@ -32,7 +32,7 @@
 					<!-- <view class="x-auto" style="margin-top: -6upx; padding-left: 10upx;">
 						{{stores_name}}
 					</view> -->
-					<view class="x-auto" style="margin-top: -6upx; padding-left: 10upx;">
+					<view class="x-auto" style="margin-top: -6upx; padding-lef: ;t: 10upx;">
 						全选
 					</view>
 					<view class="x-auto" style="float: right; font-size: 10pt;" @click="qkgwcList">清空</view>
@@ -168,7 +168,10 @@
 			login:false,
 			memberinfo:[],
 			details:false,
-			goodslist: [],
+			goodslist: [],  
+			goodslist_js: [],  //及时达
+			goodslist_cr: [],  //次日达
+			goodslist_gq:[],//过期商品
 			checkeds: [],
 			xsum:0,
 			checked:false,
@@ -188,6 +191,7 @@
 			fwqGoods:[],
 			bzf_sum:0,
 			wx_tpl:[],
+			
 			// config:{
 			// 	title: '购物车',
 			// 	color: '#ffffff',
@@ -404,6 +408,7 @@
 											this.goodslist[m].pack_num = fGoods[i].pack_num;
 											this.goodslist[m].stock_type = fGoods[i].stock_type;
 											this.goodslist[m].astrict_num = fGoods[i].astrict_num
+											this.goodslist[m].delivery_type = fGoods[i].delivery_type;
 											this.goodslist[m].bzf = (Math.ceil(parseFloat(this.goodslist[m].num)/parseFloat(fGoods[i].pack_num))*parseFloat(fGoods[i].pack_money)).toFixed(2);
 										}
 									}
@@ -413,11 +418,31 @@
 							this.xhc();
 							//算合计
 							this.xzAll();
+							//分开显示（次日达delivery_type = 1， 及时达delivery_type = 2， 失效商品status = 2）
+							this.separate(fGoods);
 						}else{
 							this.goodslist = [];
 						}
 					}
 				});
+			},
+			//分开 判断  次日达delivery_type = 1， 及时达delivery_type = 2， 失效商品status = 2，
+			separate(goodslist){
+				console.log('goodslist',goodslist)
+				this.goodslist_js = []  //及时达
+				this.goodslist_cr = []  //次日达
+				this.goodslist_gq = []//过期商品
+				for(var i = 0; i < goodslist.length; i++){
+					if(goodslist[i].status == 2){
+						this.goodslist_gq.push(goodslist[i])
+					}else{
+						if(goodslist[i].delivery_type == 1){
+							this.goodslist_cr.push(goodslist[i])
+						}else{
+							this.goodslist_js.push(goodslist[i])
+						}
+					}
+				}
 			},
 			//购物车动画效果
 			shopCart(barcode_id,type,v){
@@ -627,13 +652,13 @@
 					})
 					return;
 				}
-				if(this.addressNum==0){
-					uni.showToast({
-						icon:'none',
-						title: '请添加收货地址',
-					});
-					return;
-				}
+				// if(this.addressNum==0){
+				// 	uni.showToast({
+				// 		icon:'none',
+				// 		title: '请添加收货地址',
+				// 	});
+				// 	return;
+				// }
 				if(this.xnum==0){
 					uni.showToast({
 						icon:'none',
@@ -722,10 +747,16 @@
 					}					
 				}
 				this.shoppingCartNum = snum;
-				uni.setTabBarBadge({
-				  index: 2,
-				  text: ''+snum+'',
-				})
+				if(snum != 0){
+					uni.setTabBarBadge({
+						index: 2,
+						text: '' + snum + '',
+					});
+				}else{
+					uni.removeTabBarBadge({
+						index:2
+					})
+				}
 				this.xShow = true;
 				uni.hideLoading();
 			},

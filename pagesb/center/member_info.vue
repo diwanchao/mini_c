@@ -1,18 +1,59 @@
 <template>
 	<view>
 		<!-- <hx-navbar :config="config"/> -->
-			<view class="x12 text-center bg-white padding-big" style="color: #393D4A;">
-				<view class="x12" style="font-size: 12pt;">{{member_info.mobile}}</view>
-				<view class="x12" style="font-size: 11pt;">{{member_info.grade_name}}</view>
+		<view class=" bg-white  zhang" v-if="headimgs==true||imageList.length < imageLength&&member_info.head_img_id != 0" style="margin-top: 18rpx;padding: 0;padding: 17rpx 21rpx;">
+			<view class="x-auto">
+				<view class="" style="font-size: 28rpx;color:#333333">头像</view>
+				<!-- <view class='text-big text-blue' style="color: #007AFF; text-decoration: underline;" @tap='deleteImagex'>
+					清空
+				</view> -->
 			</view>
-			<view class="x12 padding-big bg-white text-333" style="margin-top: 10px;font-size: 12pt;">
-				<view class="x12">
-					<view class="x-auto">姓名</view>
-					<view class="x6 padding-left">
-						<input placeholder="姓名" v-model="member_info.name"/>
+			<view class="x9">
+				<image :src="member_info.img" mode="" v-if="imageList.length < imageLength"  @tap="clear" style="width: 100upx; height: 100upx; float: left; margin-left: 30upx;;border-radius: 100upx;"></image>
+			</view>
+		</view>
+		<view class="uploads  " style="width: 100%; margin-top: 18rpx;" v-else>
+			<!-- 图片上传 -->
+			<view class='upload-image-view'>
+				<!-- 标题已经省略 -->
+				<!-- <view class='title'>上传xxxx图片</view> -->
+				<view class="x-auto bg-white zhang" style="padding: 0;padding: 17rpx 21rpx;">
+					<view class="" ><text  style="font-size: 28rpx;color:#333333">头像</text><input placeholder="请选择" v-model="member_info.head_img_id" style="display: none;"/></view>
+					<!-- <view class='text-big text-blue' style="color: #007AFF; text-decoration: underline;" @tap='deleteImage'>
+						清空
+					</view> -->
+					<view class='add-view' style="width: 98upx;height: 98upx;margin: 0;" v-if="imageList.length < imageLength&&(member_info.head_img_id==0||member_info.head_img_id == ''||member_info.head_img_id == 'undefined')" @tap="chooseImage">
+						<view class="cross">
+							<view class="transverse-line"></view>
+							<view class="vertical-line"></view>
+						</view>
 					</view>
-				</view>				
-				<view class="x12 padding-top margin-top border-top border-gray">
+					<view class="x9 padding-left" v-if="member_info.head_img_id != ''&&member_info.head_img_id != 0">
+					<block v-for="(image,index) in imageList" :key="index">
+						<view class='image-view' style="width: 100upx; height: 100upx; float: left;padding: 0;margin: 0;">
+							<image :src="image" :data-src="image" style="width: 100upx;height: 100upx;border-radius: 100upx;padding: 0;" @tap="previewImage"></image>
+							<view class='del-btn' :data-index="index" @tap='deleteImage(index)' style="display: none;">
+								<view class='baicha'></view>这里是单独删除每张图片但不完善
+							</view>
+						</view>
+					</block>
+					</view>
+				</view>
+				
+				
+			</view>
+			<!-- 图片上传 -->
+		</view>
+		<view class=" bg-white text-333" style="margin-top: 20rpx;font-size: 24rpx;">
+			<view class=" zhang">
+				<view class="x-auto"><text  style="font-size: 28rpx;color:#333333">昵称</text></view>
+				<view class="x6 padding-left">
+					<input placeholder="姓名" v-model="member_info.name"/>
+				</view>
+			</view>
+			
+					
+				<!-- <view class="x12 padding-top margin-top ">
 					<view class="x-auto">性别</view>
 					<view class="x-auto padding-left text-gray">
 						<radio-group class="radio-group" @change="radioChange">
@@ -21,62 +62,29 @@
 							</label>
 						</radio-group>
 					</view>
-				</view>
-				<view class="x12 margin-top border-top border-gray" style="padding-top: 10rpx;">
+				</view> -->
+				<!-- <view class="x12 margin-top border-top border-gray" style="padding-top: 10rpx;">
 					<view class="x-auto" style="padding-top: 18rpx;">生日</view>
 					<view class="x6 padding-left" style="width: 550upx;">
 						<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
 							<view class="uni-input">{{date}}</view>
 						</picker>
-					</view>
+					</view> -->
 		<!-- 			<view class="x-auto float-right"  style="padding-top: 24upx;">
 						<image src="https://div.buy315.com.cn/xcx_imgs/yjt.png" style="width: 16upx; height: 28upx;"></image>
 					</view> -->
-				</view>
-				<view class=" x12 padding-top border-top border-gray" v-if="headimgs==true" style="margin-top: 18rpx;">
-					<view class="x-auto">
-						<view class="">头像</view>
-						<view class='text-big text-blue' style="color: #007AFF; text-decoration: underline;" @tap='deleteImagex'>
-							清空
-						</view>
-					</view>
-					<view class="x9">
-						<image :src="member_info.img" mode="" style="width: 100upx; height: 100upx; float: left; margin-left: 30upx;"></image>
-					</view>
-				</view>
-				<view class="uploads x12 border-top border-gray" style="width: 100%; margin-top: 18rpx;" v-else>
-					<!-- 图片上传 -->
-					<view class='upload-image-view'>
-						<!-- 标题已经省略 -->
-						<!-- <view class='title'>上传xxxx图片</view> -->
-						<view class="x-auto">
-							<view class="">头像<input placeholder="请选择" v-model="member_info.head_img_id" style="display: none;"/></view>
-							<view class='text-big text-blue' style="color: #007AFF; text-decoration: underline;" @tap='deleteImage'>
-								清空
-							</view>
-						</view>
-						<view class="x9 padding-left">
-						<block v-for="(image,index) in imageList" :key="index">
-							<view class='image-view' style="width: 100upx; height: 100upx; float: left;">
-								<image :src="image" :data-src="image" @tap="previewImage"></image>
-								<view class='del-btn' :data-index="index" @tap='deleteImage(index)' style="display: none;">
-									<view class='baicha'></view>这里是单独删除每张图片但不完善
-								</view>
-							</view>
-						</block>
-						</view>
-						<view class='add-view' v-if="imageList.length < imageLength" @tap="chooseImage">
-							<view class="cross">
-								<view class="transverse-line"></view>
-								<view class="vertical-line"></view>
-							</view>
-						</view>
-					</view>
-					<!-- 图片上传 -->
-				</view>
+				<!-- </view> -->
+				
 			</view>
-			<view class="btn-row x12" style="margin-top: 80upx;">				
-				<button type="primary" class="primary" @tap="setLoading" style="background:#F65A2A; border-radius:24px; width: 525upx;">提交</button>
+			<view class=" text-center bg-white zhang" style="color: #393D4A;margin-top: 20rpx;">
+				<view class="">
+					<text  style="font-size: 28rpx;color:#333333">手机号</text>
+				</view>
+				<view class="" style="font-size: 24rpx;color:#666666">{{member_info.mobile}}</view>
+				<!-- <view class="" style="font-size: 11pt;">{{member_info.grade_name}}</view> -->
+			</view>
+			<view class="btn-row x12" style="margin-top: 668upx;">				
+				<button type="primary" class="primary" @tap="setLoading" style="background:#FE0000; border-radius:44px; width: 600upx;">保存</button>
 			</view>
 
 	</view>
@@ -147,6 +155,7 @@
 			}
 		},
 		onLoad:function(data){
+			let that = this
 			//console.log(data);
 			try {//从本地缓存中同步获取指定 key 对应的内容。
 				const value = uni.getStorageSync('memberinfo');
@@ -165,6 +174,7 @@
 			} catch (e) {
 				// error
 			}
+			
 			//获取信息
 			var arr ={
 					openid: this.memberinfo.openid,
@@ -190,11 +200,14 @@
 							}
 
 						}
-						if(this.member_info.head_img_id>0){
+						console.log("that.member_info.head_img_id",that.member_info.head_img_id)
+						console.log("比较",that.imageList.length < that.imageLength&&that.member_info.head_img_id==0||that.member_info.head_img_id == '')
+						if(that.member_info.head_img_id>0){
 							this.headimgs = true;
 						}
 					}
 			});
+			
 		},
 		computed: {
 			startDate() {
@@ -281,9 +294,13 @@
 				images.splice(0,4);
 				that.imageList = images;
 			},
+			clear(){
+				this.deleteImagex();
+				this.chooseImage()
+			},
 			deleteImagex(){
 				this.headimgs = false;
-				this.member_info.head_img_id = '';
+				// this.member_info.head_img_id = '';
 			},
 			setLoading(){
 				//console.log(this.member_info);
@@ -574,5 +591,20 @@
 
 		.uploads{
 			width: 92%;
+		}
+			
+		.zhang{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0;
+			margin: 0;
+			padding: 31rpx 21rpx ;
+			width: 709rpx;
+			color: #666666;
+			font-size: 24rpx;
+		}
+		.zhang input{
+			text-align: right;
 		}
 </style>

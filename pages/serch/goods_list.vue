@@ -1,10 +1,13 @@
 <template>
     <view>
 		<!-- <hx-navbar :config="config" /> -->
-		<view class="search_text">
+		<view class="search_text" style="padding-top: 80upx;">
 			<view class="search_this" v-for="(item,msindex) in goodsList" :key="msindex">
 				<view class="search_img" @click="goDetails(item)">
 					<image class="this_img" :src="item.img" mode="aspectFill"></image>
+					<view class="right_status">
+						{{item.delivery_type == 1 ? '次日达' : '及时达'}}
+					</view>
 				</view>
 				<view class="text_two">
 					<view class="left_this_text" @click="goDetails(item)">
@@ -14,20 +17,28 @@
 								<view>{{deployinfo.monetary_symbol}}{{item.original_price}}<span >/{{item.unit}}</span></view>
 							</view>
 						</view>
+						<view class="x12 jianjie">
+								真好吃啊
+						</view>
+						<view class="x12" style="height: 40upx;">
+							<view class="manjian">
+								满199减100
+							</view>
+						</view>
 						<view class="x12 tctj-body-right-price" >
-							{{deployinfo.monetary_symbol}}{{item.price}}<span >/{{item.unit}}</span>
+							{{deployinfo.monetary_symbol}}{{item.price}}<span >/{{item.unit}}</span> <span class="span_span">{{deployinfo.monetary_symbol}}{{item.original_price}}</span>
 						</view>
 					</view>
 					<view class="x-auto float-right this_jia" >
 						<view class="x-auto" v-for="(cartitme,cartindex) in shoppingCarts" :key="cartindex" v-if="cartitme.barcode_id==item.barcode_id">
 							<view class="x-auto" v-if="cartitme.num>0" @click="jrShoppingCart(0,item)"><image src="https://div.buy315.com.cn/xcx_imgs/jian.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image></view>
-							<view class="x-auto" v-if="cartitme.num>0" >{{cartitme.num}}</view>
+							<view style="padding: 0 10upx;" class="x-auto" v-if="cartitme.num>0" >{{cartitme.num}}</view>
 						</view>
 						<view class="x-auto" @click="jrShoppingCart(1,item)"  v-if="item.more==1 && (item.sale_num==='' || item.sale_num>0)"><image src="https://div.buy315.com.cn/xcx_imgs/jia.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image></view>
 						<view class="x-auto" v-if="item.more==2 && (item.sale_num==='' || item.sale_num>0)">
-							<button type="primary"  @click="togglePopup('bottom', 'popup',item)">
+							<view type="primary"  @click="togglePopup('bottom', 'popup',item)">
 								<image src="https://div.buy315.com.cn/xcx_imgs/jia.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image>
-							</button>
+							</view>
 						</view>
 						<view class="x-auto" v-if="item.sale_num===0"><image src="https://div.buy315.com.cn/xcx_imgs/jian.png"  mode="aspectFill" style="width: 45upx; height: 45upx;"></image></view>
 					</view>
@@ -141,6 +152,33 @@
 				</view>
 			</uni-popup>
 		</view>
+		<!-- 搜索弹窗 -->
+		<view class="search_click">
+			<view class="x12 padding search_add" style="font-size: 11pt;">
+				<view class="this_search">
+					<view class="x-auto" >
+						<image class="this_imgsearch" src="https://div.buy315.com.cn/xcx_imgs/search.png" style="width: 28upx; height: 28upx;"></image>
+					</view>
+					<view class="x-auto" >
+						<input placeholder="请输入商品名称" class=" input" v-model="goods_title"/>
+					</view>	
+				</view>	
+				<view class="search_txt" @click="serchAll" >
+					{{sousuo_t}}
+				</view>
+			</view>
+		</view>
+		<view class="search_all" v-if="float_display">
+			<view v-if="display" class="del" @click="dell"><image src="https://div.buy315.com.cn/xcx_imgs/del_del.png" mode=""></image></view>
+			<view class="history" v-if="display">
+				<view class="bt">历史记录</view>
+				<view class="list" v-for="(item,index) in history_goods" :key='index' @click="clickTab(item)">{{item}}</view>
+			</view>
+			<view class="history tuijian">
+				<view class="bt">推荐搜索</view>
+				<view class="list" v-for="(item,index) in tuijian" :key='index' @click="clickTab(item.name)">{{item.name}}</view>
+			</view>
+		</view>
 		<!--多规格弹窗的显示结束-->
     </view>
 </template>
@@ -214,6 +252,24 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 			shopItemInfo: {}, //存放要和选中的值进行匹配的数据
 			subIndex: [], //是否选中 因为不确定是多规格还是但规格，所以这里定义数组来判断
 			xpopup:1,
+			goods_title:'',
+			tuijian:[],
+			stor_goods_title:[],
+			history_goods:[],
+			display:true,
+			float_display:true,
+			sousuo_t:'搜索',
+			input_val:''
+			}
+		},
+		onShow:function(){
+			this.goods_title = '';
+			this.history()
+			this.history_goods = uni.getStorageSync('goods_title')
+			if(this.history_goods.length == 0){
+				this.display = false
+			}else{
+				this.display = true
 			}
 		},
 		onLoad:function(data){
@@ -257,9 +313,84 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 		},
 		methods: {
 			serchAll(){
-				uni.navigateTo({
-					url:"../serch/goods_list?goods_title="+this.goods_title
-				})
+				var stor_goods_title = uni.getStorageSync('goods_title')
+				this.goodsList = []
+				if(this.sousuo_t == '搜索'){
+					if(this.goods_title == ''){
+						uni.showToast({
+							title:'请输入商品名称'
+						})
+						return false;
+					}
+					this.sousuo_t = '取消'
+					this.float_display = false
+					
+				}else{
+					this.sousuo_t = '搜索'
+					this.float_display = true
+					this.history_goods = stor_goods_title
+					this.display = true
+				}
+				console.log('stor_goods_title',stor_goods_title)
+				if(stor_goods_title == ''){
+					console.log('为空')
+					stor_goods_title = []
+				}
+				var flag = 1
+					for(var st = 0; st < stor_goods_title.length; st++){
+						if(stor_goods_title[st] == this.goods_title){
+							flag = 2
+							break;
+						}else{
+							flag = 1
+						}
+					}
+					if(flag == 1){
+						stor_goods_title.push(this.goods_title)
+						uni.setStorageSync('goods_title', stor_goods_title);
+					}
+					this.page = 0;
+					this.sData.goods_title = this.goods_title
+					this.loadData('add',this.sData);
+				// uni.navigateTo({
+				// 	url:"../serch/goods_list?goods_title="+this.goods_title
+				// })
+			},
+			history(){
+				var xarr = {
+				};
+				var xpdata = url.getSignStr(xarr);
+				uni.request({
+					url: url.websiteUrl + '/api_v2/stores/getrecommendedsearch',
+					method: 'POST',
+					dataType: 'json',
+					header: {
+						'content-type': 'application/x-www-form-urlencoded'
+					},
+					data: xpdata,
+					success: xres => {
+						console.log(xres.data);
+						this.tuijian = xres.data.data
+					}
+				});	
+			
+			},
+			clickTab(name){
+				this.page = 0;
+				this.goodsList = []
+				this.sData.goods_title = name
+				this.loadData('add',this.sData);
+				this.float_display = false
+				this.sousuo_t = '取消'
+				this.input_val = name
+				// uni.navigateTo({
+				// 	url:"../serch/goods_list?goods_title="+name
+				// })
+			},
+			dell(){
+				uni.setStorageSync('goods_title',[]);
+				this.display = false
+				this.history_goods = []
 			},
 			goGwc() {
 				uni.switchTab({//reLaunch 这是直接进入，没有滑动效果。switchTab有滑动效果
@@ -1067,7 +1198,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 		margin: 0 auto;
 	}
 	.search_this{
-		height: 190upx;
+		/* height: 190upx; */
 		width: 710upx;
 		background-color: #fff;
 		border-radius: 10upx;
@@ -1082,8 +1213,10 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 		height: 120upx;
 		width: 120upx;
 		border-radius: 10upx;
-		margin-top: 20upx;
-				padding-left: 20upx;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 20upx;
 		box-sizing: border-box;
 	}
 	.this_img{
@@ -1108,7 +1241,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 		z-index: 999;
 		position: absolute;
 		right: 20upx;
-		bottom: 20upx;
+		bottom: 10upx;
 	}
 	.Suspension{
 		position: relative;
@@ -1133,6 +1266,7 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 		padding-left: 40upx;
 		box-sizing: border-box;
 		width: 80%;
+		margin-left: 130upx;
 	}
 	.textwenzi{
 		font-size: 32upx;
@@ -1153,5 +1287,218 @@ import uniPopup from '@/components/uni-popup/uni-popup.vue';
 		height: 243upx;
 		width: 200upx;
 		margin: 0 auto;
+	}
+	
+	
+	
+	.tctj-body-left{
+		width: 120upx;
+		height: auto;
+		float:left;
+		padding-left: 36upx;
+	}
+	.tctj-body-left image{
+		width: 120upx;
+		height: 120upx;
+		float:left;
+	}
+	.tctj-body-right{
+		width: 540upx;
+		height: auto;
+		float:left;
+		padding-left:20upx;
+		line-height:1.2em;
+	}
+	.tctj-body-right-title{
+		font-size:28upx;
+		color:#333;
+		height: 50upx!important;
+	}
+	.tctj-body-right-describe{
+		font-size:28upx;
+		color:#666;
+	}
+	.tctj-body-right-price{
+		font-size:28upx;
+		color:#E84C3E;
+		font-weight: 700;
+	}
+	.this_search{
+		width: 630rpx;
+		height: 60rpx;
+		border-radius: 25upx;
+		background-color: #fff;
+		font-size: 24upx;
+		color: #C0C0C0;
+		line-height: 60upx;
+	}	
+	.search_txt{
+		font-size: 24upx;
+		color: #333;
+		margin-top: 20upx;
+		margin-left: 20upx;
+	}
+	.add_sea{
+		margin-left: 20upx;
+		display: flex;
+		align-items: center;
+	}
+	.address{
+		display: flex;
+		top: 40upx;
+		right: 20upx;
+		font-size: 24upx;
+		align-items: center;
+		justify-content: center;
+		color: #fff;
+	}
+	.add_img2{
+		height: 40upx;
+		width: 40upx;
+		margin-right: 20upx;
+	}
+	/* 搜索 */
+	.search{
+		height: 60upx;
+		width: 550upx;
+		background-color: #fff;
+		border-radius: 30upx;
+		top: 30upx;
+		/* right: 20upx; */
+	}
+	.search_01{
+		left: 40upx;
+		top: 15upx;
+		height: 30upx;
+		width: 30upx;
+	}
+	.text1{
+		font-size: 24upx;
+		color: #999;
+		left: 100upx;
+		top: 30upx;
+	}
+	.search_add{
+		display: flex;
+	}
+	.this_imgsearch{
+		margin-left: 30rpx;
+		margin-right: 20rpx;
+	}
+	.imgthis{
+		height: 243upx;
+		width: 200upx;
+		margin: 0 auto;
+	}
+	.textwenzi{
+		font-size: 24upx;
+		color: #999999;
+		text-align: center;
+		width: 750upx;
+		display: flex;
+		justify-content: center;
+		margin-top: 180upx;
+	}
+	.zanwushik{
+		width: 750upx;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+	}
+	.history{
+		width: 100%;
+		padding: 0 25upx;
+		box-sizing: border-box;
+		float: left;
+	}
+	.history .bt{
+		font-size: 28upx;
+		line-height: 92upx;
+		width: 100%;
+	}
+	.history .list{
+		height: 50upx;
+		line-height: 50upx;
+		font-size: 24upx;
+		padding: 0 20upx;
+		border: 2upx solid #C0C0C0;
+		float: left;
+		border-radius: 20upx;
+		margin-right: 20upx;
+		margin-bottom: 20upx;
+	}
+	.history::after{
+		content: "";
+		display: block;
+		clear: both;
+	}
+	.del{
+		background-size: 100%;
+		position: absolute;
+		right: 0upx;
+		top: 0;
+		padding: 20upx;
+	}
+	.del image{
+		width: 30upx;
+		height: 30upx;
+		background-size: 100%;
+	}
+	.search_all{
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		top: 100upx;
+		left: 0;
+		background-color: #f7f7f7;
+		z-index: 11111;
+	}
+	.search_click{
+		z-index: 1111111;
+		width: 100%;
+		height: 100upx;
+		position: fixed;
+		top: 0;
+		left: 0;
+		background-color: #F7F7F7;
+	}
+	.right_status{
+		width: 80upx;
+		height: 30upx;
+		line-height: 30upx;
+		font-size: 22upx;
+		color: #fff;
+		text-align: center;
+		border-radius: 15upx;
+		background-color: rgba(254, 0, 0, 0.6);
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	.manjian{
+		height: 40upx;
+		display: inline-block;
+		border-radius: 20upx;
+		border: 2upx solid #fe0000;
+		box-sizing: border-box;
+		line-height: 36upx;
+		text-align: center;
+		padding: 0 10upx;
+		font-size: 24upx;
+		color: #fe0000;
+		float: left;
+	}
+	.jianjie{
+		font-size: 24upx;
+		color: #999;
+		line-height: 36upx;
+		margin-bottom: 6upx;
+	}
+	.span_span{
+		font-size: 24upx;
+		color: #999;
+		text-decoration:line-through;
+		font-weight: 400;
+		margin-left: 20upx;
 	}
 </style>

@@ -37,13 +37,14 @@
 		      </view>
 		      <view class="shop_t1" @click="gotonewdetail(item)">
 		        <view class="shop_t2">{{item.goods_title}}</view>
+				<view class="shop_news">
+				  <view class="shop_t4">{{item.label_name}}</view>
+				</view>
 		        <view class="shop_money">
 		          <view>￥{{item.new_people_price}}</view>
 		          <view class="shop_t3">{{item.retail_price}}</view>
 		        </view>
-		        <view class="shop_news">
-		          <view class="shop_t4">{{item.label_name}}</view>
-		        </view>
+		        
 		      </view>
 			  
 		      <view v-if="pointer==true" class="shop_gou" @click="jrShoppingCart(1,item,item.group_id,'dh'+item.group_id+'-'+item.barcode_id,item.barcode_id)">
@@ -638,6 +639,7 @@ page{
 }
 .shop_news{
   display: flex;
+  line-height: 30upx;
 }
 .shop_t1{
   height: 150rpx;

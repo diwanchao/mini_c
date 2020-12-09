@@ -115,7 +115,6 @@
 		</view>
 		<view class="x12 bg-white time_peisongs">
 			<view class="shop_detail">商品详情</view>
-			<view class="x12 bg-white time_peisongs">
 				<!-- <view class="shop_detail">商品详情</view> -->
 				<view class="shop_jieshao">
 					<view class="shop_text45" v-if="goodsinfo.gb_name==''">产地 <text></text></view>
@@ -133,7 +132,6 @@
 					<view class="shop_text45" v-if="goodsinfo.keeps==''">储藏  <text></text></view>
 					<view class="shop_text45" v-else>储藏  <text>{{goodsinfo.keeps}}</text></view>
 				</view>
-			</view>
 	<!-- 		<view class="shop_jieshao">
 				<view class="shop_text45">产地  <text>山东</text></view>
 				<view class="shop_text45">等级  <text>ssss</text></view>

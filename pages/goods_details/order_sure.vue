@@ -1,7 +1,6 @@
 <template>
 	<view>
 		<!-- <hx-navbar :config="config" /> -->
-
 		<view class="x12 padding" style="padding-bottom: 0;">
 			<!--  -->
 			<view class="x-auto" style="margin-left: -15upx;" v-if="yikeda==true">
@@ -20,6 +19,7 @@
 			<view class="x12 bg-white padding" >
 				<view class="x12 padding" style="font-size: 12pt; color: #393D4A;" v-for="(sitem,sindex) in pay_info.address" :key="sindex">
 					<view class="x-auto" style="width: 670upx;" v-if="addressNum>0">
+					<!-- <view class="x-auto" style="width: 670upx;"> -->
 						<view class="x12" v-if="xid==1 && yikeda==true">
 							<!--  一刻达 -->
 							<view class="x-auto" @click="goAddressXlist">
@@ -42,7 +42,15 @@
 						</view>
 					</view>
 				</view>
-					<view class="x12 padding" style="border-top:#F5F5F5 solid 6upx; font-size: 12pt; align-items: center;"  >
+				<!-- ssssssssss -->
+				<view class="x12">
+					<view style="font-size: 28upx; line-height: 48upx;">{{xshopInfo.store.stores_name}}</view>
+					<view style="font-size: 28upx; line-height: 48upx;">
+						{{xshopInfo.store.region}}
+					</view>
+				</view>
+				
+					<view class="x12 padding" style="border-top:#F5F5F5 solid 2upx; font-size: 10pt; align-items: center; padding-bottom: 0;"  >
 						<!-- <view class="x-auto" style="padding-top: 8upx;">
 							<image src="https://div.buy315.com.cn/xcx_imgs/sj.png" class="float-left" style="width: 28upx; height: 28upx;"></image>
 						</view> -->
@@ -63,7 +71,8 @@
 									<view class="x-auto">{{dates}}</view>
 									<view class="x-auto padding-left">{{start_time}}-{{end_time}}</view>
 								</view>
-								<view v-else>立即提货</view>
+								<!-- <view v-else>立即提货</view> -->
+								<view v-else>{{time_is_or}}</view>
 							</view>
 						<!-- 	<view class="x-auto">
 								<image src="https://div.buy315.com.cn/xcx_imgs/yjt.png" class="float-left" style="width: 16upx; height: 30upx; margin-top: 8upx;"></image>
@@ -95,23 +104,29 @@
 						</view>
 					</view>
 								
-					<view class="x12 bg-white" style="border-radius:10upx; margin-top: 50upx;" v-if="apps >= 0 && pay_info_order.s_id*1 <= 0" @click="goKyjList">
-						<view class="x12" v-if="acom_id==0" style="font-size: 12pt; color: #393D4A;">
+								<!-- @click="goKyjList" -->
+					<view class="x12 bg-white" style="border-radius:10upx; margin-top: 50upx;" v-if="apps >= 0 && pay_info_order.s_id*1 <= 0" >
+						<!-- <view class="x12" v-if="acom_id==0" style="font-size: 12pt; color: #393D4A;"> -->
+						<view class="x12" v-if="acom_id==0" style="font-size: 12pt; color: #393D4A; position: relative;">
 							<view class="x-auto" style="font-size: 24upx;">
 								优惠劵
 							</view>
-							<view class="x-auto float-right" style="padding-top: 4upx;">
-								<image src="https://div.buy315.com.cn/xcx_imgs/yjt.png" class="float-left" style="width: 16upx; height: 30upx;"></image>
+							<view class="picker_list" v-if="array.length == 0" style="font-size: 24rpx;text-align: right;line-height: 40rpx;color: #999;right: 0;">暂无可用优惠券</view>
+							<picker :value="index" :range="array" @change="bindPickerChange" class="picker_list" range-key="title" v-if="array.length != 0">
+								<view class="price_price">{{array[index].title}}</view>
+							</picker>
+							<view class="x-auto float-right" style="padding-top: 4upx;" v-if="array.length != 0">
+								<image src="https://div.buy315.com.cn/xcx_imgs/yjt.png" class="float-left" style="width: 10upx; height: 20upx;margin-top: 8upx;"></image>
 							</view>
 						</view>
-						<view class="x12 padding" v-else style="font-size: 12pt; color: #393D4A;">
+						<!-- <view class="x12 padding" v-else style="font-size: 12pt; color: #393D4A;">
 							<view class="x-auto">
 								优惠劵抵用金额{{coupon_money}}{{deployinfo.monetary_unit}}
 							</view>
 							<view class="x-auto float-right" style="padding-top: 4upx;">
 								<image src="https://div.buy315.com.cn/xcx_imgs/yjt.png" class="float-left" style="width: 16upx; height: 30upx;"></image>
 							</view>
-						</view>
+						</view> -->
 					</view>
 				<!-- 	<view class="x12" style="padding-top: 60upx;" v-if="xid==1">
 						<view class="x-auto" style="font-size: 24upx;">
@@ -124,7 +139,7 @@
 					<view class="x12 tips">
 						<!-- 
 						<view style="float: right;">共{{pay_info_order.nums}}件</view> -->
-						<view class="xiaoji">小计：<text style="margin-right: 20upx;">￥{{pay_info_order.price}}</text><text style="text-indent: 10upx; color: #aaa;font-size: 24upx;"> 共 {{pay_info_order.nums}} 件</text></view>
+						<view class="xiaoji">小计：<text style="margin-right: 20upx;">￥{{pay_info_order.price}}</text><text style="text-indent: 10upx; color: #aaa;font-size: 24upx;"> 共 {{pay_info_order.goods_num}} 件</text></view>
 					</view>
 				</view>
 			</view>
@@ -188,6 +203,7 @@
 						去支付
 					</view>
 					<view class="x-auto text-center text-white float-right" v-else="yikeda==false" @click="dyxcx" style="width: 250upx; font-size: 26upx; line-height: 115upx; background-color:#FE0000;">
+					<!-- <view class="x-auto text-center text-white float-right" v-else="yikeda==false" @click="pay_code_go" style="width: 250upx; font-size: 26upx; line-height: 115upx; background-color:#FE0000;"> -->
 						去支付
 					</view>
 
@@ -235,8 +251,7 @@
 						site:2,
 						img:'https://div.buy315.com.cn/xcx_imgs/jinrida.png',
 						img2:'https://div.buy315.com.cn/xcx_imgs/jinrida_active.png',
-					},
-					{
+					},{
 						id:2,
 						site:1,
 						img:'https://div.buy315.com.cn/xcx_imgs/daodian.png',
@@ -272,6 +287,12 @@
 			deliverys:1,//配送商城是否支持自提
 			self_mention:1,//配送商城是否支持自提
 			zffs_id:1,//支付方式ID 1在线支付，2货到付款
+			index:0,
+			array:[],
+			first_id:'',
+			first_price:'',
+			c_id:0,
+			time_is_or:'2020-12-01'
 			}
 		},
 		onShow:function(){//返回时接收子页面的传参
@@ -313,6 +334,7 @@
 				// #endif
 				this.zf = 2;
 				this.getAddress();
+				this.getTimeIs()
 				//console.log(currPage.data.psDate);
 		},
 		onLoad:function(data){
@@ -413,7 +435,25 @@
 			// 		}
 			// },
 			//查询是否显示自提
-			
+			getTimeIs(){
+				var arr ={};
+				var pdata = url.getSignStr(arr);
+				uni.request({
+					url:url.websiteUrl+'/api_v2/Stores/checkPreSale',
+					method:'POST',
+					dataType:'json',
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+					},
+					data:pdata,
+					success: res => {
+						if(res.data.status=='y'){
+							console.log('获取时间time',res)
+							this.time_is_or = res.data.data.end_date
+						}									
+					}
+				});
+			},
 			setZt(){
 				var arr ={
 						};
@@ -496,13 +536,18 @@
 				//console.log(data);
 				//console.log(this.address_list.address_id);
 				//获取信息
+				if(this.address_list.address_id == undefined){
+					var address_id = ''
+				}else{
+					var address_id = this.address_list.address_id
+				}
 				var arr ={
 						order_code: this.order_code,
 						member_openid: this.memberinfo.openid,
-						address_id: this.address_list.address_id,
+						address_id: address_id,
 						modes: data,
 						coupon_id: '',
-						acom_id:this.acom_id,
+						acom_id:this.acom_id
 					};
 				var pdata = url.getSignStr(arr);
 				uni.request({
@@ -516,7 +561,7 @@
 					success: res => {
 						
 						console.log('已经进入了')
-						console.log(res.data.info)
+						console.log(res,'已经进入了')
 						// if(res.data.status = 'n'){
 						// 	uni.showToast({
 						// 		title:res.data.info
@@ -559,6 +604,7 @@
 						//console.log(res.data.data);return;
 						this.xShow = true;
 						uni.hideLoading();
+						this.getYouHuiJuan();
 					}
 				});
 			},
@@ -636,12 +682,13 @@
 						date: this.dates,
 						point: (this.isNo==true)?(this.pay_info.points[0].point):(''),
 						points_money: (this.isNo==true)?(this.pay_info.points[0].points_money):(''),
-						coupon_id: (this.pay_info.coupon.length>0)?(this.pay_info.coupon[0].coupon_id):(''),
+						// coupon_id: (this.pay_info.coupon.length>0)?(this.pay_info.coupon[0].coupon_id):(''),
 						modes: this.xid,
 						address_id: (this.pay_info.address.length>0)?(this.pay_info.address[0].address_id):(''),
 						note:this.note,
 						acom_id:this.acom_id,
 						order_type:this.zffs_id,
+						c_id:this.c_id
 					};
 				var pdata = url.getSignStr(arr);
 				//console.log(pdata);
@@ -830,7 +877,56 @@
 					fail: () => {},
 					complete: () => {}
 				});
+			},
+			// 获取优惠券列表
+			getYouHuiJuan(){
+				var arr ={
+						order_code: this.order_code,
+					};
+				var pdata = url.getSignStr(arr);
+				uni.request({
+					url:url.websiteUrl+'/api_v2/coupon/getavailablecouponlist',
+					method:'POST',
+					dataType:'json',
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+					},
+					data:pdata,
+					success: res => {
+						//console.log(res.data);
+						if(res.data.status=='y'){
+							console.log('res优惠券列',res)
+							this.array = res.data.data
+							this.first_id = res.data.data[0].c_id
+							this.first_price = res.data.data[0].coupon_reduction
+							this.pay_info_order.pay_money = (this.pay_info_order.pay_money * 100 - res.data.data[0].coupon_reduction * 100) / 100
+							this.c_id = this.array[0].c_id
+							// console.log('this.pay_info_order.pay_money',this.pay_info_order.pay_money)
+							// console.log('res.data.data[0].coupon_reduction',res.data.data[0].coupon_reduction)
+							// console.log('this.pay_info_order.pay_money - res.data.data[0].coupon_reduction',this.pay_info_order.pay_money - res.data.data[0].coupon_reduction)
+						}
+						
+						//console.log(res.data);
+					},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
+			// picker 优惠券
+			bindPickerChange(e){
+				console.log('eeeeeeeeeeeeeee',e)
+				this.index = e.detail.value
+				var index = e.detail.value
+				var array = this.array[index].coupon_reduction
+				this.pay_info_order.pay_money = (this.pay_info_order.price * 100 - array * 100) / 100
+				this.c_id = this.array[index].c_id
 			}
+			// pay_code_go(){
+			// 	uni.navigateTo({
+			// 		url:"./pay_sure?order_code=" + this.order_code + "&c_id=" + this.c_id
+			// 	})
+			// }
+			
 		}
 	}
 </script>
@@ -1045,4 +1141,17 @@
 		text-align: center;
 		border-bottom: 1rpx solid #F7F7F7;
 	}
+	.picker_list{
+		position: absolute;
+		right: 30upx;
+		top: 0;
+		width: 400upx;
+		height: 40upx;
+	}
+	.price_price{
+		font-size: 24upx;
+		text-align: right;
+		line-height: 40upx;
+	}
+	
 </style>

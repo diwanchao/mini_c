@@ -39,17 +39,23 @@
 		    </view>
 		  </view>
 		<!-- 待发货 -->
-		<view v-if='yemxList.order_status == 1 && yemxList.temp_logistics_status == 1 && (yemxList.temp_pay_status == 2 || yemxList.temp_type == 2)'>
-		    <view class="za_sj">待发货</view>
-		    <view class="zf_an">
-		    </view>
-		  </view> 
+		    <!-- <view class="za_sj">待发货</view> -->
+			<view class="zf_an" v-if='yemxList.order_status == 1 && yemxList.temp_logistics_status == 1 && (yemxList.temp_pay_status == 2 || yemxList.temp_type == 2)'>
+				<view class="t1">门店地址：{{yemxList.stores_address}}</view>
+				<view class="t2">联系人：{{yemxList.manager}}</view>
+				<view class="t3">联系电话：{{yemxList.stores_tel}}
+					<view class="phone" @click="back_phone(yemxList.stores_tel)">拨打电话</view>
+				</view>
+			</view>
 		  <!-- 待收货 -->
-		  <view v-if='yemxList.order_status == 1 && yemxList.temp_logistics_status == 2 && (yemxList.temp_pay_status == 2 || yemxList.temp_type == 2)'>
-		    <view class="za_sj">待收货</view>
-		    <view class="zf_an">
+		    <!-- <view class="za_sj">待收货</view> -->
+		    <view class="zf_an" v-if='yemxList.order_status == 1 && yemxList.temp_logistics_status == 2 && (yemxList.temp_pay_status == 2 || yemxList.temp_type == 2)'>
+		    	<view class="t1">门店地址：{{yemxList.stores_address}}</view>
+		    	<view class="t2">联系人：{{yemxList.manager}}</view>
+		    	<view class="t3">联系电话：{{yemxList.stores_tel}}
+		    		<view class="phone" @click="back_phone(yemxList.stores_tel)">拨打电话</view>
+		    	</view>
 		    </view>
-		  </view> 
 		  <!-- 退款 -->
 		  <view v-if='yemxList.order_status==4 '>
 		    <view class="za_sj">退货成功</view>
@@ -132,17 +138,21 @@
 		<view class="ddbhss">
 		  <view class="xinxi">
 		    <view>商品总额</view>
-		    <view class="xinxi_je">￥{{yemxList.price}}</view>
+		    <view class="xinxi_je">￥{{yemxList.total_price}}</view>
 		  </view>
 		  <view class="xinxi">
 		    <view>优惠金额</view>
 		    <view class="xinxi_je">￥{{yemxList.discount_money}}</view>
 		  </view>
+		 <!-- <view class="xinxi" v-if="yemxList.coupon_price != 0 ">
+		    <view>优惠券金额</view>
+		    <view class="xinxi_je">￥{{yemxList.coupon_price}}</view>
+		  </view> -->
 	<!-- 	  <view class="xinxi">
 		    <view>运费</view>
 		    <view class="xinxi_je">￥0.00</view>
 		  </view> -->
-		  <view class="sfk">实付款:<text>￥{{yemxList.price}}</text></view>
+		  <view class="sfk">实付款:<text>￥{{yemxList.pay_money}}</text></view>
 		 </view>
 </view>
 <!-- 		<view class="page-body" v-if="send_info.type<=1 && send_info.status==2 && rider_status<3 && deployinfo.map_address==1">
@@ -754,6 +764,12 @@ import uniCountdown from "@/components/linnian-CountDown/uni-countdown.vue";
 					url:"/pages/goods_details/order_sure?order_code="+order_code
 				})
 			},
+			//调起电话
+			back_phone(phone){
+				uni.makePhoneCall({
+				  phoneNumber: phone 
+				})
+			},
 			//再次购买
 			zcShopping(data){
 				//console.log(data);return;
@@ -923,10 +939,39 @@ import uniCountdown from "@/components/linnian-CountDown/uni-countdown.vue";
 	  /* padding-left: 20rpx; */
 	}
 	.zf_an{
-	  display: flex;
 	  position: relative;
 	  margin-left: 20upx;
-	
+	  display: block;
+	}
+	.zf_an .t1,
+	.zf_an .t2,
+	.zf_an .t3{
+		width: 100%;
+		font-size: 28upx;
+		line-height: 52upx;
+		float: left;
+		display: block;
+		position: relative;
+	}
+	.zf_an .t3 .phone{
+		font-size: 22upx;
+		line-height: 52upx;
+		position: absolute;
+		right: 170upx;
+		top: 0;
+		color: #fe0000;
+		padding-left: 40upx;
+	}
+	.zf_an .t3 .phone::after{
+		content: "";
+		width: 24upx;
+		height: 24upx;
+		background: url("https://div.buy315.com.cn/xcx_imgs/tel_phone_111.png");
+		background-size: 100%;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 0;
 	}
 	.zf_anlj{
 	  width: 140rpx;

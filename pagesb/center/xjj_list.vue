@@ -1,3 +1,4 @@
+<!-- 原优惠券 -->
 <template>
 	<view>
 		<!-- <hx-navbar :config="config" /> -->
@@ -20,7 +21,6 @@
 			  <image class="bottom" src="https://div.buy315.com.cn/xcx_imgs/coupon3.png" v-if="item.status == 4"></image>
 			</view>
 			<view class="white">
-				
 			  <view class="t2"  @click="goLq(item)" v-if="item.use_status != 2">立即使用></view>
 			  <!-- <view class="t2"  @click="goLq(item)" v-else>线下核销></view> -->
 			 <view class="t1" v-if="item.use_status==1 || item.use_status==2">{{item.atype_name}}</view>

@@ -113,7 +113,7 @@
 		methods: {
 			goIndex(){
 				uni.switchTab({
-					url: '../home/index',
+					url: '/pages/home/index',
 				});
 			},
 			created(e) {
@@ -164,7 +164,7 @@
 				this.s = second
 				if(second==0){
 					uni.switchTab({
-						url: '../home/index',
+						url: '/pages/home/index',
 					});
 				}
 			}

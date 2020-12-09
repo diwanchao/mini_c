@@ -1,8 +1,8 @@
 <template>
     <view>
-		<hx-navbar :config="config" />
+		<!-- <hx-navbar :config="config" /> -->
 		<view class="rech_top">
-		  <image src="https://div.buy315.com.cn/xcx_imgs/my_small.png" class="image"></image>
+		  <!-- <image src="https://div.buy315.com.cn/xcx_imgs/my_small.png" class="image"></image> -->
 		  <view class="content">
 		    <view class="t1">{{zhanghuyue.money_sum}}</view>
 		    <view class="t2">余额（元）</view>
@@ -25,9 +25,8 @@
 			</view>
 		</view>
 		<view style="margin-left: 20upx; margin-bottom: 20rpx;">
-		<view>充值声明</view>
-			<ul style='width: 550upx; line-height: 40upx;'>
-				
+		<view style="font-size: 28rpx;display: flex;align-items: center;">充值声明 <image  @click="gotochongzhi" src="https://div.buy315.com.cn/xcx_imgs/wen_hao.png" class="wen_hao"></image></view>
+			<ul style='width: 720upx; line-height: 40upx;font: 18rpx;color: #999;'>
 				<li>充值面额：100元、500元、1000元、3000元；</li>
 				<li>购卡充值成功后，不支持提现，除非法律另外规定；</li>
 				<li>使用方法，此充值在每日菜场商城消费视同于现金结算，在结算时选择“账户余额”即可使用；</li>
@@ -233,6 +232,11 @@
 
 </script>
 <style>
+	.wen_hao{
+		width:27rpx;
+		height: 27rpx;
+		margin-left: 12rpx;
+	}
 	page{
 		background-color: #F7F7F7;
 	}
@@ -246,6 +250,11 @@
 	  margin: 0 auto;
 	  margin-top: 20rpx;
 	  position: relative;
+	  background: url('https://div.buy315.com.cn/xcx_imgs/my_small.png') no-repeat;
+	  background-size: 765rpx 280rpx;
+	  background-position: -20rpx -20rpx;
+	  overflow: hidden;
+	  border-radius: 10rpx;
 	}
 	.rech_top .image{
 	  width:715rpx;
@@ -254,7 +263,7 @@
 	}
 	.rech_top .content{
 	  width:715rpx;
-	  height: 200rpx;
+	  height: 180rpx;
 	  position: absolute;
 	  top: 0;
 	  left: 0;
@@ -299,8 +308,9 @@
 	}
 	.rech_price .bt{
 	  font-size: 28rpx;
-	  line-height: 110rpx;
+	  line-height: 90rpx;
 	  text-indent: 10rpx;
+	  font-weight: 600;
 	}
 	.rech_price .list{
 	  width: 100%;
@@ -376,16 +386,19 @@
 		font-size: 36upx;
 		color: #fff;
 		margin: 0 auto;
+		margin-top: 179rpx;
 	}
 	.chongzhixieyi{
-		position: absolute;
-		bottom: 33upx;
+		/* position: absolute; */
+		/* bottom: 33upx; */
 		justify-content: center;
 		display: flex;
 		font-size: 22upx;
 		color: #999;
 		margin: 0 auto;
 		width: 100%;
+		margin-top: 77rpx;
+		margin-bottom: 33rpx;
 	}
 	.chongzhixieyi .anniuxieyi{
 		color: #0026E8;

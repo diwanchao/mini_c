@@ -6,8 +6,8 @@
 			<view class="x12 height-big bg-white text-center text-default text-gray text-333" style="white-space:nowrap;  z-index: 10000; top: 0;">
 				<scroll-view scroll-x="true" scroll-left="0" scroll-with-animation="true">
 					<view class="glance-slidenav-tabbar">
-						<view class="x3" v-for="(itme,index) in oneMenu" :key="index" style="float: left; width: 180upx; padding-left:20upx; padding-right:20upx;">
-							<view class="x12 borderOrange" style="color: #F65A2A;" @click="yemx(index)" v-if="xid == itme._id">{{itme.name}}</view>
+						<view class="x3" v-for="(itme,index) in oneMenu" :key="index" style="float: left; width: 180upx; padding-left:10upx; padding-right:10upx;">
+							<view class="x12 borderOrange" style="color: #fff;" @click="yemx(index)" v-if="xid == itme._id">{{itme.name}}</view>
 							<view class="x12" style="overflow:hidden;  text-overflow:ellipsis; white-space:nowrap;" @click="yemx(itme._id)"
 							 v-else>{{itme.name}}</view>
 						</view>
@@ -68,12 +68,13 @@
 					
 					</view>
 				<!-- </view> -->
-				<view class="x12 text-center padding-big" style="padding-top: 20%;" v-if="datanum==0">
+				<view class="x12 text-center padding-big" style="font-size: 24upx; color: #999; ">没有更多了</view>
+				<!-- <view class="x12 text-center padding-big" style="padding-top: 20%;" v-if="datanum==0">
 					<image src="https://div.buy315.com.cn/xcx_imgs/wts.png" mode="aspectFill" style="width: 132upx; height: 140upx;"></image>
 					<view class="x12 text-center padding-small-top" style="font-size: 12pt; color: #747C96;">
 						暂无相关订单
 					</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 	</view>
@@ -132,7 +133,7 @@
 					},
 					{
 						'_id': 4,
-						'name': '退款/售后',
+						'name': '退款',
 					},
 				],
 				yemxList: [],
@@ -323,7 +324,7 @@
 							this.datanum = res.data.data.order_info.length;
 							this.listpaid = res.data.data.order_info
 							console.log(this.listpaid)
-							console.log(this.datanum)
+							console.log('this.datanum',this.datanum)
 							for (let i in this.listpaid) {
 								this.xdtime = this.listpaid[i].expiration_time;
 							}
@@ -516,7 +517,7 @@
 						} else {
 							uni.showToast({
 								icon: 'none',
-								title: '商品已下架',
+								title: res.data.info,
 							});
 							return;
 						}
@@ -544,9 +545,15 @@
 	}
 
 	.borderOrange {
-		border-bottom: #F65A2A solid 3px;
+		/* border-bottom: #F65A2A solid 3px; */
+		width: 100%;
+		height: 40upx;
+		background-color: #fe0000;
+		margin-top: 28upx;
+		line-height: 40upx;
+		border-radius: 14upx;
 	}
-
+	
 	.glance-slidenav-tabbar {
 		height: 100upx;
 		display: inline-block;

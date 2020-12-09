@@ -18,7 +18,7 @@
 			<!-- 列表 -->
 			 <!-- <view class="none">{{none}}</view> -->
 			 <view v-if="datanum==0">
-				<view style="text-align: center;">暂无数据</view>
+				<view style="text-align: center; font-size: 24upx; color: #999;">暂无数据</view>
 			 </view>
 			<view class="ul">
 			  <view class="li" v-for="item in listScroll" :key="item.id">
